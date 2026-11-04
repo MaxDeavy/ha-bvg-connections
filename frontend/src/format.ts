@@ -1,0 +1,123 @@
+import type { CardConfig, EntityRef, Journey, Urgency } from "./types";
+
+export const MINUTE = 60_000;
+
+export function parseTime(value: string | null | undefined): number | null {
+  if (!value) return null;
+  const ms = Date.parse(value);
+  return Number.isNaN(ms) ? null : ms;
+}
+
+/** Whole minutes from now until `target` (floored, like station displays). */
+export function minutesUntil(target: number, now: number): number {
+  return Math.floor((target - now) / MINUTE);
+}
+
+/** Countdown text: "jetzt", "9", "1h 22". The unit is rendered separately. */
+export function countdown(target: number | null, now: number, nowText: string): {
+  value: string;
+  unit: boolean;
+} {
+  if (target === null) return { value: "–", unit: false };
+  const minutes = minutesUntil(target, now);
+  if (minutes <= 0) return { value: nowText, unit: false };
+  if (minutes < 60) return { value: String(minutes), unit: true };
+  const hours = Math.floor(minutes / 60);
+  const rest = minutes % 60;
+  return { value: `${hours}h ${String(rest).padStart(2, "0")}`, unit: false };
+}
+
+export function formatClock(ms: number, language: string, timeZone?: string): string {
+  try {
+    return new Intl.DateTimeFormat(language, {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      timeZone,
+    }).format(ms);
+  } catch {
+    const date = new Date(ms);
+    return `${String(date.getHours()).padStart(2, "0")}:${String(date.getMinutes()).padStart(2, "0")}`;
+  }
+}
+
+export function formatDelay(minutes: number | null | undefined): string | null {
+  if (minutes === null || minutes === undefined || minutes === 0) return null;
+  return minutes > 0 ? `+${minutes}` : `${minutes}`;
+}
+
+/** How urgent it is to leave home for a journey or departure. */
+export function urgency(
+  leaveAt: number | null,
+  now: number,
+  cancelled: boolean,
+): Urgency {
+  if (cancelled) return "cancelled";
+  if (leaveAt === null) return "relaxed";
+  const minutes = (leaveAt - now) / MINUTE;
+  if (minutes < -0.5) return "missed";
+  if (minutes < 1) return "now";
+  if (minutes < 4) return "soon";
+  return "relaxed";
+}
+
+export function isDeparted(departure: number | null, now: number): boolean {
+  return departure !== null && departure < now - 30_000;
+}
+
+export function visibleJourneys(journeys: Journey[], now: number, max: number): Journey[] {
+  return journeys
+    .filter((j) => !isDeparted(parseTime(j.departure), now))
+    .slice(0, max);
+}
+
+export function normalizeRefs(refs: (string | EntityRef)[] | undefined): EntityRef[] {
+  return (refs ?? [])
+    .map((ref) => (typeof ref === "string" ? { entity: ref } : ref))
+    .filter((ref) => Boolean(ref?.entity));
+}
+
+export interface NormalizedConfig {
+  type: string;
+  title?: string;
+  connections: EntityRef[];
+  departures: EntityRef[];
+  max_journeys: number;
+  max_departures: number;
+  show_clock: boolean;
+  show_header: boolean;
+  show_footer: boolean;
+  expand: boolean;
+}
+
+export function normalizeConfig(config: CardConfig): NormalizedConfig {
+  return {
+    type: config.type,
+    title: config.title,
+    connections: normalizeRefs(config.connections),
+    departures: normalizeRefs(config.departures),
+    max_journeys: Math.max(1, Number(config.max_journeys ?? 3)),
+    max_departures: Math.max(1, Number(config.max_departures ?? 6)),
+    show_clock: config.show_clock ?? true,
+    show_header: config.show_header ?? true,
+    show_footer: config.show_footer ?? true,
+    expand: config.expand ?? false,
+  };
+}
+
+export type BadgeShape = "pill" | "square" | "rect";
+
+export function badgeShape(product: string | null | undefined): BadgeShape {
+  if (product === "suburban") return "pill";
+  if (product === "subway") return "square";
+  return "rect";
+}
+
+/** Readable text colour if the integration did not provide one. */
+export function contrastText(hex: string): string {
+  const match = /^#?([0-9a-f]{6})$/i.exec(hex);
+  if (!match) return "#fff";
+  const n = parseInt(match[1], 16);
+  const [r, g, b] = [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  return 0.299 * r + 0.587 * g + 0.114 * b > 160 ? "#000" : "#fff";
+}
