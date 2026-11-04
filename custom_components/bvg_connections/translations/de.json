@@ -129,12 +129,12 @@
             "hide_missed": "Abfahrten ausblenden, die ich nicht mehr schaffe",
             "products": "Verkehrsmittel",
             "lines": "Nur diese Linien",
-            "direction": "Richtung enthält"
+            "directions": "Richtung enthält"
           },
           "data_description": {
             "walk_minutes": "Minuten von der Haustür bis zur Haltestelle (Standard 5).",
             "lines": "Linie eintippen (z. B. U9) und Enter drücken. Leer = alle Linien.",
-            "direction": "Optionaler Textfilter für das Fahrtziel, z. B. „Osloer“."
+            "directions": "Zieltext eintippen (z. B. Osloer) und Enter drücken. Leer = alle Richtungen. Treffer, wenn irgendein Text enthalten ist."
           }
         }
       }

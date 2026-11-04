@@ -414,6 +414,18 @@ def _normalize_lines(lines: Iterable[str] | None) -> set[str]:
     return {line.replace(" ", "").upper() for line in lines or () if line.strip()}
 
 
+def normalize_directions(
+    directions: Iterable[str] | str | None = None,
+) -> list[str]:
+    """Normalize direction filter fragments; accepts a legacy single string."""
+    if directions is None:
+        return []
+    if isinstance(directions, str):
+        text = directions.strip()
+        return [text] if text else []
+    return sorted({str(value).strip() for value in directions if str(value).strip()})
+
+
 def filter_journeys(
     journeys: Sequence[Journey],
     *,
@@ -455,12 +467,22 @@ def filter_departures(
     walk_minutes: int = 0,
     hide_missed: bool = True,
     lines: Iterable[str] | None = None,
+    directions: Iterable[str] | str | None = None,
     direction: str | None = None,
     limit: int | None = None,
 ) -> list[Departure]:
-    """Apply line/direction filters, drop missed and duplicate departures."""
+    """Apply line/direction filters, drop missed and duplicate departures.
+
+    ``directions`` is an OR filter: keep a departure if any fragment is a
+    casefold substring of ``dep.direction``. ``direction`` remains as a
+    legacy single-string alias.
+    """
     wanted = _normalize_lines(lines)
-    direction_filter = (direction or "").strip().casefold()
+    if directions is None and direction is not None:
+        directions = direction
+    direction_filters = [
+        fragment.casefold() for fragment in normalize_directions(directions)
+    ]
     seen: set[tuple[str | None, str | None]] = set()
     result: list[Departure] = []
     for dep in sorted(
@@ -475,7 +497,9 @@ def filter_departures(
             continue
         if wanted and (dep.line or "").replace(" ", "").upper() not in wanted:
             continue
-        if direction_filter and direction_filter not in dep.direction.casefold():
+        if direction_filters and not any(
+            fragment in dep.direction.casefold() for fragment in direction_filters
+        ):
             continue
         key = (dep.trip_id, dep.line)
         if dep.trip_id and key in seen:

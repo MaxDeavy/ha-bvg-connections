@@ -281,8 +281,11 @@ class Seeder:
             ],
             "lines": item.get("lines", []),
         }
-        if item.get("direction"):
-            settings["direction"] = item["direction"]
+        directions = item.get("directions")
+        if directions is None and item.get("direction"):
+            directions = [item["direction"]]
+        if directions:
+            settings["directions"] = directions
         await self._step(flow["flow_id"], settings)
 
     async def write_dashboard(self, title: str) -> None:

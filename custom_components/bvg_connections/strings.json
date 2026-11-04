@@ -129,12 +129,12 @@
             "hide_missed": "Hide departures I can no longer catch",
             "products": "Means of transport",
             "lines": "Only these lines",
-            "direction": "Direction contains"
+            "directions": "Direction contains"
           },
           "data_description": {
             "walk_minutes": "Minutes from your door to the stop (default 5).",
             "lines": "Type a line (e.g. U9) and press Enter. Empty = all lines.",
-            "direction": "Optional text filter for the destination, e.g. “Osloer”."
+            "directions": "Type a destination fragment (e.g. Osloer) and press Enter. Empty = all directions. Match if any fragment is contained."
           }
         }
       }
