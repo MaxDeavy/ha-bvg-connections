@@ -27,7 +27,7 @@ Datenquelle ist [`v6.bvg.transport.rest`](https://v6.bvg.transport.rest) (Commun
 
 ## Installation
 
-Voraussetzung: Home Assistant **2025.3** oder neuer.
+Voraussetzung: Home Assistant **2026.10** oder neuer.
 
 1. HACS → Integrationen → Menü → *Benutzerdefinierte Repositories* → `https://github.com/MaxDeavy/ha-bvg-connections`, Kategorie *Integration*.
 2. „BVG Verbindungen“ installieren und Home Assistant neu starten.
@@ -114,7 +114,7 @@ Journeys with transfers and departure boards for Berlin public transport (BVG, S
 
 **Features:** journeys from stop/address/place to stop/address/place with all transfers; departure boards with product, line and direction filters; per-entry walking time that hides connections you can no longer catch and drives “leave in X min” hints; realtime delays, cancellations, at-risk connections, platform changes, occupancy and disruption notices; a native-looking card (light and dark theme) with BVG-coloured line badges, transfer chains, countdowns, urgency bars, expandable trip details and a visual editor; everything configured in the UI via config subentries; a request budget (default 40/min, the public API allows 100/min), backoff, stale-data display and a repair issue on longer outages.
 
-**Install:** HACS → custom repository `https://github.com/MaxDeavy/ha-bvg-connections` (category *Integration*), install, restart, then add “BVG Verbindungen” under *Settings → Devices & services*. Requires Home Assistant 2025.3 or newer. The card is served and loaded by the integration automatically.
+**Install:** HACS → custom repository `https://github.com/MaxDeavy/ha-bvg-connections` (category *Integration*), install, restart, then add “BVG Verbindungen” under *Settings → Devices & services*. Requires Home Assistant 2026.10 or newer. The card is served and loaded by the integration automatically.
 
 **Setup:** add *connections* and *departure boards* from the integration page. Polling intervals (default 30 s each) and the request budget are in the integration options. Use “Reconfigure” on a connection or board to change filters and walking time.
 
