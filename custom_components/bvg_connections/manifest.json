@@ -2,6 +2,7 @@
   "domain": "bvg_connections",
   "name": "BVG Verbindungen",
   "after_dependencies": ["frontend"],
+  "categories": ["vehicles_transport.public_transport"],
   "codeowners": ["@MaxDeavy"],
   "config_flow": true,
   "dependencies": ["http"],
