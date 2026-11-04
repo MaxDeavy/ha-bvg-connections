@@ -157,8 +157,10 @@ describe("visibleJourneys", () => {
 
 describe("i18n", () => {
   it("translates with placeholders and falls back to English", () => {
-    expect(translate("de", "leave_in_prefix")).toBe("Los in");
-    expect(translate("en-GB", "leave_in_prefix")).toBe("Go in");
+    expect(translate("de", "leave_in_prefix")).toBe("in");
+    expect(translate("en-GB", "leave_in_prefix")).toBe("in");
+    expect(translate("de", "leave_now")).toBe("Jetzt!");
+    expect(translate("en", "leave_now")).toBe("Now!");
     expect(translate("fr", "cancelled")).toBe("Cancelled");
   });
 });
