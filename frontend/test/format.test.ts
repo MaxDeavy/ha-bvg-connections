@@ -6,6 +6,7 @@ import {
   formatClock,
   formatDelay,
   normalizeConfig,
+  productSymbol,
   urgency,
   visibleJourneys,
 } from "../src/format";
@@ -60,6 +61,13 @@ describe("formatting", () => {
     expect(contrastText("#F0D722")).toBe("#000");
     expect(contrastText("#224F86")).toBe("#fff");
     expect(contrastText("nope")).toBe("#fff");
+  });
+
+  it("maps products to tinted MDI symbols", () => {
+    expect(productSymbol("subway")).toEqual({ icon: "mdi:subway-variant", tone: "subway" });
+    expect(productSymbol("regional").tone).toBe("regional");
+    expect(productSymbol(null)).toEqual({ icon: "mdi:transit-connection-variant", tone: "muted" });
+    expect(productSymbol("toString").tone).toBe("muted");
   });
 });
 

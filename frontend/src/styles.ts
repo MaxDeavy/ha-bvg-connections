@@ -9,7 +9,88 @@ export const cardStyles = css`
     --bvg-divider: var(--divider-color, rgba(0, 0, 0, 0.12));
     --bvg-row-hover: rgba(var(--rgb-primary-text-color, 0, 0, 0), 0.04);
     --bvg-chip-bg: rgba(var(--rgb-primary-text-color, 0, 0, 0), 0.06);
+    --bvg-walk: var(--light-blue-color, #03a9f4);
     display: block;
+  }
+
+  /* Tile-style symbols: MDI icon on a tinted circle, like HA tile cards */
+  .sym {
+    --sym-size: 24px;
+    --sym-color: var(--bvg-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--sym-size);
+    height: var(--sym-size);
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--sym-color) 20%, transparent);
+    color: var(--sym-color);
+    flex: none;
+    box-sizing: border-box;
+  }
+  .sym ha-icon {
+    --mdc-icon-size: calc(var(--sym-size) * 0.66);
+    display: inline-flex;
+  }
+  .sym.xs {
+    --sym-size: 16px;
+  }
+  .sym.s {
+    --sym-size: 20px;
+  }
+  .sym.l {
+    --sym-size: 32px;
+  }
+  .tone-place {
+    --sym-color: var(--primary-color, #03a9f4);
+  }
+  .tone-walk {
+    --sym-color: var(--bvg-walk);
+  }
+  .tone-muted {
+    --sym-color: var(--bvg-muted);
+  }
+  .tone-current {
+    --sym-color: currentColor;
+  }
+  .tone-ok {
+    --sym-color: var(--bvg-ok);
+  }
+  .tone-warn {
+    --sym-color: var(--bvg-warn);
+  }
+  .tone-error {
+    --sym-color: var(--bvg-error);
+  }
+  .tone-suburban {
+    --sym-color: #008d4f;
+  }
+  .tone-subway {
+    --sym-color: #0a3c85;
+  }
+  .dark .tone-subway {
+    --sym-color: #5c8fd6;
+  }
+  .tone-tram {
+    --sym-color: #be1414;
+  }
+  .tone-bus {
+    --sym-color: #a5027d;
+  }
+  .dark .tone-bus {
+    --sym-color: #d04aa9;
+  }
+  .tone-ferry {
+    --sym-color: #0080ba;
+  }
+  .tone-regional,
+  .tone-express {
+    --sym-color: #e2001a;
+  }
+  .dark .tone-tram,
+  .dark .tone-regional,
+  .dark .tone-express {
+    --sym-color: #f04a4a;
   }
   ha-card {
     overflow: hidden;
@@ -56,9 +137,12 @@ export const cardStyles = css`
     font-weight: 500;
     min-width: 0;
   }
-  .group-head ha-icon {
+  .group-head > ha-icon {
     --mdc-icon-size: 16px;
     flex: none;
+  }
+  .group-head .sym.l {
+    margin-right: 4px;
   }
   .group-head .place {
     color: var(--primary-text-color);
@@ -72,8 +156,8 @@ export const cardStyles = css`
   .chip {
     display: inline-flex;
     align-items: center;
-    gap: 3px;
-    padding: 1px 8px 1px 6px;
+    gap: 4px;
+    padding: 2px 8px 2px 2px;
     border-radius: 999px;
     background: var(--bvg-chip-bg);
     color: var(--bvg-muted);
@@ -81,9 +165,6 @@ export const cardStyles = css`
     font-weight: 500;
     white-space: nowrap;
     flex: none;
-  }
-  .chip ha-icon {
-    --mdc-icon-size: 14px;
   }
   .chip.stale {
     background: color-mix(in srgb, var(--bvg-warn) 18%, transparent);
@@ -173,18 +254,18 @@ export const cardStyles = css`
     align-items: center;
     gap: 3px 2px;
   }
+  .chain > .sym {
+    margin-right: 2px;
+  }
   .sep {
     color: var(--bvg-muted);
     font-size: 14px;
     margin: 0 1px;
     line-height: 1;
   }
-  .walk-icon {
-    --mdc-icon-size: 18px;
-    color: var(--bvg-muted);
-  }
   .meta {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
     gap: 2px 8px;
     margin-top: 3px;
@@ -221,47 +302,27 @@ export const cardStyles = css`
   .leave {
     display: inline-flex;
     align-items: center;
-    gap: 2px;
+    gap: 4px;
     font-size: 12px;
     font-weight: 500;
     white-space: nowrap;
     color: var(--urgency-color);
   }
-  .leave ha-icon {
-    --mdc-icon-size: 14px;
-  }
   .u-relaxed .leave {
     color: var(--bvg-muted);
   }
   .status {
-    display: inline-block;
-    padding: 0 6px;
-    border-radius: 4px;
-    font-size: 11px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
     font-weight: 600;
-    line-height: 18px;
-    letter-spacing: 0.2px;
+    line-height: 20px;
     white-space: nowrap;
+    color: var(--sym-color);
   }
-  .status.ok {
-    color: var(--bvg-ok);
-    background: color-mix(in srgb, var(--bvg-ok) 14%, transparent);
-  }
-  .status.delayed {
-    color: var(--primary-text-color);
-    background: color-mix(in srgb, var(--bvg-warn) 28%, transparent);
-  }
-  .status.connection_at_risk {
-    color: var(--primary-text-color);
-    background: color-mix(in srgb, var(--bvg-warn) 40%, transparent);
-  }
-  .status.cancelled {
-    color: #fff;
-    background: var(--bvg-error);
-  }
-  .status.no_realtime {
-    color: var(--bvg-muted);
-    background: var(--bvg-chip-bg);
+  .status.tone-muted {
+    font-weight: 500;
   }
 
   /* Line badges */
@@ -307,7 +368,7 @@ export const cardStyles = css`
   }
   .leg {
     display: grid;
-    grid-template-columns: 52px 40px 1fr;
+    grid-template-columns: 52px 64px 1fr;
     column-gap: 10px;
     padding: 6px 0;
     font-size: 13px;
@@ -347,9 +408,13 @@ export const cardStyles = css`
     font-size: 12px;
     align-items: center;
   }
-  .leg.walk ha-icon {
-    --mdc-icon-size: 18px;
-    justify-self: center;
+  .leg .line {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .leg.walk .sym {
+    justify-self: start;
   }
   .platform-changed {
     color: var(--bvg-warn);
@@ -377,20 +442,14 @@ export const cardStyles = css`
     line-height: 1.4;
     color: var(--primary-text-color);
   }
-  .remark ha-icon {
-    --mdc-icon-size: 15px;
-    color: var(--bvg-warn);
-    flex: none;
-    margin-top: 1px;
-  }
-  .remark.status ha-icon {
-    color: var(--bvg-muted);
+  .remark .sym {
+    margin-top: -1px;
   }
 
   /* Departure board */
   .departure {
     display: grid;
-    grid-template-columns: 44px 1fr auto auto;
+    grid-template-columns: 24px 44px 1fr auto auto;
     align-items: center;
     column-gap: 10px;
     padding: 5px 16px;
@@ -419,6 +478,10 @@ export const cardStyles = css`
     text-decoration: line-through;
   }
   .departure .delay {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 3px;
     font-size: 13px;
     font-weight: 600;
     font-variant-numeric: tabular-nums;
@@ -453,9 +516,9 @@ export const cardStyles = css`
     font-weight: 500;
     color: var(--primary-text-color);
   }
-  .notices .summary ha-icon {
+  .notices .summary > ha-icon {
     --mdc-icon-size: 16px;
-    color: var(--bvg-warn);
+    color: var(--bvg-muted);
   }
   .notices .spacer {
     flex: 1;
