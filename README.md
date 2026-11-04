@@ -1,8 +1,5 @@
 <p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="custom_components/bvg_connections/brand/dark_logo.png">
-    <img src="custom_components/bvg_connections/brand/logo.png" alt="BVG Verbindungen" width="420">
-  </picture>
+  <img src="https://raw.githubusercontent.com/MaxDeavy/ha-bvg-connections/main/custom_components/bvg_connections/brand/logo.png" alt="BVG Verbindungen" width="420">
 </p>
 
 # BVG Verbindungen für Home Assistant
@@ -19,10 +16,10 @@ Verbindungen mit Umstiegen und Abfahrtstafeln für den Berliner ÖPNV (BVG, S-Ba
 > **Wo lege ich Verbindungen an?** Nicht über „Integration hinzufügen“, sondern auf der Seite der Integration: *Einstellungen → Geräte & Dienste → BVG Verbindungen* → oben die Knöpfe **„Verbindung hinzufügen“** bzw. **„Abfahrtstafel hinzufügen“**. Details in [Schritt 3](#3-verbindungen-und-abfahrtstafeln-anlegen).
 
 <p align="center">
-  <img src="docs/images/card-themes.png" alt="Verbindungskarte hell und dunkel (aufgeklappte Details)" width="840">
+  <img src="https://raw.githubusercontent.com/MaxDeavy/ha-bvg-connections/main/docs/images/card-themes.png" alt="Verbindungskarte hell und dunkel (aufgeklappte Details)" width="840">
 </p>
 <p align="center">
-  <img src="docs/images/card-board-themes.png" alt="Abfahrtstafel hell und dunkel" width="840">
+  <img src="https://raw.githubusercontent.com/MaxDeavy/ha-bvg-connections/main/docs/images/card-board-themes.png" alt="Abfahrtstafel hell und dunkel" width="840">
 </p>
 
 ## Funktionen
@@ -32,7 +29,7 @@ Verbindungen mit Umstiegen und Abfahrtstafeln für den Berliner ÖPNV (BVG, S-Ba
 - **Fußweg zur Haltestelle** pro Verbindung bzw. Tafel: Die Integration blendet Fahrten aus, die du nicht mehr erreichst, und die Karte zeigt „Los in X min“ bzw. „Jetzt los!“.
 - **Echtzeit:** Verspätungen, Ausfälle, gefährdete Anschlüsse, Gleiswechsel, Auslastung und Störungsmeldungen.
 - **Lovelace-Karte** im nativen Home-Assistant-Look (helles und dunkles Theme): Linien-Badges in BVG-Farben, Symbole in farbigen Kreisen wie bei den HA-Kachelkarten (nach Verkehrsmittel und Status eingefärbt), Umstiegsketten, Countdown, Dringlichkeitsbalken, aufklappbare Fahrtdetails, Uhr und grafischer Editor.
-- **Eigenes Symbol und Logo:** Home Assistant zeigt sie direkt aus dem Ordner `brand/` der Integration an, ein Eintrag im Brands-Repository ist nicht nötig.
+- **Eigenes Symbol und Logo:** Nach der Installation zeigt Home Assistant sie unter Geräte & Dienste aus dem Ordner `brand/` (kein Brands-Repository nötig). Im HACS-Katalog kann bis zum Home Assistant Marketplace (HA 2026.11) noch ein Platzhalter erscheinen.
 - **Alles über die Oberfläche:** Verbindungen und Tafeln sind Unterelemente (Config Subentries) der Integration und lassen sich jederzeit hinzufügen, bearbeiten oder löschen.
 - **Schonend zur API:** Request-Budget mit Token-Bucket (Standard 40/min, die öffentliche API erlaubt 100/min), Backoff bei Fehlern, die letzten Daten bleiben bei Ausfällen sichtbar, Reparaturhinweis bei längerem Ausfall.
 
@@ -61,7 +58,7 @@ Damit ist nur die Integration selbst angelegt; Verbindungen gibt es noch keine.
 1. *Einstellungen → Geräte & Dienste* → auf **BVG Verbindungen** klicken (nicht erneut „Integration hinzufügen“).
 2. Oben auf der Integrationsseite stehen die Knöpfe **„Verbindung hinzufügen“** und **„Abfahrtstafel hinzufügen“** (nicht „Dienst hinzufügen“, das legt eine zweite Integration an):
 
-   <img src="docs/images/integration-page.png" alt="Integrationsseite mit den Knöpfen „Verbindung hinzufügen“ und „Abfahrtstafel hinzufügen“" width="600">
+   <img src="https://raw.githubusercontent.com/MaxDeavy/ha-bvg-connections/main/docs/images/integration-page.png" alt="Integrationsseite mit den Knöpfen „Verbindung hinzufügen“ und „Abfahrtstafel hinzufügen“" width="600">
 3. **Verbindung hinzufügen:** Start und Ziel eingeben (Haltestelle, Adresse oder Ort), passenden Treffer auswählen. Im letzten Schritt Name, **Gehzeit zur Haltestelle** (vorbelegt mit 5 min), Anzahl der Verbindungen, Verkehrsmittel, ausgeschlossene Linien, maximale Umstiege und Mindest-Umstiegszeit festlegen. Bleibt der Start leer, werden Haltestellen in der Nähe deines Zuhauses angeboten.
 4. **Abfahrtstafel hinzufügen:** Haltestelle suchen, dann Gehzeit, Zeitfenster, Anzahl, Verkehrsmittel, Linien und Richtung festlegen.
 5. Für jede Verbindung und Tafel entsteht ein eigenes Gerät mit Sensoren (siehe [Entitäten](#entitäten)).
@@ -130,8 +127,8 @@ expand: false                # Fahrtdetails immer aufgeklappt
 In `entries` gehören die Sensoren „Nächste Abfahrt“ deiner Verbindungen und Tafeln. Die Karte zeigt sie in der angegebenen Reihenfolge. Ohne `entries` zeigt sie alle, erst die Verbindungen, dann die Tafeln, und nimmt neu angelegte automatisch auf. So kannst du eine Karte mit allem und zusätzlich Karten für einzelne Wege oder Haltestellen anlegen. Karten aus Version 0.1 mit `connections:` und `departures:` funktionieren weiter; der Editor stellt sie beim nächsten Speichern auf `entries` um.
 
 <p align="center">
-  <img src="docs/images/card-select-entries.png" alt="Zwei Karten: eine zeigt nur eine Verbindung, die andere nur eine Abfahrtstafel" width="840">
-  <img src="docs/images/card-editor-entries.png" alt="Karteneditor mit Auswahl einer Verbindung und einer Abfahrtstafel" width="840">
+  <img src="https://raw.githubusercontent.com/MaxDeavy/ha-bvg-connections/main/docs/images/card-select-entries.png" alt="Zwei Karten: eine zeigt nur eine Verbindung, die andere nur eine Abfahrtstafel" width="840">
+  <img src="https://raw.githubusercontent.com/MaxDeavy/ha-bvg-connections/main/docs/images/card-editor-entries.png" alt="Karteneditor mit Auswahl einer Verbindung und einer Abfahrtstafel" width="840">
 </p>
 
 Ein Tipp auf eine Verbindung klappt die Details auf (Teilstrecken, Fußwege, Richtung, Gleis, Auslastung, Hinweise). Der farbige Balken links zeigt, wie dringend du los musst: grün = entspannt, orange = bald/jetzt, rot = nicht mehr zu schaffen oder Ausfall.
@@ -142,7 +139,7 @@ Ein Tipp auf eine Verbindung klappt die Details auf (Teilstrecken, Fußwege, Ric
 
 Journeys with transfers and departure boards for Berlin public transport (BVG, S-Bahn, regional trains), as a Home Assistant integration with a bundled Lovelace card.
 
-**Features:** journeys from stop/address/place to stop/address/place with all transfers; departure boards with product, line and direction filters; per-entry walking time that hides connections you can no longer catch and drives “leave in X min” hints; realtime delays, cancellations, at-risk connections, platform changes, occupancy and disruption notices; a native-looking card (light and dark theme) with BVG-coloured line badges, tile-style symbols (MDI icons in tinted circles, coloured by product and status), transfer chains, countdowns, urgency bars, expandable trip details and a visual editor; its own icon and logo, served by Home Assistant from the integration's `brand/` folder; everything configured in the UI via config subentries; a request budget (default 40/min, the public API allows 100/min), backoff, stale-data display and a repair issue on longer outages.
+**Features:** journeys from stop/address/place to stop/address/place with all transfers; departure boards with product, line and direction filters; per-entry walking time that hides connections you can no longer catch and drives “leave in X min” hints; realtime delays, cancellations, at-risk connections, platform changes, occupancy and disruption notices; a native-looking card (light and dark theme) with BVG-coloured line badges, tile-style symbols (MDI icons in tinted circles, coloured by product and status), transfer chains, countdowns, urgency bars, expandable trip details and a visual editor; its own icon and logo from the integration's `brand/` folder (shown in Devices & services after install; the HACS catalog may show a placeholder until the Home Assistant Marketplace in HA 2026.11); everything configured in the UI via config subentries; a request budget (default 40/min, the public API allows 100/min), backoff, stale-data display and a repair issue on longer outages.
 
 > [!TIP]
 > **Where do I add connections?** Not via “Add integration”, but on the integration's own page: *Settings → Devices & services → BVG Verbindungen* → the **“Verbindung hinzufügen”** (add connection) and **“Abfahrtstafel hinzufügen”** (add departure board) buttons at the top.
