@@ -84,7 +84,7 @@
             "transfer_time": "Minimum transfer time"
           },
           "data_description": {
-            "walk_minutes": "Minutes from your door to the origin. Used for “leave in X min” and to hide connections you can't reach.",
+            "walk_minutes": "Minutes from your door to the origin (default 5). Used for “leave in X min” and to hide connections you can't reach.",
             "products": "Only use these products. Select all for no filter.",
             "excluded_lines": "Type a line (e.g. M10) and press Enter.",
             "max_transfers": "Leave empty for no limit."
@@ -132,7 +132,7 @@
             "direction": "Direction contains"
           },
           "data_description": {
-            "walk_minutes": "Minutes from your door to the stop.",
+            "walk_minutes": "Minutes from your door to the stop (default 5).",
             "lines": "Type a line (e.g. U9) and press Enter. Empty = all lines.",
             "direction": "Optional text filter for the destination, e.g. “Osloer”."
           }

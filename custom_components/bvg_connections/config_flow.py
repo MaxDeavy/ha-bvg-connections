@@ -60,6 +60,7 @@ from .const import (
     DEFAULT_DEPARTURE_INTERVAL,
     DEFAULT_JOURNEY_INTERVAL,
     DEFAULT_REQUEST_BUDGET,
+    DEFAULT_WALK_MINUTES,
     DOMAIN,
     MAX_INTERVAL,
     MAX_REQUEST_BUDGET,
@@ -486,7 +487,8 @@ class ConnectionSubentryFlow(_BvgSubentryFlow):
             {
                 vol.Required(CONF_NAME, default=default_name): TextSelector(),
                 vol.Required(
-                    CONF_WALK_MINUTES, default=data.get(CONF_WALK_MINUTES, 0)
+                    CONF_WALK_MINUTES,
+                    default=data.get(CONF_WALK_MINUTES, DEFAULT_WALK_MINUTES),
                 ): _number(0, 60, unit="min"),
                 vol.Required(
                     CONF_RESULTS,
@@ -575,7 +577,8 @@ class DepartureBoardSubentryFlow(_BvgSubentryFlow):
                     default=self._title or clean_name(data[CONF_STOP]["name"]),
                 ): TextSelector(),
                 vol.Required(
-                    CONF_WALK_MINUTES, default=data.get(CONF_WALK_MINUTES, 0)
+                    CONF_WALK_MINUTES,
+                    default=data.get(CONF_WALK_MINUTES, DEFAULT_WALK_MINUTES),
                 ): _number(0, 60, unit="min"),
                 vol.Required(
                     CONF_RESULTS, default=data.get(CONF_RESULTS, DEFAULT_BOARD_RESULTS)

@@ -113,6 +113,11 @@ async def test_options_flow(hass: HomeAssistant, loaded_entry: MockConfigEntry) 
     assert coordinator.base_interval.total_seconds() == 60
 
 
+def _default(result: dict, field: str) -> object:
+    key = next(k for k in result["data_schema"].schema if k == field)
+    return key.default()
+
+
 def test_estimate() -> None:
     """Two connections and two boards at 30 s stay well below 100/min."""
     assert estimate_requests_per_minute(2, 2, 30, 30) == 12
@@ -153,6 +158,7 @@ async def test_connection_subentry_flow(
         {CONF_ORIGIN: origin_options[0]["value"], CONF_DESTINATION: address_key},
     )
     assert result["step_id"] == "settings"
+    assert _default(result, CONF_WALK_MINUTES) == 5
     result = await hass.config_entries.subentries.async_configure(
         result["flow_id"],
         {
@@ -203,7 +209,9 @@ async def test_connection_reconfigure(
         s for s in loaded_entry.subentries.values() if s.subentry_type == "connection"
     )
     hass.config_entries.async_update_subentry(
-        loaded_entry, subentry, data={**subentry.data, CONF_MAX_TRANSFERS: 2}
+        loaded_entry,
+        subentry,
+        data={**subentry.data, CONF_MAX_TRANSFERS: 2, CONF_WALK_MINUTES: 9},
     )
     await hass.async_block_till_done()
     result = await hass.config_entries.subentries.async_init(
@@ -211,6 +219,9 @@ async def test_connection_reconfigure(
         context={"source": SOURCE_RECONFIGURE, "subentry_id": subentry.subentry_id},
     )
     assert result["step_id"] == "settings"
+    # Stored value wins over the default.
+    assert _default(result, CONF_WALK_MINUTES) == 9
+    assert _default(result, CONF_RESULTS) == 3
     result = await hass.config_entries.subentries.async_configure(
         result["flow_id"],
         {
@@ -253,6 +264,7 @@ async def test_board_subentry_flow(
         result["flow_id"], {CONF_STOP: "stop:900100003"}
     )
     assert result["step_id"] == "settings"
+    assert _default(result, CONF_WALK_MINUTES) == 5
     result = await hass.config_entries.subentries.async_configure(
         result["flow_id"],
         {
