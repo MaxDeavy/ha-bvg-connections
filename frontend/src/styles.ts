@@ -129,7 +129,7 @@ export const cardStyles = css`
   }
   .group-head {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 6px;
     padding: 4px 16px 6px;
     color: var(--bvg-muted);
@@ -137,12 +137,20 @@ export const cardStyles = css`
     font-weight: 500;
     min-width: 0;
   }
-  .group-head > ha-icon {
-    --mdc-icon-size: 16px;
-    flex: none;
+  .group-head .places {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
   }
-  .group-head .sym.l {
-    margin-right: 4px;
+  .group-head .place-line {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+  }
+  .group-head .place-line.dest {
+    padding-left: 6px;
   }
   .group-head .place {
     color: var(--primary-text-color);
@@ -152,6 +160,10 @@ export const cardStyles = css`
   }
   .group-head .spacer {
     flex: 1;
+    min-width: 4px;
+  }
+  .group-head .chip {
+    align-self: center;
   }
   .chip {
     display: inline-flex;
@@ -171,7 +183,7 @@ export const cardStyles = css`
     color: var(--primary-text-color);
   }
 
-  /* Journey rows */
+  /* Journey rows: leave/status | lines+meta | big arrival */
   .journey {
     position: relative;
     display: grid;
@@ -182,6 +194,8 @@ export const cardStyles = css`
     cursor: pointer;
     outline: none;
     transition: background-color 120ms ease;
+    container-type: inline-size;
+    container-name: journey;
   }
   .journey:hover,
   .journey:focus-visible {
@@ -211,17 +225,37 @@ export const cardStyles = css`
     --urgency-color: var(--bvg-error);
   }
   .u-missed .times,
-  .u-missed .chain {
+  .u-missed .chain,
+  .u-missed .meta {
     opacity: 0.55;
+  }
+  .leave-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    min-width: 0;
   }
   .times {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
     min-width: 52px;
     font-variant-numeric: tabular-nums;
+    text-align: right;
   }
-  .dep {
+  .time-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+    color: var(--bvg-muted);
+    text-transform: none;
+  }
+  .time-label .short {
+    display: none;
+  }
+  .arr-time {
     font-size: 20px;
     font-weight: 500;
     line-height: 1.15;
@@ -273,15 +307,8 @@ export const cardStyles = css`
     color: var(--bvg-muted);
     font-variant-numeric: tabular-nums;
   }
-  .meta .arr {
+  .meta .dep-meta {
     color: var(--primary-text-color);
-  }
-  .right {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 2px;
-    text-align: right;
   }
   .countdown {
     display: flex;
@@ -323,6 +350,14 @@ export const cardStyles = css`
   }
   .status.tone-muted {
     font-weight: 500;
+  }
+  @container journey (max-width: 380px) {
+    .time-label .long {
+      display: none;
+    }
+    .time-label .short {
+      display: inline;
+    }
   }
 
   /* Line badges */
@@ -561,10 +596,5 @@ export const cardStyles = css`
   .footer .stale-text {
     color: var(--bvg-warn);
     font-weight: 500;
-  }
-  @media (max-width: 420px) {
-    .leave .label-long {
-      display: none;
-    }
   }
 `;

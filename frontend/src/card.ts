@@ -52,13 +52,17 @@ export class BvgConnectionsCard extends LitElement {
     _config: { state: true },
     _now: { state: true },
     _expanded: { state: true },
+    _collapsed: { state: true },
     _openNotices: { state: true },
   };
 
   hass?: HomeAssistant;
   private _config?: Normalized;
   private _now = Date.now();
+  /** Rows opened when `expand` is false. */
   private _expanded = new Set<string>();
+  /** Rows closed when `expand` is true (initial open). */
+  private _collapsed = new Set<string>();
   private _openNotices = new Set<string>();
   private _timer?: number;
 
@@ -181,11 +185,18 @@ export class BvgConnectionsCard extends LitElement {
     return html`
       <section>
         <div class="group-head">
-          ${this._sym("mdi:map-marker", "place", "l")}
-          <span class="place">${ref.name ?? a.origin}</span>
-          ${ref.name
-            ? nothing
-            : html`<ha-icon icon="mdi:arrow-right"></ha-icon><span class="place">${a.destination}</span>`}
+          <div class="places">
+            <div class="place-line">
+              ${this._sym("mdi:map-marker", "place", "l")}
+              <span class="place">${ref.name ?? a.origin}</span>
+            </div>
+            ${ref.name
+              ? nothing
+              : html`<div class="place-line dest">
+                  ${this._sym("mdi:flag-checkered", "place", "s")}
+                  <span class="place">${a.destination}</span>
+                </div>`}
+          </div>
           <span class="spacer"></span>
           ${a.stale
             ? html`<span class="chip stale">${this._sym("mdi:cloud-alert", "warn", "s")}${this._t("stale")}</span>`
@@ -203,15 +214,22 @@ export class BvgConnectionsCard extends LitElement {
     `;
   }
 
+  private _journeyKey(entityId: string, j: Journey): string {
+    return `${entityId}:${j.planned_departure ?? j.departure}:${j.lines.join(">")}`;
+  }
+
+  private _isExpanded(key: string): boolean {
+    return this._config!.expand ? !this._collapsed.has(key) : this._expanded.has(key);
+  }
+
   private _renderJourney(entityId: string, j: Journey, index: number, walk: number): TemplateResult {
-    const key = `${entityId}:${j.departure}:${j.lines.join(">")}`;
+    const key = this._journeyKey(entityId, j);
     const departure = parseTime(j.departure);
     const leaveAt = parseTime(j.leave_at);
     const cancelled = j.status === "cancelled";
     const level = urgency(walk ? leaveAt : departure, this._now, cancelled);
-    const expanded = this._config!.expand || this._expanded.has(key);
+    const expanded = this._isExpanded(key);
     const cd = countdown(departure, this._now, this._t("now"));
-    const delay = formatDelay(j.delay);
     const arrivalDelay = formatDelay(j.arrival_delay);
     const firstRide = j.legs.find((l) => !l.walking);
 
@@ -230,13 +248,12 @@ export class BvgConnectionsCard extends LitElement {
         }}
         data-index=${index}
       >
-        <div class="times">
-          <span class="dep ${cancelled ? "cancelled-text" : delay ? this._delayClass(j.delay) : ""}"
-            >${this._time(j.departure)}</span
+        <div class="leave-col">
+          ${this._status(j)}
+          <span class="countdown"
+            >${cd.value}${cd.unit ? html`<span class="unit">${this._t("min")}</span>` : nothing}</span
           >
-          ${delay && j.planned_departure && !cancelled
-            ? html`<span class="planned">${this._time(j.planned_departure)}</span>`
-            : nothing}
+          ${walk && !cancelled ? this._leaveHint(leaveAt, level) : nothing}
         </div>
         <div class="main">
           <div class="chain">
@@ -254,10 +271,8 @@ export class BvgConnectionsCard extends LitElement {
               )}
           </div>
           <div class="meta">
-            <span class="arr ${cancelled ? "cancelled-text" : ""}"
-              >${this._t("arrival")} ${this._time(j.arrival)}${arrivalDelay
-                ? html` <span class=${this._delayClass(j.arrival_delay)}>(${arrivalDelay})</span>`
-                : nothing}</span
+            <span class="dep-meta ${cancelled ? "cancelled-text" : ""}"
+              >${this._t("departure")} ${this._time(j.departure)}</span
             >
             ${j.duration !== null ? html`<span>${j.duration} ${this._t("min")}</span>` : nothing}
             <span>${this._transfers(j.transfers)}</span>
@@ -271,10 +286,18 @@ export class BvgConnectionsCard extends LitElement {
               : nothing}
           </div>
         </div>
-        <div class="right">
-          ${this._status(j)}
-          <span class="countdown">${cd.value}${cd.unit ? html`<span class="unit">${this._t("min")}</span>` : nothing}</span>
-          ${walk && !cancelled ? this._leaveHint(leaveAt, level) : nothing}
+        <div class="times">
+          <span class="time-label"
+            ><span class="long">${this._t("arrival_label")}</span
+            ><span class="short">${this._t("arrival_label_short")}</span></span
+          >
+          <span
+            class="arr-time ${cancelled ? "cancelled-text" : arrivalDelay ? this._delayClass(j.arrival_delay) : ""}"
+            >${this._time(j.arrival)}</span
+          >
+          ${arrivalDelay && j.planned_arrival && !cancelled
+            ? html`<span class="planned">${this._time(j.planned_arrival)}</span>`
+            : nothing}
         </div>
       </div>
       ${expanded ? this._renderDetails(j) : nothing}
@@ -535,6 +558,13 @@ export class BvgConnectionsCard extends LitElement {
   }
 
   private _toggle(key: string): void {
+    if (this._config!.expand) {
+      const next = new Set(this._collapsed);
+      if (next.has(key)) next.delete(key);
+      else next.add(key);
+      this._collapsed = next;
+      return;
+    }
     const next = new Set(this._expanded);
     if (next.has(key)) next.delete(key);
     else next.add(key);

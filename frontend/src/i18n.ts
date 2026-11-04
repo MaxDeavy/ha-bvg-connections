@@ -19,7 +19,10 @@ const de = {
   transfer: "Umstieg",
   platform: "Gl.",
   direction: "Richtung",
+  departure: "ab",
   arrival: "an",
+  arrival_label: "Ankunft",
+  arrival_label_short: "An",
   updated: "Stand",
   stale: "Daten veraltet",
   realtime: "Echtzeit",
@@ -44,7 +47,7 @@ const de = {
   editor_show_clock: "Uhr anzeigen",
   editor_show_header: "Kopfzeile anzeigen",
   editor_show_footer: "Aktualisierungszeit anzeigen",
-  editor_expand: "Details immer aufgeklappt",
+  editor_expand: "Details anfangs aufgeklappt",
 };
 
 type Strings = typeof de;
@@ -70,7 +73,10 @@ const en: Strings = {
   transfer: "Transfer",
   platform: "Pl.",
   direction: "towards",
+  departure: "dep",
   arrival: "arr.",
+  arrival_label: "Arrival",
+  arrival_label_short: "Arr",
   updated: "Updated",
   stale: "Data outdated",
   realtime: "Realtime",
@@ -95,7 +101,7 @@ const en: Strings = {
   editor_show_clock: "Show clock",
   editor_show_header: "Show header",
   editor_show_footer: "Show update time",
-  editor_expand: "Always show details",
+  editor_expand: "Expand details by default",
 };
 
 export type StringKey = keyof Strings;
