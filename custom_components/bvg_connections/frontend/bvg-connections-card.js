@@ -585,7 +585,25 @@ function Se(e) {
 function Ce(e) {
 	return e === "suburban" ? "pill" : e === "subway" ? "square" : "rect";
 }
-function we(e) {
+var we = {
+	suburban: "mdi:train-variant",
+	subway: "mdi:subway-variant",
+	tram: "mdi:tram",
+	bus: "mdi:bus",
+	ferry: "mdi:ferry",
+	regional: "mdi:train",
+	express: "mdi:train"
+};
+function Te(e) {
+	return e && Object.hasOwn(we, e) ? {
+		icon: we[e],
+		tone: e
+	} : {
+		icon: "mdi:transit-connection-variant",
+		tone: "muted"
+	};
+}
+function Ee(e) {
 	let t = /^#?([0-9a-f]{6})$/i.exec(e);
 	if (!t) return "#fff";
 	let n = parseInt(t[1], 16), [r, i, a] = [
@@ -596,7 +614,7 @@ function we(e) {
 	return .299 * r + .587 * i + .114 * a > 160 ? "#000" : "#fff";
 }
 // src/i18n.ts
-var Te = {
+var De = {
 	now: "jetzt",
 	min: "min",
 	in: "in",
@@ -640,7 +658,7 @@ var Te = {
 	editor_show_header: "Kopfzeile anzeigen",
 	editor_show_footer: "Aktualisierungszeit anzeigen",
 	editor_expand: "Details immer aufgeklappt"
-}, Ee = {
+}, Oe = {
 	now: "now",
 	min: "min",
 	in: "in",
@@ -685,11 +703,11 @@ var Te = {
 	editor_show_footer: "Show update time",
 	editor_expand: "Always show details"
 };
-function De(e, t, n = {}) {
-	return ((e ?? "en").toLowerCase().startsWith("de") ? Te : Ee)[t].replace(/\{(\w+)\}/g, (e, t) => String(n[t] ?? ""));
+function ke(e, t, n = {}) {
+	return ((e ?? "en").toLowerCase().startsWith("de") ? De : Oe)[t].replace(/\{(\w+)\}/g, (e, t) => String(n[t] ?? ""));
 }
 // src/styles.ts
-var Oe = o`
+var Ae = o`
   :host {
     --bvg-ok: var(--success-color, #43a047);
     --bvg-warn: var(--warning-color, #ffa600);
@@ -698,7 +716,88 @@ var Oe = o`
     --bvg-divider: var(--divider-color, rgba(0, 0, 0, 0.12));
     --bvg-row-hover: rgba(var(--rgb-primary-text-color, 0, 0, 0), 0.04);
     --bvg-chip-bg: rgba(var(--rgb-primary-text-color, 0, 0, 0), 0.06);
+    --bvg-walk: var(--light-blue-color, #03a9f4);
     display: block;
+  }
+
+  /* Tile-style symbols: MDI icon on a tinted circle, like HA tile cards */
+  .sym {
+    --sym-size: 24px;
+    --sym-color: var(--bvg-muted);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--sym-size);
+    height: var(--sym-size);
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--sym-color) 20%, transparent);
+    color: var(--sym-color);
+    flex: none;
+    box-sizing: border-box;
+  }
+  .sym ha-icon {
+    --mdc-icon-size: calc(var(--sym-size) * 0.66);
+    display: inline-flex;
+  }
+  .sym.xs {
+    --sym-size: 16px;
+  }
+  .sym.s {
+    --sym-size: 20px;
+  }
+  .sym.l {
+    --sym-size: 32px;
+  }
+  .tone-place {
+    --sym-color: var(--primary-color, #03a9f4);
+  }
+  .tone-walk {
+    --sym-color: var(--bvg-walk);
+  }
+  .tone-muted {
+    --sym-color: var(--bvg-muted);
+  }
+  .tone-current {
+    --sym-color: currentColor;
+  }
+  .tone-ok {
+    --sym-color: var(--bvg-ok);
+  }
+  .tone-warn {
+    --sym-color: var(--bvg-warn);
+  }
+  .tone-error {
+    --sym-color: var(--bvg-error);
+  }
+  .tone-suburban {
+    --sym-color: #008d4f;
+  }
+  .tone-subway {
+    --sym-color: #0a3c85;
+  }
+  .dark .tone-subway {
+    --sym-color: #5c8fd6;
+  }
+  .tone-tram {
+    --sym-color: #be1414;
+  }
+  .tone-bus {
+    --sym-color: #a5027d;
+  }
+  .dark .tone-bus {
+    --sym-color: #d04aa9;
+  }
+  .tone-ferry {
+    --sym-color: #0080ba;
+  }
+  .tone-regional,
+  .tone-express {
+    --sym-color: #e2001a;
+  }
+  .dark .tone-tram,
+  .dark .tone-regional,
+  .dark .tone-express {
+    --sym-color: #f04a4a;
   }
   ha-card {
     overflow: hidden;
@@ -745,9 +844,12 @@ var Oe = o`
     font-weight: 500;
     min-width: 0;
   }
-  .group-head ha-icon {
+  .group-head > ha-icon {
     --mdc-icon-size: 16px;
     flex: none;
+  }
+  .group-head .sym.l {
+    margin-right: 4px;
   }
   .group-head .place {
     color: var(--primary-text-color);
@@ -761,8 +863,8 @@ var Oe = o`
   .chip {
     display: inline-flex;
     align-items: center;
-    gap: 3px;
-    padding: 1px 8px 1px 6px;
+    gap: 4px;
+    padding: 2px 8px 2px 2px;
     border-radius: 999px;
     background: var(--bvg-chip-bg);
     color: var(--bvg-muted);
@@ -770,9 +872,6 @@ var Oe = o`
     font-weight: 500;
     white-space: nowrap;
     flex: none;
-  }
-  .chip ha-icon {
-    --mdc-icon-size: 14px;
   }
   .chip.stale {
     background: color-mix(in srgb, var(--bvg-warn) 18%, transparent);
@@ -862,18 +961,18 @@ var Oe = o`
     align-items: center;
     gap: 3px 2px;
   }
+  .chain > .sym {
+    margin-right: 2px;
+  }
   .sep {
     color: var(--bvg-muted);
     font-size: 14px;
     margin: 0 1px;
     line-height: 1;
   }
-  .walk-icon {
-    --mdc-icon-size: 18px;
-    color: var(--bvg-muted);
-  }
   .meta {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
     gap: 2px 8px;
     margin-top: 3px;
@@ -910,47 +1009,27 @@ var Oe = o`
   .leave {
     display: inline-flex;
     align-items: center;
-    gap: 2px;
+    gap: 4px;
     font-size: 12px;
     font-weight: 500;
     white-space: nowrap;
     color: var(--urgency-color);
   }
-  .leave ha-icon {
-    --mdc-icon-size: 14px;
-  }
   .u-relaxed .leave {
     color: var(--bvg-muted);
   }
   .status {
-    display: inline-block;
-    padding: 0 6px;
-    border-radius: 4px;
-    font-size: 11px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
     font-weight: 600;
-    line-height: 18px;
-    letter-spacing: 0.2px;
+    line-height: 20px;
     white-space: nowrap;
+    color: var(--sym-color);
   }
-  .status.ok {
-    color: var(--bvg-ok);
-    background: color-mix(in srgb, var(--bvg-ok) 14%, transparent);
-  }
-  .status.delayed {
-    color: var(--primary-text-color);
-    background: color-mix(in srgb, var(--bvg-warn) 28%, transparent);
-  }
-  .status.connection_at_risk {
-    color: var(--primary-text-color);
-    background: color-mix(in srgb, var(--bvg-warn) 40%, transparent);
-  }
-  .status.cancelled {
-    color: #fff;
-    background: var(--bvg-error);
-  }
-  .status.no_realtime {
-    color: var(--bvg-muted);
-    background: var(--bvg-chip-bg);
+  .status.tone-muted {
+    font-weight: 500;
   }
 
   /* Line badges */
@@ -996,7 +1075,7 @@ var Oe = o`
   }
   .leg {
     display: grid;
-    grid-template-columns: 52px 40px 1fr;
+    grid-template-columns: 52px 64px 1fr;
     column-gap: 10px;
     padding: 6px 0;
     font-size: 13px;
@@ -1036,9 +1115,13 @@ var Oe = o`
     font-size: 12px;
     align-items: center;
   }
-  .leg.walk ha-icon {
-    --mdc-icon-size: 18px;
-    justify-self: center;
+  .leg .line {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .leg.walk .sym {
+    justify-self: start;
   }
   .platform-changed {
     color: var(--bvg-warn);
@@ -1066,20 +1149,14 @@ var Oe = o`
     line-height: 1.4;
     color: var(--primary-text-color);
   }
-  .remark ha-icon {
-    --mdc-icon-size: 15px;
-    color: var(--bvg-warn);
-    flex: none;
-    margin-top: 1px;
-  }
-  .remark.status ha-icon {
-    color: var(--bvg-muted);
+  .remark .sym {
+    margin-top: -1px;
   }
 
   /* Departure board */
   .departure {
     display: grid;
-    grid-template-columns: 44px 1fr auto auto;
+    grid-template-columns: 24px 44px 1fr auto auto;
     align-items: center;
     column-gap: 10px;
     padding: 5px 16px;
@@ -1108,6 +1185,10 @@ var Oe = o`
     text-decoration: line-through;
   }
   .departure .delay {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 3px;
     font-size: 13px;
     font-weight: 600;
     font-variant-numeric: tabular-nums;
@@ -1142,9 +1223,9 @@ var Oe = o`
     font-weight: 500;
     color: var(--primary-text-color);
   }
-  .notices .summary ha-icon {
+  .notices .summary > ha-icon {
     --mdc-icon-size: 16px;
-    color: var(--bvg-warn);
+    color: var(--bvg-muted);
   }
   .notices .spacer {
     flex: 1;
@@ -1184,11 +1265,11 @@ var Oe = o`
       display: none;
     }
   }
-`, ke = {
+`, je = {
 	integration: "bvg_connections",
 	domain: "sensor",
 	device_class: "timestamp"
-}, Ae = [
+}, Me = [
 	{
 		name: "title",
 		selector: { text: {} }
@@ -1197,14 +1278,14 @@ var Oe = o`
 		name: "connections",
 		selector: { entity: {
 			multiple: !0,
-			filter: ke
+			filter: je
 		} }
 	},
 	{
 		name: "departures",
 		selector: { entity: {
 			multiple: !0,
-			filter: ke
+			filter: je
 		} }
 	},
 	{
@@ -1248,7 +1329,7 @@ var Oe = o`
 			}
 		]
 	}
-], je = class extends J {
+], Ne = class extends J {
 	static {
 		this.properties = {
 			hass: { attribute: !1 },
@@ -1274,8 +1355,8 @@ var Oe = o`
 		return L`<ha-form
       .hass=${this.hass}
       .data=${e}
-      .schema=${Ae}
-      .computeLabel=${(e) => De(this.hass?.locale?.language ?? this.hass?.language, `editor_${e.name}`)}
+      .schema=${Me}
+      .computeLabel=${(e) => ke(this.hass?.locale?.language ?? this.hass?.language, `editor_${e.name}`)}
       @value-changed=${this._changed}
     ></ha-form>`;
 	}
@@ -1296,14 +1377,20 @@ var Oe = o`
 		}));
 	}
 };
-customElements.get("bvg-connections-card-editor") || customElements.define("bvg-connections-card-editor", je);
+customElements.get("bvg-connections-card-editor") || customElements.define("bvg-connections-card-editor", Ne);
 // src/card.ts
-var Me = "0.1.0", Ne = 5e3, Pe = class extends J {
+var Pe = "0.1.0", Fe = {
+	ok: ["mdi:check", "ok"],
+	delayed: ["mdi:clock-alert-outline", "warn"],
+	connection_at_risk: ["mdi:transit-transfer", "warn"],
+	cancelled: ["mdi:cancel", "error"],
+	no_realtime: ["mdi:clock-outline", "muted"]
+}, Ie = 5e3, Le = class extends J {
 	constructor(...e) {
 		super(...e), this._now = Date.now(), this._expanded = /* @__PURE__ */ new Set(), this._openNotices = /* @__PURE__ */ new Set();
 	}
 	static {
-		this.styles = Oe;
+		this.styles = Ae;
 	}
 	static {
 		this.properties = {
@@ -1349,7 +1436,7 @@ var Me = "0.1.0", Ne = 5e3, Pe = class extends J {
 	connectedCallback() {
 		super.connectedCallback(), this._now = Date.now(), this._timer = window.setInterval(() => {
 			this._now = Date.now();
-		}, Ne);
+		}, Ie);
 	}
 	disconnectedCallback() {
 		super.disconnectedCallback(), this._timer && window.clearInterval(this._timer);
@@ -1363,7 +1450,7 @@ var Me = "0.1.0", Ne = 5e3, Pe = class extends J {
 		return this.hass?.locale?.language ?? this.hass?.language ?? "de";
 	}
 	_t(e, t) {
-		return De(this._lang, e, t);
+		return ke(this._lang, e, t);
 	}
 	_time(e) {
 		let t = typeof e == "number" ? e : X(e);
@@ -1375,7 +1462,7 @@ var Me = "0.1.0", Ne = 5e3, Pe = class extends J {
 		if (!this._config || !this.hass) return z;
 		let e = this._config, t = [...e.connections, ...e.departures].map((e) => this.hass.states[e.entity]).filter(Boolean), n = e.connections.length ? this.hass.states[e.connections[0].entity] : void 0, r = e.title ?? (e.connections.length === 1 && n ? String(n.attributes.origin ?? "") : "");
 		return L`
-      <ha-card>
+      <ha-card class=${this.hass.themes?.darkMode ? "dark" : ""}>
         ${e.show_header && (r || e.show_clock) ? L`<div class="header">
               <div class="title">${r}</div>
               ${e.show_clock ? L`<div class="clock">${this._time(this._now)}</div>` : z}
@@ -1397,13 +1484,13 @@ var Me = "0.1.0", Ne = 5e3, Pe = class extends J {
 		return L`
       <section>
         <div class="group-head">
-          <ha-icon icon="mdi:map-marker-outline"></ha-icon>
+          ${this._sym("mdi:map-marker", "place", "l")}
           <span class="place">${e.name ?? n.origin}</span>
           ${e.name ? z : L`<ha-icon icon="mdi:arrow-right"></ha-icon><span class="place">${n.destination}</span>`}
           <span class="spacer"></span>
-          ${n.stale ? L`<span class="chip stale"><ha-icon icon="mdi:cloud-alert"></ha-icon>${this._t("stale")}</span>` : z}
+          ${n.stale ? L`<span class="chip stale">${this._sym("mdi:cloud-alert", "warn", "s")}${this._t("stale")}</span>` : z}
           ${r ? L`<span class="chip" title=${this._t("walk_to_stop")}
-                ><ha-icon icon="mdi:walk"></ha-icon>${r} ${this._t("min")}</span
+                >${this._sym("mdi:walk", "walk", "s")}${r} ${this._t("min")}</span
               >` : z}
         </div>
         ${i.length ? i.map((e, n) => this._renderJourney(t.entity_id, e, n, r)) : L`<div class="empty">${this._t("no_journeys")}</div>`}
@@ -1432,7 +1519,7 @@ var Me = "0.1.0", Ne = 5e3, Pe = class extends J {
         </div>
         <div class="main">
           <div class="chain">
-            ${t.starts_with_walk ? L`<ha-icon class="walk-icon" icon="mdi:walk"></ha-icon>` : z}
+            ${t.starts_with_walk ? this._sym("mdi:walk", "walk") : z}
             ${t.legs.filter((e) => !e.walking).map((e, n) => L`${n || t.starts_with_walk ? L`<span class="sep">›</span>` : z}${this._badge(e.line, e.product, e.color, e.text_color, e.cancelled)}`)}
           </div>
           <div class="meta">
@@ -1444,7 +1531,7 @@ var Me = "0.1.0", Ne = 5e3, Pe = class extends J {
             ${p?.platform ? L`<span class=${p.platform_changed ? "platform-changed" : ""}
                   >${this._platform(p.platform)}</span
                 >` : z}
-            ${t.remarks.some((e) => e.type === "warning") ? L`<ha-icon style="--mdc-icon-size:14px;color:var(--bvg-warn)" icon="mdi:alert"></ha-icon>` : z}
+            ${t.remarks.some((e) => e.type === "warning") ? this._sym("mdi:alert", "warn", "xs") : z}
           </div>
         </div>
         <div class="right">
@@ -1472,15 +1559,26 @@ var Me = "0.1.0", Ne = 5e3, Pe = class extends J {
 			connection_at_risk: this._t("at_risk"),
 			no_realtime: this._t("no_realtime")
 		}, n = e.status === "delayed" ? Q(e.delay) ?? Q(e.arrival_delay) ?? "+" : t[e.status];
-		return L`<span class="status ${e.status}">${n}</span>`;
+		return this._tag(e.status, n);
+	}
+	_tag(e, t) {
+		let [n, r] = Fe[e] ?? Fe.no_realtime;
+		return L`<span class="status tone-${r}">${this._sym(n, r, "s")}${t}</span>`;
+	}
+	_sym(e, t, n = "m") {
+		return L`<span class="sym ${n} tone-${t}"><ha-icon icon=${e}></ha-icon></span>`;
+	}
+	_productSym(e, t = "m") {
+		let { icon: n, tone: r } = Te(e);
+		return this._sym(n, r, t);
 	}
 	_leaveHint(e, t) {
 		if (e === null) return z;
 		let n = Math.floor((e - this._now) / 6e4), r;
-		return r = t === "missed" ? this._t("missed") : n <= 0 ? this._t("leave_now") : this._t("leave_in", { m: n }), L`<span class="leave"><ha-icon icon="mdi:walk"></ha-icon>${r}</span>`;
+		return r = t === "missed" ? this._t("missed") : n <= 0 ? this._t("leave_now") : this._t("leave_in", { m: n }), L`<span class="leave">${this._sym("mdi:walk", t === "relaxed" ? "walk" : "current", "s")}${r}</span>`;
 	}
 	_badge(e, t, n, r, i = !1, a = !1) {
-		let o = n || "#5f6368", s = r || we(o);
+		let o = n || "#5f6368", s = r || Ee(o);
 		return L`<span
       class="badge ${Ce(t)} ${i ? "cancelled" : ""} ${a ? "large" : ""}"
       style="background:${o};color:${s}"
@@ -1497,7 +1595,7 @@ var Me = "0.1.0", Ne = 5e3, Pe = class extends J {
 		let t = e.departure && e.arrival ? Math.max(1, Math.round((Date.parse(e.arrival) - Date.parse(e.departure)) / 6e4)) : null, n = e.distance ? this._t("walk_distance", { d: e.distance }) : this._t("transfer");
 		return L`<div class="leg walk">
       <span class="t">${this._time(e.departure)}</span>
-      <ha-icon icon=${e.distance ? "mdi:walk" : "mdi:swap-horizontal"}></ha-icon>
+      ${e.distance ? this._sym("mdi:walk", "walk") : this._sym("mdi:transit-transfer", "muted")}
       <span>${n}${t ? ` · ${t} ${this._t("min")}` : ""}${e.to ? ` → ${e.to}` : ""}</span>
     </div>`;
 	}
@@ -1512,15 +1610,17 @@ var Me = "0.1.0", Ne = 5e3, Pe = class extends J {
           >${this._time(e.arrival)}${n ? L` <small>${n}</small>` : z}</span
         >
       </span>
-      ${this._badge(e.line, e.product, e.color, e.text_color, e.cancelled)}
+      <span class="line">
+        ${this._productSym(e.product)}${this._badge(e.line, e.product, e.color, e.text_color, e.cancelled)}
+      </span>
       <div class="route">
         <div class="stop ${e.cancelled ? "cancelled-text" : ""}">${e.from}</div>
         <div class="sub">
           ${e.direction ? L`<span>${this._t("direction")} ${e.direction}</span>` : z}
           ${e.platform ? L`<span class=${e.platform_changed ? "platform-changed" : ""}>${this._platform(e.platform)}</span>` : z}
           ${this._occupancy(e.occupancy)}
-          ${e.cancelled ? L`<span class="status cancelled">${this._t("cancelled")}</span>` : z}
-          ${!e.reachable && !e.cancelled ? L`<span class="status connection_at_risk">${this._t("at_risk")}</span>` : z}
+          ${e.cancelled ? this._tag("cancelled", this._t("cancelled")) : z}
+          ${!e.reachable && !e.cancelled ? this._tag("connection_at_risk", this._t("at_risk")) : z}
         </div>
         <div class="stop ${e.cancelled ? "cancelled-text" : ""}">${e.to}</div>
         ${e.remarks.map((e) => this._remark(e))}
@@ -1533,8 +1633,8 @@ var Me = "0.1.0", Ne = 5e3, Pe = class extends J {
 		return L`<span class="occupancy ${e}" title=${this._t(`occupancy_${e}`)}><ha-icon icon=${t}></ha-icon></span>`;
 	}
 	_remark(e) {
-		return L`<div class="remark ${e.type}">
-      <ha-icon icon=${e.type === "warning" ? "mdi:alert" : "mdi:information-outline"}></ha-icon>
+		return L`<div class="remark is-${e.type}">
+      ${e.type === "warning" ? this._sym("mdi:alert", "warn", "s") : this._sym("mdi:information-variant", "muted", "s")}
       <span>${e.summary && e.summary !== e.text ? L`<b>${e.summary}:</b> ` : z}${e.text}</span>
     </div>`;
 	}
@@ -1545,16 +1645,16 @@ var Me = "0.1.0", Ne = 5e3, Pe = class extends J {
 		return L`
       <section>
         <div class="group-head">
-          <ha-icon icon="mdi:bus-stop"></ha-icon>
+          ${this._sym("mdi:bus-stop", "place", "l")}
           <span class="place">${e.name ?? n.stop}</span>
           <span class="spacer"></span>
-          ${n.stale ? L`<span class="chip stale"><ha-icon icon="mdi:cloud-alert"></ha-icon>${this._t("stale")}</span>` : z}
-          ${r ? L`<span class="chip"><ha-icon icon="mdi:walk"></ha-icon>${r} ${this._t("min")}</span>` : z}
+          ${n.stale ? L`<span class="chip stale">${this._sym("mdi:cloud-alert", "warn", "s")}${this._t("stale")}</span>` : z}
+          ${r ? L`<span class="chip">${this._sym("mdi:walk", "walk", "s")}${r} ${this._t("min")}</span>` : z}
         </div>
         ${i.length ? i.map((e) => this._renderDeparture(e, r)) : L`<div class="empty">${this._t("no_departures")}</div>`}
         ${a.length ? L`<div class="notices" @click=${() => this._toggleNotices(t.entity_id)}>
               <div class="summary">
-                <ha-icon icon="mdi:alert"></ha-icon>
+                ${this._sym("mdi:alert", "warn", "s")}
                 <span>${a.length === 1 ? this._t("remark") : this._t("remarks", { n: a.length })}</span>
                 ${o ? z : L`<span class="preview">${a[0].text}</span>`}
                 <span class="spacer"></span>
@@ -1573,16 +1673,19 @@ var Me = "0.1.0", Ne = 5e3, Pe = class extends J {
 	_renderDeparture(e, t) {
 		let n = X(e.when), r = X(e.leave_at), i = !t || r === null || r >= this._now - 3e4, a = Z(n, this._now, this._t("now")), o = Q(e.delay), s = o && e.planned_when && !e.cancelled ? this._time(e.planned_when) : null;
 		return L`<div class="departure ${e.cancelled ? "is-cancelled" : ""} ${i ? "" : "unreachable"}">
+      ${this._productSym(e.product)}
       ${this._badge(e.line, e.product, e.color, e.text_color, !1, !0)}
       <div class="dir">
         <span>${e.direction}</span>
         ${e.platform || s || e.cancelled ? L`<small>
-              ${e.cancelled ? L`<span class="status cancelled">${this._t("cancelled")}</span>` : z}
+              ${e.cancelled ? this._tag("cancelled", this._t("cancelled")) : z}
               ${s ? L`<span class="planned-inline">${s}</span>` : z}
               ${e.platform ? L`<span class=${e.platform_changed ? "platform-changed" : ""}>${this._platform(e.platform)}</span>` : z}
             </small>` : z}
       </div>
-      <span class="delay ${this._delayClass(e.delay)}">${e.cancelled ? "" : o ?? ""}</span>
+      <span class="delay ${this._delayClass(e.delay)}"
+        >${e.cancelled ? "" : L`${(e.delay ?? 0) > 0 ? this._sym("mdi:clock-alert-outline", "current", "xs") : z}${o ?? ""}`}</span
+      >
       <span class="countdown ${e.cancelled ? "cancelled-text" : ""}"
         >${a.value}${a.unit ? L`<span class="unit">${this._t("min")}</span>` : z}</span
       >
@@ -1605,7 +1708,7 @@ var Me = "0.1.0", Ne = 5e3, Pe = class extends J {
 	}
 };
 if (!customElements.get("bvg-connections-card")) {
-	customElements.define("bvg-connections-card", Pe);
+	customElements.define("bvg-connections-card", Le);
 	let e = window;
 	e.customCards = e.customCards ?? [], e.customCards.push({
 		type: "bvg-connections-card",
@@ -1613,6 +1716,6 @@ if (!customElements.get("bvg-connections-card")) {
 		description: "Verbindungen mit Umstiegen, Abfahrtstafeln und Losgeh-Hinweisen",
 		preview: !0,
 		documentationURL: "https://github.com/MaxDeavy/ha-bvg-connections"
-	}), console.info(`%c BVG-CONNECTIONS-CARD %c ${Me} `, "color:#fff;background:#f0d722;color:#000;font-weight:700", "");
+	}), console.info(`%c BVG-CONNECTIONS-CARD %c ${Pe} `, "color:#fff;background:#f0d722;color:#000;font-weight:700", "");
 }
-export { Pe as BvgConnectionsCard };
+export { Le as BvgConnectionsCard };
