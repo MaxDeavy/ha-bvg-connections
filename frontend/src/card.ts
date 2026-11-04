@@ -15,6 +15,7 @@ import {
 } from "./format";
 import { translate, type StringKey } from "./i18n";
 import { defineElement } from "./define";
+import { parseRemark, remarkPlainText } from "./remark-text";
 import { cardStyles } from "./styles";
 import type {
   CardConfig,
@@ -420,9 +421,25 @@ export class BvgConnectionsCard extends LitElement {
   }
 
   private _remark(r: Remark): TemplateResult {
+    const more = this._t("more");
+    const summary = remarkPlainText(r.summary, more);
+    const parts = parseRemark(r.text, more);
+    const showSummary = summary && summary !== remarkPlainText(r.text, more);
     return html`<div class="remark is-${r.type}">
       ${r.type === "warning" ? this._sym("mdi:alert", "warn", "s") : this._sym("mdi:information-variant", "muted", "s")}
-      <span>${r.summary && r.summary !== r.text ? html`<b>${r.summary}:</b> ` : nothing}${r.text}</span>
+      <span
+        >${showSummary ? html`<b>${summary}:</b> ` : nothing}${parts.map((part) =>
+          part.href
+            ? html`<a
+                href=${part.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                @click=${(ev: Event) => ev.stopPropagation()}
+                >${part.text}</a
+              >`
+            : part.text,
+        )}</span
+      >
     </div>`;
   }
 
@@ -457,7 +474,7 @@ export class BvgConnectionsCard extends LitElement {
               <div class="summary">
                 ${this._sym("mdi:alert", "warn", "s")}
                 <span>${notices.length === 1 ? this._t("remark") : this._t("remarks", { n: notices.length })}</span>
-                ${open ? nothing : html`<span class="preview">${notices[0].text}</span>`}
+                ${open ? nothing : html`<span class="preview">${remarkPlainText(notices[0].text, this._t("more"))}</span>`}
                 <span class="spacer"></span>
                 <ha-icon icon=${open ? "mdi:chevron-up" : "mdi:chevron-down"}></ha-icon>
               </div>

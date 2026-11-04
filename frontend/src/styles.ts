@@ -445,6 +445,15 @@ export const cardStyles = css`
   .remark .sym {
     margin-top: -1px;
   }
+  .remark a {
+    color: var(--primary-color);
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .remark a:hover,
+  .remark a:focus-visible {
+    text-decoration: underline;
+  }
 
   /* Departure board */
   .departure {
