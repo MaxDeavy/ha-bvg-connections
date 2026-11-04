@@ -6,6 +6,7 @@ import {
   entryType,
   formatClock,
   formatDelay,
+  formatJourneyDuration,
   isDeparted,
   normalizeConfig,
   type NormalizedConfig,
@@ -31,7 +32,7 @@ import type {
 } from "./types";
 import "./editor";
 
-const VERSION = "0.1.3";
+const VERSION = "0.1.4";
 
 const STATUS_SYMBOLS: Record<string, [icon: string, tone: string]> = {
   ok: ["mdi:check", "ok"],
@@ -274,7 +275,9 @@ export class BvgConnectionsCard extends LitElement {
             <span class="dep-meta ${cancelled ? "cancelled-text" : ""}"
               >${this._t("departure")} ${this._time(j.departure)}</span
             >
-            ${j.duration !== null ? html`<span>${j.duration} ${this._t("min")}</span>` : nothing}
+            ${j.duration !== null
+              ? html`<span>${formatJourneyDuration(j.duration, this._lang)}</span>`
+              : nothing}
             <span>${this._transfers(j.transfers)}</span>
             ${firstRide?.platform
               ? html`<span class=${firstRide.platform_changed ? "platform-changed" : ""}
@@ -347,11 +350,16 @@ export class BvgConnectionsCard extends LitElement {
   private _leaveHint(leaveAt: number | null, level: string): TemplateResult | typeof nothing {
     if (leaveAt === null) return nothing;
     const minutes = Math.floor((leaveAt - this._now) / 60_000);
-    let text: string;
-    if (level === "missed") text = this._t("missed");
-    else if (minutes <= 0) text = this._t("leave_now");
-    else text = this._t("leave_in", { m: minutes });
-    return html`<span class="leave">${this._sym("mdi:walk", level === "relaxed" ? "walk" : "current", "s")}${text}</span>`;
+    const icon = this._sym("mdi:walk", level === "relaxed" ? "walk" : "current", "s");
+    if (level === "missed") {
+      return html`<span class="leave">${icon}${this._t("missed")}</span>`;
+    }
+    if (minutes <= 0) {
+      return html`<span class="leave">${icon}${this._t("leave_now")}</span>`;
+    }
+    return html`<span class="leave"
+      >${icon}${this._t("leave_in_prefix")} ${minutes} ${this._t("min")}</span
+    >`;
   }
 
   private _badge(

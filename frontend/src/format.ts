@@ -1,6 +1,17 @@
+import { translate } from "./i18n";
 import type { CardConfig, EntityRef, Journey, Urgency } from "./types";
 
 export const MINUTE = 60_000;
+
+/** Journey duration for the meta row: "49 min", "1 Stunde" / "1 hour", "2 Std. 15 min" / "2 h 15 min". */
+export function formatJourneyDuration(minutes: number, language: string | undefined): string {
+  if (minutes < 60) return translate(language, "duration_m", { m: minutes });
+  if (minutes === 60) return translate(language, "duration_1h");
+  return translate(language, "duration_hm", {
+    h: Math.floor(minutes / 60),
+    m: minutes % 60,
+  });
+}
 
 export function parseTime(value: string | null | undefined): number | null {
   if (!value) return null;

@@ -1,6 +1,6 @@
 {
   "name": "bvg-connections-card",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "private": true,
   "description": "Lovelace card for the BVG Verbindungen Home Assistant integration",
   "license": "MIT",

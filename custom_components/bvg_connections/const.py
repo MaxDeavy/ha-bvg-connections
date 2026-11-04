@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Final
 
 DOMAIN: Final = "bvg_connections"
-VERSION: Final = "0.1.3"
+VERSION: Final = "0.1.4"
 
 DEFAULT_BASE_URL: Final = "https://v6.bvg.transport.rest"
 

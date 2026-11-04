@@ -6,6 +6,22 @@ Format: [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung 
 
 <!-- next-release -->
 
+## [0.1.4](https://github.com/MaxDeavy/ha-bvg-connections/compare/v0.1.3...v0.1.4) – 2026-11-04
+
+### Neu / Added
+
+- **card:** Format journey duration as hours and minutes (`49 min`, `1 Stunde` / `1 hour`, `2 Std. 15 min` / `2 h 15 min`)
+
+### Geändert / Changed
+
+- **card:** Tighter journey columns and slightly larger countdown, arrival and meta type
+- **card:** Leave hint as walk icon + `in X min` (or `Jetzt!` / `Now!`)
+
+### Dokumentation / Docs
+
+- Refresh README card screenshots for 0.1.3 layout (#13)
+- Abfahrtstafel-Screenshots in der README (#14)
+
 ## [0.1.3](https://github.com/MaxDeavy/ha-bvg-connections/compare/v0.1.2...v0.1.3) – 2026-11-04
 
 ### Neu / Added
