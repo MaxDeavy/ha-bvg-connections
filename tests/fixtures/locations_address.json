@@ -1,0 +1,39 @@
+[
+ {
+  "type": "location",
+  "id": "991138487",
+  "latitude": 52.518596,
+  "longitude": 13.376102,
+  "address": "Platz der Republik 1, Berlin-Tiergarten"
+ },
+ {
+  "type": "location",
+  "id": "991145228",
+  "latitude": 52.519899,
+  "longitude": 13.374304,
+  "address": "Platz der Republik 1, Berlin-Tiergarten"
+ },
+ {
+  "type": "location",
+  "id": "991144754",
+  "latitude": 52.33776,
+  "longitude": 14.086996,
+  "address": "Platz der Republik 1, Fürstenwalde/Spree"
+ },
+ {
+  "type": "location",
+  "id": "980084046",
+  "latitude": 52.51865,
+  "longitude": 13.376102,
+  "name": "Reichstag Building, Platz der Republik 1, 11011 Berlin-Tiergarten",
+  "poi": true
+ },
+ {
+  "type": "location",
+  "id": "980123498",
+  "latitude": 52.518596,
+  "longitude": 13.376102,
+  "name": "Reichstag dome, Platz der Republik 1, 10557 Berlin-Tiergarten",
+  "poi": true
+ }
+]

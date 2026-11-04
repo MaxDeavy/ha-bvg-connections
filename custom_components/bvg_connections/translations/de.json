@@ -1,0 +1,189 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "Dieser API-Endpunkt ist bereits eingerichtet."
+    },
+    "error": {
+      "cannot_connect": "Die API ist nicht erreichbar. Prüfe die URL oder versuche es später erneut."
+    },
+    "step": {
+      "user": {
+        "title": "BVG Verbindungen",
+        "description": "Verbindung zu einer transport.rest-API (bvg-rest/vbb-rest). Verbindungen und Abfahrtstafeln fügst du danach auf der Integrationsseite hinzu.",
+        "data": {
+          "base_url": "API-URL",
+          "request_budget": "Request-Budget pro Minute"
+        },
+        "data_description": {
+          "base_url": "Standard: https://v6.bvg.transport.rest (öffentlich, ohne SLA). Eine selbst gehostete bvg-rest-Instanz geht auch.",
+          "request_budget": "Obergrenze für Anfragen an die API. Die öffentliche Instanz erlaubt 100 pro Minute."
+        }
+      }
+    }
+  },
+  "options": {
+    "error": {
+      "budget_exceeded": "Mit diesen Intervallen würden bis zu {estimate} Anfragen pro Minute gesendet. Erhöhe die Intervalle oder das Budget."
+    },
+    "step": {
+      "init": {
+        "title": "Abfrage",
+        "data": {
+          "journey_interval": "Aktualisierungsintervall für Verbindungen",
+          "departure_interval": "Aktualisierungsintervall für Abfahrtstafeln",
+          "request_budget": "Request-Budget pro Minute"
+        },
+        "data_description": {
+          "journey_interval": "Sekunden zwischen zwei Verbindungssuchen je Verbindung.",
+          "departure_interval": "Sekunden zwischen zwei Abfragen je Abfahrtstafel. Die API cacht Tafeln 30 s lang."
+        }
+      }
+    }
+  },
+  "config_subentries": {
+    "connection": {
+      "entry_type": "Verbindung",
+      "initiate_flow": {
+        "user": "Verbindung hinzufügen",
+        "reconfigure": "Verbindung bearbeiten"
+      },
+      "abort": {
+        "entry_not_loaded": "Die Integration ist nicht geladen. Aktiviere sie zuerst."
+      },
+      "error": {
+        "cannot_connect": "Die API ist nicht erreichbar.",
+        "no_results": "Nichts gefunden. Versuche eine andere Schreibweise.",
+        "same_location": "Start und Ziel müssen sich unterscheiden."
+      },
+      "step": {
+        "user": {
+          "title": "Start und Ziel suchen",
+          "description": "Haltestellen, Adressen oder Orte eingeben. Bleibt der Start leer, werden Haltestellen in der Nähe deines Zuhauses angeboten.",
+          "data": {
+            "origin_query": "Start",
+            "destination_query": "Ziel"
+          }
+        },
+        "select": {
+          "title": "Start und Ziel auswählen",
+          "data": {
+            "origin": "Start",
+            "destination": "Ziel"
+          }
+        },
+        "settings": {
+          "title": "Einstellungen der Verbindung",
+          "data": {
+            "name": "Name",
+            "walk_minutes": "Fußweg zur Starthaltestelle",
+            "results": "Anzahl Verbindungen",
+            "hide_missed": "Verbindungen ausblenden, die ich nicht mehr schaffe",
+            "products": "Verkehrsmittel",
+            "excluded_lines": "Linien ausschließen",
+            "max_transfers": "Maximale Umstiege",
+            "transfer_time": "Mindest-Umstiegszeit"
+          },
+          "data_description": {
+            "walk_minutes": "Minuten von der Haustür bis zum Start. Wird für „Losgehen in X min“ genutzt und um nicht mehr erreichbare Verbindungen auszublenden.",
+            "products": "Nur diese Verkehrsmittel verwenden. Alle ausgewählt = kein Filter.",
+            "excluded_lines": "Linie eintippen (z. B. M10) und Enter drücken.",
+            "max_transfers": "Leer lassen für keine Begrenzung."
+          }
+        }
+      }
+    },
+    "departure_board": {
+      "entry_type": "Abfahrtstafel",
+      "initiate_flow": {
+        "user": "Abfahrtstafel hinzufügen",
+        "reconfigure": "Abfahrtstafel bearbeiten"
+      },
+      "abort": {
+        "entry_not_loaded": "Die Integration ist nicht geladen. Aktiviere sie zuerst."
+      },
+      "error": {
+        "cannot_connect": "Die API ist nicht erreichbar.",
+        "no_results": "Keine Haltestelle gefunden. Versuche eine andere Schreibweise."
+      },
+      "step": {
+        "user": {
+          "title": "Haltestelle suchen",
+          "description": "Leer lassen, um Haltestellen in der Nähe deines Zuhauses anzuzeigen.",
+          "data": {
+            "stop_query": "Haltestelle"
+          }
+        },
+        "select": {
+          "title": "Haltestelle auswählen",
+          "data": {
+            "stop": "Haltestelle"
+          }
+        },
+        "settings": {
+          "title": "Einstellungen der Abfahrtstafel",
+          "data": {
+            "name": "Name",
+            "walk_minutes": "Fußweg zur Haltestelle",
+            "results": "Anzahl Abfahrten",
+            "duration": "Zeitfenster",
+            "hide_missed": "Abfahrten ausblenden, die ich nicht mehr schaffe",
+            "products": "Verkehrsmittel",
+            "lines": "Nur diese Linien",
+            "direction": "Richtung enthält"
+          },
+          "data_description": {
+            "walk_minutes": "Minuten von der Haustür bis zur Haltestelle.",
+            "lines": "Linie eintippen (z. B. U9) und Enter drücken. Leer = alle Linien.",
+            "direction": "Optionaler Textfilter für das Fahrtziel, z. B. „Osloer“."
+          }
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "disruption": {
+        "name": "Störung"
+      }
+    },
+    "sensor": {
+      "board_next_departure": {
+        "name": "Nächste Abfahrt"
+      },
+      "delay": {
+        "name": "Verspätung"
+      },
+      "duration": {
+        "name": "Fahrtdauer"
+      },
+      "leave_at": {
+        "name": "Losgehen um"
+      },
+      "next_departure": {
+        "name": "Nächste Abfahrt"
+      },
+      "transfers": {
+        "name": "Umstiege"
+      }
+    }
+  },
+  "issues": {
+    "api_unreachable": {
+      "title": "Fahrplan-API nicht erreichbar",
+      "description": "Die API unter {url} hat mehrfach nicht geantwortet. Die zuletzt bekannten Verbindungen werden weiter angezeigt, und die Abfragen laufen mit wachsendem Abstand weiter. Hält das an, prüfe die URL der Integration oder nutze eine selbst gehostete bvg-rest-Instanz."
+    }
+  },
+  "selector": {
+    "product": {
+      "options": {
+        "suburban": "S-Bahn",
+        "subway": "U-Bahn",
+        "tram": "Tram",
+        "bus": "Bus",
+        "ferry": "Fähre",
+        "regional": "Regionalverkehr (RE/RB)",
+        "express": "Fernverkehr (IC/ICE)"
+      }
+    }
+  }
+}

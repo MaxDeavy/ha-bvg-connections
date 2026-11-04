@@ -1,0 +1,24 @@
+# Personal stops/addresses for local testing. Never commit.
+local_defaults.yaml
+local_defaults.yml
+
+# Local Home Assistant dev instance
+.dev*/
+
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+htmlcov/
+.venv/
+venv/
+
+node_modules/
+frontend/coverage/
+
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,2848 @@
+{
+ "departures": [
+  {
+   "tripId": "1|54873|2|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024202",
+    "name": "U Wilmersdorfer Str. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024202",
+     "latitude": 52.506415,
+     "longitude": 13.306777
+    },
+    "products": {
+     "suburban": false,
+     "subway": true,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024202"
+    }
+   },
+   "when": null,
+   "plannedWhen": "2026-11-04T09:34:00+01:00",
+   "prognosedWhen": null,
+   "delay": null,
+   "platform": null,
+   "plannedPlatform": "Pos. 2",
+   "prognosedPlatform": null,
+   "prognosisType": null,
+   "direction": "Kladow, Hottengrund",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-bus-x34",
+    "fahrtNr": "117698",
+    "name": "X34",
+    "public": true,
+    "adminCode": "BVB---",
+    "productName": "Bus",
+    "mode": "bus",
+    "product": "bus",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [
+    {
+     "id": "344139",
+     "type": "warning",
+     "summary": "Haltestelle verlegt",
+     "text": "Bus M49, X34: Verlegung der Haltestelle U Wilmersdorfer Straße Richtung Hertzallee um 95 Meter weiter in Fahrtrichtung.",
+     "icon": {
+      "type": "HIM1",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      1
+     ],
+     "validFrom": "2026-06-29T09:00:00+02:00",
+     "validUntil": "2026-11-30T23:59:00+01:00",
+     "modified": "2026-10-27T12:24:21+01:00"
+    },
+    {
+     "id": "371777",
+     "type": "warning",
+     "summary": "Unterbrechung",
+     "text": "Bus X34: Die Linie fährt aufgrund eines Polizei-Einsatzes nicht zwischen S Messe Nord und S+U Zoologischer Garten.",
+     "icon": {
+      "type": "HIM2",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      2
+     ],
+     "validFrom": "2026-11-03T06:16:00+01:00",
+     "validUntil": "2026-11-04T23:59:00+01:00",
+     "modified": "2026-11-03T22:43:17+01:00"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.journey.cancelled",
+     "text": "X34: Fällt aus"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.journey.partially.cancelled.between",
+     "text": "X34: Fahrt fällt aus zwischen U Wilmersdorfer Str. (Berlin) und S Messe Nord (Berlin). Bitte benutzen Sie eine andere Verbindung."
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.stop.cancelled",
+     "text": "Halt entfällt"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900039103",
+    "name": "Hottengrund (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900039103",
+     "latitude": 52.445576,
+     "longitude": 13.125914
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900039103"
+    }
+   },
+   "currentTripPosition": {
+    "type": "location",
+    "latitude": 52.507917,
+    "longitude": 13.247736
+   },
+   "cancelled": true,
+   "occupancy": "medium"
+  },
+  {
+   "tripId": "1|50611|0|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024202",
+    "name": "U Wilmersdorfer Str. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024202",
+     "latitude": 52.506415,
+     "longitude": 13.306777
+    },
+    "products": {
+     "suburban": false,
+     "subway": true,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024202"
+    }
+   },
+   "when": null,
+   "plannedWhen": "2026-11-04T09:35:00+01:00",
+   "prognosedWhen": null,
+   "delay": null,
+   "platform": null,
+   "plannedPlatform": "Pos. 1",
+   "prognosedPlatform": null,
+   "prognosisType": null,
+   "direction": "S+U Zoologischer Garten",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-bus-m49",
+    "fahrtNr": "110697",
+    "name": "M49",
+    "public": true,
+    "adminCode": "BVB---",
+    "productName": "Bus",
+    "mode": "bus",
+    "product": "bus",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [
+    {
+     "id": "344139",
+     "type": "warning",
+     "summary": "Haltestelle verlegt",
+     "text": "Bus M49, X34: Verlegung der Haltestelle U Wilmersdorfer Straße Richtung Hertzallee um 95 Meter weiter in Fahrtrichtung.",
+     "icon": {
+      "type": "HIM1",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      1
+     ],
+     "validFrom": "2026-06-29T09:00:00+02:00",
+     "validUntil": "2026-11-30T23:59:00+01:00",
+     "modified": "2026-10-27T12:24:21+01:00"
+    },
+    {
+     "id": "371774",
+     "type": "warning",
+     "summary": "Unterbrechung",
+     "text": "Bus M49: Die Linie fährt aufgrund eines Polizei-Einsatzes Richtung S+U Zoologischer Garten nicht von Amtsgerichtsplatz bis S+U Zoologischer Garten.",
+     "icon": {
+      "type": "HIM2",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      2
+     ],
+     "validFrom": "2026-11-04T04:30:00+01:00",
+     "validUntil": "2026-11-04T23:59:00+01:00",
+     "modified": "2026-11-04T00:39:48+01:00"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.journey.cancelled",
+     "text": "M49: Fällt aus"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.stop.cancelled",
+     "text": "Halt entfällt"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900004181",
+    "name": "Hertzallee (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900004181",
+     "latitude": 52.509229,
+     "longitude": 13.332612
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900004181"
+    }
+   },
+   "currentTripPosition": {
+    "type": "location",
+    "latitude": 52.50655,
+    "longitude": 13.288106
+   },
+   "cancelled": true,
+   "occupancy": "medium"
+  },
+  {
+   "tripId": "1|54777|0|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024202",
+    "name": "U Wilmersdorfer Str. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024202",
+     "latitude": 52.506415,
+     "longitude": 13.306777
+    },
+    "products": {
+     "suburban": false,
+     "subway": true,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024202"
+    }
+   },
+   "when": null,
+   "plannedWhen": "2026-11-04T09:35:00+01:00",
+   "prognosedWhen": null,
+   "delay": null,
+   "platform": null,
+   "plannedPlatform": "Pos. 1",
+   "prognosedPlatform": null,
+   "prognosisType": null,
+   "direction": "S+U Zoologischer Garten",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-bus-x34",
+    "fahrtNr": "117909",
+    "name": "X34",
+    "public": true,
+    "adminCode": "BVB---",
+    "productName": "Bus",
+    "mode": "bus",
+    "product": "bus",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [
+    {
+     "id": "344139",
+     "type": "warning",
+     "summary": "Haltestelle verlegt",
+     "text": "Bus M49, X34: Verlegung der Haltestelle U Wilmersdorfer Straße Richtung Hertzallee um 95 Meter weiter in Fahrtrichtung.",
+     "icon": {
+      "type": "HIM1",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      1
+     ],
+     "validFrom": "2026-06-29T09:00:00+02:00",
+     "validUntil": "2026-11-30T23:59:00+01:00",
+     "modified": "2026-10-27T12:24:21+01:00"
+    },
+    {
+     "id": "371777",
+     "type": "warning",
+     "summary": "Unterbrechung",
+     "text": "Bus X34: Die Linie fährt aufgrund eines Polizei-Einsatzes nicht zwischen S Messe Nord und S+U Zoologischer Garten.",
+     "icon": {
+      "type": "HIM2",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      2
+     ],
+     "validFrom": "2026-11-03T06:16:00+01:00",
+     "validUntil": "2026-11-04T23:59:00+01:00",
+     "modified": "2026-11-03T22:43:17+01:00"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.journey.cancelled",
+     "text": "X34: Fällt aus"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.stop.cancelled",
+     "text": "Halt entfällt"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900004181",
+    "name": "Hertzallee (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900004181",
+     "latitude": 52.509229,
+     "longitude": 13.332612
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900004181"
+    }
+   },
+   "cancelled": true,
+   "occupancy": "low"
+  },
+  {
+   "tripId": "1|27724|1|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024103",
+    "name": "S Charlottenburg/Gervinusstr. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024103",
+     "latitude": 52.503988,
+     "longitude": 13.304062
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024103"
+    }
+   },
+   "when": null,
+   "plannedWhen": "2026-11-04T09:41:00+01:00",
+   "prognosedWhen": null,
+   "delay": null,
+   "platform": null,
+   "plannedPlatform": "Pos. 6",
+   "prognosedPlatform": null,
+   "prognosisType": null,
+   "direction": "S+U Zoologischer Garten",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-bus-109",
+    "fahrtNr": "65480",
+    "name": "109",
+    "public": true,
+    "adminCode": "BVB---",
+    "productName": "Bus",
+    "mode": "bus",
+    "product": "bus",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [
+    {
+     "id": "371772",
+     "type": "warning",
+     "summary": "Unterbrechung",
+     "text": "Bus 109: Die Linie fährt aufgrund eines Polizei-Einsatzes Richtung S+U Zoologischer Garten nicht von S Charlottenburg/Gervinusstraße bis S+U Zoologischer Garten.",
+     "icon": {
+      "type": "HIM2",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      2
+     ],
+     "validFrom": "2026-11-03T06:16:00+01:00",
+     "validUntil": "2026-11-04T23:59:00+01:00",
+     "modified": "2026-11-03T22:46:48+01:00"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.journey.cancelled",
+     "text": "109: Fällt aus"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.stop.cancelled",
+     "text": "Halt entfällt"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900004181",
+    "name": "Hertzallee (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900004181",
+     "latitude": 52.509229,
+     "longitude": 13.332612
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900004181"
+    }
+   },
+   "currentTripPosition": {
+    "type": "location",
+    "latitude": 52.518802,
+    "longitude": 13.29963
+   },
+   "cancelled": true,
+   "occupancy": "medium"
+  },
+  {
+   "tripId": "1|54935|3|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024202",
+    "name": "U Wilmersdorfer Str. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024202",
+     "latitude": 52.506415,
+     "longitude": 13.306777
+    },
+    "products": {
+     "suburban": false,
+     "subway": true,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024202"
+    }
+   },
+   "when": null,
+   "plannedWhen": "2026-11-04T09:44:00+01:00",
+   "prognosedWhen": null,
+   "delay": null,
+   "platform": null,
+   "plannedPlatform": "Pos. 2",
+   "prognosedPlatform": null,
+   "prognosisType": null,
+   "direction": "Kladow, Gutsstr.",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-bus-x34",
+    "fahrtNr": "117573",
+    "name": "X34",
+    "public": true,
+    "adminCode": "BVB---",
+    "productName": "Bus",
+    "mode": "bus",
+    "product": "bus",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [
+    {
+     "id": "344139",
+     "type": "warning",
+     "summary": "Haltestelle verlegt",
+     "text": "Bus M49, X34: Verlegung der Haltestelle U Wilmersdorfer Straße Richtung Hertzallee um 95 Meter weiter in Fahrtrichtung.",
+     "icon": {
+      "type": "HIM1",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      1
+     ],
+     "validFrom": "2026-06-29T09:00:00+02:00",
+     "validUntil": "2026-11-30T23:59:00+01:00",
+     "modified": "2026-10-27T12:24:21+01:00"
+    },
+    {
+     "id": "371777",
+     "type": "warning",
+     "summary": "Unterbrechung",
+     "text": "Bus X34: Die Linie fährt aufgrund eines Polizei-Einsatzes nicht zwischen S Messe Nord und S+U Zoologischer Garten.",
+     "icon": {
+      "type": "HIM2",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      2
+     ],
+     "validFrom": "2026-11-03T06:16:00+01:00",
+     "validUntil": "2026-11-04T23:59:00+01:00",
+     "modified": "2026-11-03T22:43:17+01:00"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.journey.cancelled",
+     "text": "X34: Fällt aus"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.journey.partially.cancelled.between",
+     "text": "X34: Fahrt fällt aus zwischen U Wilmersdorfer Str. (Berlin) und S Messe Nord (Berlin). Bitte benutzen Sie eine andere Verbindung."
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.stop.cancelled",
+     "text": "Halt entfällt"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900039101",
+    "name": "Gutsstr. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900039101",
+     "latitude": 52.474935,
+     "longitude": 13.12097
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900039101"
+    }
+   },
+   "cancelled": true,
+   "occupancy": "medium"
+  },
+  {
+   "tripId": "1|50553|0|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024202",
+    "name": "U Wilmersdorfer Str. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024202",
+     "latitude": 52.506415,
+     "longitude": 13.306777
+    },
+    "products": {
+     "suburban": false,
+     "subway": true,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024202"
+    }
+   },
+   "when": null,
+   "plannedWhen": "2026-11-04T09:45:00+01:00",
+   "prognosedWhen": null,
+   "delay": null,
+   "platform": null,
+   "plannedPlatform": "Pos. 1",
+   "prognosedPlatform": null,
+   "prognosisType": null,
+   "direction": "S+U Zoologischer Garten",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-bus-m49",
+    "fahrtNr": "110707",
+    "name": "M49",
+    "public": true,
+    "adminCode": "BVB---",
+    "productName": "Bus",
+    "mode": "bus",
+    "product": "bus",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [
+    {
+     "id": "344139",
+     "type": "warning",
+     "summary": "Haltestelle verlegt",
+     "text": "Bus M49, X34: Verlegung der Haltestelle U Wilmersdorfer Straße Richtung Hertzallee um 95 Meter weiter in Fahrtrichtung.",
+     "icon": {
+      "type": "HIM1",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      1
+     ],
+     "validFrom": "2026-06-29T09:00:00+02:00",
+     "validUntil": "2026-11-30T23:59:00+01:00",
+     "modified": "2026-10-27T12:24:21+01:00"
+    },
+    {
+     "id": "371774",
+     "type": "warning",
+     "summary": "Unterbrechung",
+     "text": "Bus M49: Die Linie fährt aufgrund eines Polizei-Einsatzes Richtung S+U Zoologischer Garten nicht von Amtsgerichtsplatz bis S+U Zoologischer Garten.",
+     "icon": {
+      "type": "HIM2",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      2
+     ],
+     "validFrom": "2026-11-04T04:30:00+01:00",
+     "validUntil": "2026-11-04T23:59:00+01:00",
+     "modified": "2026-11-04T00:39:48+01:00"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.journey.cancelled",
+     "text": "M49: Fällt aus"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.stop.cancelled",
+     "text": "Halt entfällt"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900004181",
+    "name": "Hertzallee (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900004181",
+     "latitude": 52.509229,
+     "longitude": 13.332612
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900004181"
+    }
+   },
+   "currentTripPosition": {
+    "type": "location",
+    "latitude": 52.507746,
+    "longitude": 13.275009
+   },
+   "cancelled": true,
+   "occupancy": "medium"
+  },
+  {
+   "tripId": "1|54833|0|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024202",
+    "name": "U Wilmersdorfer Str. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024202",
+     "latitude": 52.506415,
+     "longitude": 13.306777
+    },
+    "products": {
+     "suburban": false,
+     "subway": true,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024202"
+    }
+   },
+   "when": null,
+   "plannedWhen": "2026-11-04T09:45:00+01:00",
+   "prognosedWhen": null,
+   "delay": null,
+   "platform": null,
+   "plannedPlatform": "Pos. 1",
+   "prognosedPlatform": null,
+   "prognosisType": null,
+   "direction": "S+U Zoologischer Garten",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-bus-x34",
+    "fahrtNr": "117724",
+    "name": "X34",
+    "public": true,
+    "adminCode": "BVB---",
+    "productName": "Bus",
+    "mode": "bus",
+    "product": "bus",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [
+    {
+     "id": "344139",
+     "type": "warning",
+     "summary": "Haltestelle verlegt",
+     "text": "Bus M49, X34: Verlegung der Haltestelle U Wilmersdorfer Straße Richtung Hertzallee um 95 Meter weiter in Fahrtrichtung.",
+     "icon": {
+      "type": "HIM1",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      1
+     ],
+     "validFrom": "2026-06-29T09:00:00+02:00",
+     "validUntil": "2026-11-30T23:59:00+01:00",
+     "modified": "2026-10-27T12:24:21+01:00"
+    },
+    {
+     "id": "371777",
+     "type": "warning",
+     "summary": "Unterbrechung",
+     "text": "Bus X34: Die Linie fährt aufgrund eines Polizei-Einsatzes nicht zwischen S Messe Nord und S+U Zoologischer Garten.",
+     "icon": {
+      "type": "HIM2",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      2
+     ],
+     "validFrom": "2026-11-03T06:16:00+01:00",
+     "validUntil": "2026-11-04T23:59:00+01:00",
+     "modified": "2026-11-03T22:43:17+01:00"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.journey.cancelled",
+     "text": "X34: Fällt aus"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.stop.cancelled",
+     "text": "Halt entfällt"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900004181",
+    "name": "Hertzallee (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900004181",
+     "latitude": 52.509229,
+     "longitude": 13.332612
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900004181"
+    }
+   },
+   "currentTripPosition": {
+    "type": "location",
+    "latitude": 52.507332,
+    "longitude": 13.225029
+   },
+   "cancelled": true,
+   "occupancy": "low"
+  },
+  {
+   "tripId": "1|27767|1|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024103",
+    "name": "S Charlottenburg/Gervinusstr. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024103",
+     "latitude": 52.503988,
+     "longitude": 13.304062
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024103"
+    }
+   },
+   "when": null,
+   "plannedWhen": "2026-11-04T09:51:00+01:00",
+   "prognosedWhen": null,
+   "delay": null,
+   "platform": null,
+   "plannedPlatform": "Pos. 6",
+   "prognosedPlatform": null,
+   "prognosisType": null,
+   "direction": "S+U Zoologischer Garten",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-bus-109",
+    "fahrtNr": "65287",
+    "name": "109",
+    "public": true,
+    "adminCode": "BVB---",
+    "productName": "Bus",
+    "mode": "bus",
+    "product": "bus",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [
+    {
+     "id": "371772",
+     "type": "warning",
+     "summary": "Unterbrechung",
+     "text": "Bus 109: Die Linie fährt aufgrund eines Polizei-Einsatzes Richtung S+U Zoologischer Garten nicht von S Charlottenburg/Gervinusstraße bis S+U Zoologischer Garten.",
+     "icon": {
+      "type": "HIM2",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      2
+     ],
+     "validFrom": "2026-11-03T06:16:00+01:00",
+     "validUntil": "2026-11-04T23:59:00+01:00",
+     "modified": "2026-11-03T22:46:48+01:00"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.journey.cancelled",
+     "text": "109: Fällt aus"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.stop.cancelled",
+     "text": "Halt entfällt"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900004181",
+    "name": "Hertzallee (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900004181",
+     "latitude": 52.509229,
+     "longitude": 13.332612
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900004181"
+    }
+   },
+   "currentTripPosition": {
+    "type": "location",
+    "latitude": 52.544871,
+    "longitude": 13.297779
+   },
+   "cancelled": true,
+   "occupancy": "medium"
+  },
+  {
+   "tripId": "1|54873|3|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024202",
+    "name": "U Wilmersdorfer Str. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024202",
+     "latitude": 52.506415,
+     "longitude": 13.306777
+    },
+    "products": {
+     "suburban": false,
+     "subway": true,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024202"
+    }
+   },
+   "when": null,
+   "plannedWhen": "2026-11-04T09:54:00+01:00",
+   "prognosedWhen": null,
+   "delay": null,
+   "platform": null,
+   "plannedPlatform": "Pos. 2",
+   "prognosedPlatform": null,
+   "prognosisType": null,
+   "direction": "Kladow, Hottengrund",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-bus-x34",
+    "fahrtNr": "117699",
+    "name": "X34",
+    "public": true,
+    "adminCode": "BVB---",
+    "productName": "Bus",
+    "mode": "bus",
+    "product": "bus",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [
+    {
+     "id": "344139",
+     "type": "warning",
+     "summary": "Haltestelle verlegt",
+     "text": "Bus M49, X34: Verlegung der Haltestelle U Wilmersdorfer Straße Richtung Hertzallee um 95 Meter weiter in Fahrtrichtung.",
+     "icon": {
+      "type": "HIM1",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      1
+     ],
+     "validFrom": "2026-06-29T09:00:00+02:00",
+     "validUntil": "2026-11-30T23:59:00+01:00",
+     "modified": "2026-10-27T12:24:21+01:00"
+    },
+    {
+     "id": "371777",
+     "type": "warning",
+     "summary": "Unterbrechung",
+     "text": "Bus X34: Die Linie fährt aufgrund eines Polizei-Einsatzes nicht zwischen S Messe Nord und S+U Zoologischer Garten.",
+     "icon": {
+      "type": "HIM2",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      2
+     ],
+     "validFrom": "2026-11-03T06:16:00+01:00",
+     "validUntil": "2026-11-04T23:59:00+01:00",
+     "modified": "2026-11-03T22:43:17+01:00"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.journey.cancelled",
+     "text": "X34: Fällt aus"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.journey.partially.cancelled.between",
+     "text": "X34: Fahrt fällt aus zwischen U Wilmersdorfer Str. (Berlin) und S Messe Nord (Berlin). Bitte benutzen Sie eine andere Verbindung."
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.stop.cancelled",
+     "text": "Halt entfällt"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900039103",
+    "name": "Hottengrund (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900039103",
+     "latitude": 52.445576,
+     "longitude": 13.125914
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900039103"
+    }
+   },
+   "cancelled": true,
+   "occupancy": "medium"
+  },
+  {
+   "tripId": "1|50611|1|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024202",
+    "name": "U Wilmersdorfer Str. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024202",
+     "latitude": 52.506415,
+     "longitude": 13.306777
+    },
+    "products": {
+     "suburban": false,
+     "subway": true,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024202"
+    }
+   },
+   "when": null,
+   "plannedWhen": "2026-11-04T09:55:00+01:00",
+   "prognosedWhen": null,
+   "delay": null,
+   "platform": null,
+   "plannedPlatform": "Pos. 1",
+   "prognosedPlatform": null,
+   "prognosisType": null,
+   "direction": "S+U Zoologischer Garten",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-bus-m49",
+    "fahrtNr": "110698",
+    "name": "M49",
+    "public": true,
+    "adminCode": "BVB---",
+    "productName": "Bus",
+    "mode": "bus",
+    "product": "bus",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [
+    {
+     "id": "344139",
+     "type": "warning",
+     "summary": "Haltestelle verlegt",
+     "text": "Bus M49, X34: Verlegung der Haltestelle U Wilmersdorfer Straße Richtung Hertzallee um 95 Meter weiter in Fahrtrichtung.",
+     "icon": {
+      "type": "HIM1",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      1
+     ],
+     "validFrom": "2026-06-29T09:00:00+02:00",
+     "validUntil": "2026-11-30T23:59:00+01:00",
+     "modified": "2026-10-27T12:24:21+01:00"
+    },
+    {
+     "id": "371774",
+     "type": "warning",
+     "summary": "Unterbrechung",
+     "text": "Bus M49: Die Linie fährt aufgrund eines Polizei-Einsatzes Richtung S+U Zoologischer Garten nicht von Amtsgerichtsplatz bis S+U Zoologischer Garten.",
+     "icon": {
+      "type": "HIM2",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      2
+     ],
+     "validFrom": "2026-11-04T04:30:00+01:00",
+     "validUntil": "2026-11-04T23:59:00+01:00",
+     "modified": "2026-11-04T00:39:48+01:00"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.journey.cancelled",
+     "text": "M49: Fällt aus"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.stop.cancelled",
+     "text": "Halt entfällt"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900004181",
+    "name": "Hertzallee (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900004181",
+     "latitude": 52.509229,
+     "longitude": 13.332612
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900004181"
+    }
+   },
+   "currentTripPosition": {
+    "type": "location",
+    "latitude": 52.512834,
+    "longitude": 13.197711
+   },
+   "cancelled": true,
+   "occupancy": "medium"
+  },
+  {
+   "tripId": "1|54778|0|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024202",
+    "name": "U Wilmersdorfer Str. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024202",
+     "latitude": 52.506415,
+     "longitude": 13.306777
+    },
+    "products": {
+     "suburban": false,
+     "subway": true,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024202"
+    }
+   },
+   "when": null,
+   "plannedWhen": "2026-11-04T09:55:00+01:00",
+   "prognosedWhen": null,
+   "delay": null,
+   "platform": null,
+   "plannedPlatform": "Pos. 1",
+   "prognosedPlatform": null,
+   "prognosisType": null,
+   "direction": "S+U Zoologischer Garten",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-bus-x34",
+    "fahrtNr": "117908",
+    "name": "X34",
+    "public": true,
+    "adminCode": "BVB---",
+    "productName": "Bus",
+    "mode": "bus",
+    "product": "bus",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [
+    {
+     "id": "344139",
+     "type": "warning",
+     "summary": "Haltestelle verlegt",
+     "text": "Bus M49, X34: Verlegung der Haltestelle U Wilmersdorfer Straße Richtung Hertzallee um 95 Meter weiter in Fahrtrichtung.",
+     "icon": {
+      "type": "HIM1",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      1
+     ],
+     "validFrom": "2026-06-29T09:00:00+02:00",
+     "validUntil": "2026-11-30T23:59:00+01:00",
+     "modified": "2026-10-27T12:24:21+01:00"
+    },
+    {
+     "id": "371777",
+     "type": "warning",
+     "summary": "Unterbrechung",
+     "text": "Bus X34: Die Linie fährt aufgrund eines Polizei-Einsatzes nicht zwischen S Messe Nord und S+U Zoologischer Garten.",
+     "icon": {
+      "type": "HIM2",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      2
+     ],
+     "validFrom": "2026-11-03T06:16:00+01:00",
+     "validUntil": "2026-11-04T23:59:00+01:00",
+     "modified": "2026-11-03T22:43:17+01:00"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.journey.cancelled",
+     "text": "X34: Fällt aus"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.stop.cancelled",
+     "text": "Halt entfällt"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900004181",
+    "name": "Hertzallee (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900004181",
+     "latitude": 52.509229,
+     "longitude": 13.332612
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900004181"
+    }
+   },
+   "currentTripPosition": {
+    "type": "location",
+    "latitude": 52.512492,
+    "longitude": 13.199446
+   },
+   "cancelled": true,
+   "occupancy": "low"
+  },
+  {
+   "tripId": "1|27724|2|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024103",
+    "name": "S Charlottenburg/Gervinusstr. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024103",
+     "latitude": 52.503988,
+     "longitude": 13.304062
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024103"
+    }
+   },
+   "when": null,
+   "plannedWhen": "2026-11-04T10:01:00+01:00",
+   "prognosedWhen": null,
+   "delay": null,
+   "platform": null,
+   "plannedPlatform": "Pos. 6",
+   "prognosedPlatform": null,
+   "prognosisType": null,
+   "direction": "S+U Zoologischer Garten",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-bus-109",
+    "fahrtNr": "65481",
+    "name": "109",
+    "public": true,
+    "adminCode": "BVB---",
+    "productName": "Bus",
+    "mode": "bus",
+    "product": "bus",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [
+    {
+     "id": "371772",
+     "type": "warning",
+     "summary": "Unterbrechung",
+     "text": "Bus 109: Die Linie fährt aufgrund eines Polizei-Einsatzes Richtung S+U Zoologischer Garten nicht von S Charlottenburg/Gervinusstraße bis S+U Zoologischer Garten.",
+     "icon": {
+      "type": "HIM2",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      2
+     ],
+     "validFrom": "2026-11-03T06:16:00+01:00",
+     "validUntil": "2026-11-04T23:59:00+01:00",
+     "modified": "2026-11-03T22:46:48+01:00"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.journey.cancelled",
+     "text": "109: Fällt aus"
+    },
+    {
+     "type": "status",
+     "code": "text.realtime.stop.cancelled",
+     "text": "Halt entfällt"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900004181",
+    "name": "Hertzallee (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900004181",
+     "latitude": 52.509229,
+     "longitude": 13.332612
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900004181"
+    }
+   },
+   "cancelled": true,
+   "occupancy": "medium"
+  },
+  {
+   "tripId": "1|55275|0|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024101",
+    "name": "S Charlottenburg Bhf (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024101",
+     "latitude": 52.504734,
+     "longitude": 13.303864
+    },
+    "products": {
+     "suburban": true,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": true,
+     "regional": true
+    },
+    "ids": {
+     "ifopt": "de:11000:900024101"
+    }
+   },
+   "when": "2026-11-04T09:34:00+01:00",
+   "plannedWhen": "2026-11-04T09:31:00+01:00",
+   "delay": 180,
+   "platform": "Pos. 5",
+   "plannedPlatform": "Pos. 5",
+   "prognosisType": "prognosed",
+   "direction": "U Wilmersdorfer Str./S Charlottenburg",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-bus-x49",
+    "fahrtNr": "118432",
+    "name": "X49",
+    "public": true,
+    "adminCode": "BVB---",
+    "productName": "Bus",
+    "mode": "bus",
+    "product": "bus",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900024205",
+    "name": "U Wilmersdorfer Str./S Charlottenburg (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024205",
+     "latitude": 52.505696,
+     "longitude": 13.306022
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024205"
+    }
+   },
+   "currentTripPosition": {
+    "type": "location",
+    "latitude": 52.505346,
+    "longitude": 13.302282
+   },
+   "occupancy": "low"
+  },
+  {
+   "tripId": "1|111997|0|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024101",
+    "name": "S Charlottenburg Bhf (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024101",
+     "latitude": 52.504734,
+     "longitude": 13.303864
+    },
+    "products": {
+     "suburban": true,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": true,
+     "regional": true
+    },
+    "ids": {
+     "ifopt": "de:11000:900024101"
+    }
+   },
+   "when": "2026-11-04T09:34:00+01:00",
+   "plannedWhen": "2026-11-04T09:34:00+01:00",
+   "delay": 0,
+   "platform": "1",
+   "plannedPlatform": "1",
+   "prognosisType": "prognosed",
+   "direction": "Brandenburg an der Havel, Hauptbahnhof",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-12052000-r-bahn-re1-odeg",
+    "fahrtNr": "73766",
+    "name": "RE1",
+    "public": true,
+    "adminCode": "ODRE1_",
+    "productName": "RE",
+    "mode": "train",
+    "product": "regional",
+    "operator": {
+     "type": "operator",
+     "id": "odeg-ostdeutsche-eisenbahn-gmbh",
+     "name": "ODEG Ostdeutsche Eisenbahn GmbH"
+    }
+   },
+   "remarks": [
+    {
+     "type": "hint",
+     "code": "FK",
+     "text": "Fahrradmitnahme möglich"
+    },
+    {
+     "type": "hint",
+     "code": "hn",
+     "text": "Fahrradmitnahme leicht gemacht: www.vbb.de/radimregio"
+    },
+    {
+     "id": "344935",
+     "type": "warning",
+     "summary": "Information.",
+     "text": "Bitte beachten Sie, dass ein barrierefreier Zugang zum S-Bahnsteig in Berlin-Charlottenburg nur am östlichen Ein-/Ausgang Wilmersdorfer Str. möglich ist und planen Sie bei Bedarf mehr Zeit zum Umsteigen zwischen RE1 und S-Bahn ein.",
+     "icon": {
+      "type": "HIM0",
+      "title": null
+     },
+     "priority": 50,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": false,
+      "ferry": false,
+      "express": false,
+      "regional": true
+     },
+     "company": "VBB",
+     "categories": [
+      0
+     ],
+     "validFrom": "2026-10-11T00:00:00+02:00",
+     "validUntil": "2026-11-24T23:59:00+01:00",
+     "modified": "2026-06-23T14:46:22+02:00"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900275110",
+    "name": "Brandenburg an der Havel, Hauptbahnhof",
+    "location": {
+     "type": "location",
+     "id": "900275110",
+     "latitude": 52.400792,
+     "longitude": 12.566039
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": true,
+     "bus": true,
+     "ferry": false,
+     "express": true,
+     "regional": true
+    },
+    "ids": {
+     "ifopt": "de:12051:900275110"
+    }
+   },
+   "currentTripPosition": {
+    "type": "location",
+    "latitude": 52.502883,
+    "longitude": 13.296322
+   }
+  },
+  {
+   "tripId": "1|64543|35|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024202",
+    "name": "U Wilmersdorfer Str. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024202",
+     "latitude": 52.506415,
+     "longitude": 13.306777
+    },
+    "products": {
+     "suburban": false,
+     "subway": true,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024202"
+    }
+   },
+   "when": "2026-11-04T09:35:00+01:00",
+   "plannedWhen": "2026-11-04T09:34:00+01:00",
+   "delay": 60,
+   "platform": "2",
+   "plannedPlatform": "2",
+   "prognosisType": "prognosed",
+   "direction": "Rathaus Spandau",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-u-bahn-u7",
+    "fahrtNr": "12651",
+    "name": "U7",
+    "public": true,
+    "adminCode": "BVU---",
+    "productName": "U",
+    "mode": "train",
+    "product": "subway",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [
+    {
+     "type": "hint",
+     "code": "FK",
+     "text": "Fahrradmitnahme möglich"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900029302",
+    "name": "S+U Rathaus Spandau (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900029302",
+     "latitude": 52.535639,
+     "longitude": 13.199841
+    },
+    "products": {
+     "suburban": false,
+     "subway": true,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900029302"
+    }
+   },
+   "currentTripPosition": {
+    "type": "location",
+    "latitude": 52.502703,
+    "longitude": 13.307883
+   },
+   "occupancy": "low"
+  },
+  {
+   "tripId": "1|1778|4|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024101",
+    "name": "S Charlottenburg Bhf (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024101",
+     "latitude": 52.504734,
+     "longitude": 13.303864
+    },
+    "products": {
+     "suburban": true,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": true,
+     "regional": true
+    },
+    "ids": {
+     "ifopt": "de:11000:900024101"
+    }
+   },
+   "when": "2026-11-04T09:35:00+01:00",
+   "plannedWhen": "2026-11-04T09:35:00+01:00",
+   "delay": 0,
+   "platform": "6",
+   "plannedPlatform": "6",
+   "prognosisType": "prognosed",
+   "direction": "S Erkner Bhf",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-s-bahn-s3-s3-b",
+    "fahrtNr": "23051",
+    "name": "S3",
+    "public": true,
+    "adminCode": "DBS---",
+    "productName": "S",
+    "mode": "train",
+    "product": "suburban",
+    "operator": {
+     "type": "operator",
+     "id": "s-bahn-berlin-gmbh",
+     "name": "S-Bahn Berlin GmbH"
+    }
+   },
+   "remarks": [
+    {
+     "type": "hint",
+     "code": "FK",
+     "text": "Fahrradmitnahme möglich"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900310004",
+    "name": "S Erkner Bhf",
+    "location": {
+     "type": "location",
+     "id": "900310004",
+     "latitude": 52.42696,
+     "longitude": 13.75266
+    },
+    "products": {
+     "suburban": true,
+     "subway": false,
+     "tram": false,
+     "bus": false,
+     "ferry": false,
+     "express": false,
+     "regional": true
+    },
+    "ids": {
+     "ifopt": "de:12067:900310004"
+    }
+   },
+   "currentTripPosition": {
+    "type": "location",
+    "latitude": 52.504986,
+    "longitude": 13.304449
+   }
+  },
+  {
+   "tripId": "1|3553|10|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024101",
+    "name": "S Charlottenburg Bhf (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024101",
+     "latitude": 52.504734,
+     "longitude": 13.303864
+    },
+    "products": {
+     "suburban": true,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": true,
+     "regional": true
+    },
+    "ids": {
+     "ifopt": "de:11000:900024101"
+    }
+   },
+   "when": "2026-11-04T09:35:00+01:00",
+   "plannedWhen": "2026-11-04T09:35:00+01:00",
+   "delay": 0,
+   "platform": "8",
+   "plannedPlatform": "8",
+   "prognosisType": "prognosed",
+   "direction": "S Westkreuz (Berlin)",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-s-bahn-s5-s5-ei",
+    "fahrtNr": "28935",
+    "name": "S5",
+    "public": true,
+    "adminCode": "DBS---",
+    "productName": "S",
+    "mode": "train",
+    "product": "suburban",
+    "operator": {
+     "type": "operator",
+     "id": "s-bahn-berlin-gmbh",
+     "name": "S-Bahn Berlin GmbH"
+    }
+   },
+   "remarks": [
+    {
+     "type": "hint",
+     "code": "FK",
+     "text": "Fahrradmitnahme möglich"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900024102",
+    "name": "S Westkreuz (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024102",
+     "latitude": 52.501148,
+     "longitude": 13.283036
+    },
+    "products": {
+     "suburban": true,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024102"
+    }
+   },
+   "currentTripPosition": {
+    "type": "location",
+    "latitude": 52.505139,
+    "longitude": 13.30435
+   }
+  },
+  {
+   "tripId": "1|56584|7|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024103",
+    "name": "S Charlottenburg/Gervinusstr. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024103",
+     "latitude": 52.503988,
+     "longitude": 13.304062
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024103"
+    }
+   },
+   "when": "2026-11-04T09:37:00+01:00",
+   "plannedWhen": "2026-11-04T09:34:00+01:00",
+   "delay": 180,
+   "platform": "Pos. 7",
+   "plannedPlatform": "Pos. 7",
+   "prognosisType": "prognosed",
+   "direction": "U Wilmersdorfer Str./S Charlottenburg",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-bus-310",
+    "fahrtNr": "96766",
+    "name": "310",
+    "public": true,
+    "adminCode": "BVB---",
+    "productName": "Bus",
+    "mode": "bus",
+    "product": "bus",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900024205",
+    "name": "U Wilmersdorfer Str./S Charlottenburg (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024205",
+     "latitude": 52.505696,
+     "longitude": 13.306022
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024205"
+    }
+   },
+   "currentTripPosition": {
+    "type": "location",
+    "latitude": 52.4957,
+    "longitude": 13.302831
+   },
+   "occupancy": "medium"
+  },
+  {
+   "tripId": "1|4084|4|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024101",
+    "name": "S Charlottenburg Bhf (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024101",
+     "latitude": 52.504734,
+     "longitude": 13.303864
+    },
+    "products": {
+     "suburban": true,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": true,
+     "regional": true
+    },
+    "ids": {
+     "ifopt": "de:11000:900024101"
+    }
+   },
+   "when": "2026-11-04T09:37:00+01:00",
+   "plannedWhen": "2026-11-04T09:37:00+01:00",
+   "delay": 0,
+   "platform": "8",
+   "plannedPlatform": "8",
+   "prognosisType": "prognosed",
+   "direction": "S Potsdam Hauptbahnhof",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-s-bahn-s7-s7-o",
+    "fahrtNr": "30272",
+    "name": "S7",
+    "public": true,
+    "adminCode": "DBS---",
+    "productName": "S",
+    "mode": "train",
+    "product": "suburban",
+    "operator": {
+     "type": "operator",
+     "id": "s-bahn-berlin-gmbh",
+     "name": "S-Bahn Berlin GmbH"
+    }
+   },
+   "remarks": [
+    {
+     "type": "hint",
+     "code": "FK",
+     "text": "Fahrradmitnahme möglich"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900230999",
+    "name": "S Potsdam Hauptbahnhof",
+    "location": {
+     "type": "location",
+     "id": "900230999",
+     "latitude": 52.391443,
+     "longitude": 13.06716
+    },
+    "products": {
+     "suburban": true,
+     "subway": false,
+     "tram": true,
+     "bus": true,
+     "ferry": false,
+     "express": true,
+     "regional": true
+    },
+    "ids": {
+     "ifopt": "de:12054:900230999"
+    }
+   },
+   "currentTripPosition": {
+    "type": "location",
+    "latitude": 52.504905,
+    "longitude": 13.323155
+   }
+  },
+  {
+   "tripId": "1|50687|4|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024202",
+    "name": "U Wilmersdorfer Str. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024202",
+     "latitude": 52.506415,
+     "longitude": 13.306777
+    },
+    "products": {
+     "suburban": false,
+     "subway": true,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024202"
+    }
+   },
+   "when": "2026-11-04T09:37:00+01:00",
+   "plannedWhen": "2026-11-04T09:37:00+01:00",
+   "delay": 0,
+   "platform": "Pos. 2",
+   "plannedPlatform": "Pos. 2",
+   "prognosisType": "prognosed",
+   "direction": "Staaken, Reimerweg",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-bus-m49",
+    "fahrtNr": "110479",
+    "name": "M49",
+    "public": true,
+    "adminCode": "BVB---",
+    "productName": "Bus",
+    "mode": "bus",
+    "product": "bus",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [
+    {
+     "id": "344139",
+     "type": "warning",
+     "summary": "Haltestelle verlegt",
+     "text": "Bus M49, X34: Verlegung der Haltestelle U Wilmersdorfer Straße Richtung Hertzallee um 95 Meter weiter in Fahrtrichtung.",
+     "icon": {
+      "type": "HIM1",
+      "title": null
+     },
+     "priority": 100,
+     "products": {
+      "suburban": false,
+      "subway": false,
+      "tram": false,
+      "bus": true,
+      "ferry": false,
+      "express": false,
+      "regional": false
+     },
+     "company": "BVG",
+     "categories": [
+      1
+     ],
+     "validFrom": "2026-06-29T09:00:00+02:00",
+     "validUntil": "2026-11-30T23:59:00+01:00",
+     "modified": "2026-10-27T12:24:21+01:00"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900037274",
+    "name": "Reimerweg (Berlin) [Endstelle]",
+    "location": {
+     "type": "location",
+     "id": "900037274",
+     "latitude": 52.521994,
+     "longitude": 13.154428
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900037274"
+    }
+   },
+   "occupancy": "low"
+  },
+  {
+   "tripId": "1|64487|39|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024202",
+    "name": "U Wilmersdorfer Str. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024202",
+     "latitude": 52.506415,
+     "longitude": 13.306777
+    },
+    "products": {
+     "suburban": false,
+     "subway": true,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024202"
+    }
+   },
+   "when": "2026-11-04T09:38:00+01:00",
+   "plannedWhen": "2026-11-04T09:35:00+01:00",
+   "delay": 180,
+   "platform": "1",
+   "plannedPlatform": "1",
+   "prognosisType": "prognosed",
+   "direction": "Rudow",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-u-bahn-u7",
+    "fahrtNr": "13059",
+    "name": "U7",
+    "public": true,
+    "adminCode": "BVU---",
+    "productName": "U",
+    "mode": "train",
+    "product": "subway",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [
+    {
+     "type": "hint",
+     "code": "FK",
+     "text": "Fahrradmitnahme möglich"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900083201",
+    "name": "U Rudow (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900083201",
+     "latitude": 52.415714,
+     "longitude": 13.49653
+    },
+    "products": {
+     "suburban": false,
+     "subway": true,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900083201"
+    }
+   },
+   "currentTripPosition": {
+    "type": "location",
+    "latitude": 52.522659,
+    "longitude": 13.305986
+   },
+   "occupancy": "medium"
+  },
+  {
+   "tripId": "1|4528|0|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024101",
+    "name": "S Charlottenburg Bhf (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024101",
+     "latitude": 52.504734,
+     "longitude": 13.303864
+    },
+    "products": {
+     "suburban": true,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": true,
+     "regional": true
+    },
+    "ids": {
+     "ifopt": "de:11000:900024101"
+    }
+   },
+   "when": "2026-11-04T09:39:00+01:00",
+   "plannedWhen": "2026-11-04T09:37:00+01:00",
+   "delay": 120,
+   "platform": "6",
+   "plannedPlatform": "6",
+   "prognosisType": "prognosed",
+   "direction": "S Ahrensfelde Bhf (Berlin)",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-s-bahn-s7-s7-oi",
+    "fahrtNr": "30510",
+    "name": "S7",
+    "public": true,
+    "adminCode": "DBS---",
+    "productName": "S",
+    "mode": "train",
+    "product": "suburban",
+    "operator": {
+     "type": "operator",
+     "id": "s-bahn-berlin-gmbh",
+     "name": "S-Bahn Berlin GmbH"
+    }
+   },
+   "remarks": [
+    {
+     "type": "hint",
+     "code": "FK",
+     "text": "Fahrradmitnahme möglich"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900170004",
+    "name": "S Ahrensfelde Bhf (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900170004",
+     "latitude": 52.571335,
+     "longitude": 13.565648
+    },
+    "products": {
+     "suburban": true,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": true
+    },
+    "ids": {
+     "ifopt": "de:11000:900170004"
+    }
+   },
+   "currentTripPosition": {
+    "type": "location",
+    "latitude": 52.495745,
+    "longitude": 13.270227
+   }
+  },
+  {
+   "tripId": "1|27881|7|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024103",
+    "name": "S Charlottenburg/Gervinusstr. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024103",
+     "latitude": 52.503988,
+     "longitude": 13.304062
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024103"
+    }
+   },
+   "when": "2026-11-04T09:39:00+01:00",
+   "plannedWhen": "2026-11-04T09:39:00+01:00",
+   "delay": 0,
+   "platform": "Pos. 7",
+   "plannedPlatform": "Pos. 7",
+   "prognosisType": "prognosed",
+   "direction": "U Jakob-Kaiser-Platz",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-bus-109",
+    "fahrtNr": "65096",
+    "name": "109",
+    "public": true,
+    "adminCode": "BVB---",
+    "productName": "Bus",
+    "mode": "bus",
+    "product": "bus",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900018101",
+    "name": "U Jakob-Kaiser-Platz (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900018101",
+     "latitude": 52.536988,
+     "longitude": 13.293662
+    },
+    "products": {
+     "suburban": false,
+     "subway": true,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900018101"
+    }
+   },
+   "occupancy": "medium"
+  },
+  {
+   "tripId": "1|56579|0|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024205",
+    "name": "U Wilmersdorfer Str./S Charlottenburg (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024205",
+     "latitude": 52.505696,
+     "longitude": 13.306022
+    },
+    "products": {
+     "suburban": false,
+     "subway": false,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024205"
+    }
+   },
+   "when": "2026-11-04T09:39:00+01:00",
+   "plannedWhen": "2026-11-04T09:39:00+01:00",
+   "delay": 0,
+   "platform": "Pos. 4",
+   "plannedPlatform": "Pos. 4",
+   "prognosisType": "prognosed",
+   "direction": "U Blissestr.",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-bus-310",
+    "fahrtNr": "96796",
+    "name": "310",
+    "public": true,
+    "adminCode": "BVB---",
+    "productName": "Bus",
+    "mode": "bus",
+    "product": "bus",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900041102",
+    "name": "U Blissestr. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900041102",
+     "latitude": 52.486477,
+     "longitude": 13.320548
+    },
+    "products": {
+     "suburban": false,
+     "subway": true,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900041102"
+    }
+   },
+   "occupancy": "medium"
+  },
+  {
+   "tripId": "1|64543|36|86|4112026",
+   "stop": {
+    "type": "stop",
+    "id": "900024202",
+    "name": "U Wilmersdorfer Str. (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900024202",
+     "latitude": 52.506415,
+     "longitude": 13.306777
+    },
+    "products": {
+     "suburban": false,
+     "subway": true,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900024202"
+    }
+   },
+   "when": "2026-11-04T09:39:00+01:00",
+   "plannedWhen": "2026-11-04T09:39:00+01:00",
+   "delay": 0,
+   "platform": "2",
+   "plannedPlatform": "2",
+   "prognosisType": "prognosed",
+   "direction": "Rathaus Spandau",
+   "provenance": null,
+   "line": {
+    "type": "line",
+    "id": "de-vbb-11000000-u-bahn-u7",
+    "fahrtNr": "12652",
+    "name": "U7",
+    "public": true,
+    "adminCode": "BVU---",
+    "productName": "U",
+    "mode": "train",
+    "product": "subway",
+    "operator": {
+     "type": "operator",
+     "id": "berliner-verkehrsbetriebe",
+     "name": "Berliner Verkehrsbetriebe"
+    }
+   },
+   "remarks": [
+    {
+     "type": "hint",
+     "code": "FK",
+     "text": "Fahrradmitnahme möglich"
+    }
+   ],
+   "origin": null,
+   "destination": {
+    "type": "stop",
+    "id": "900029302",
+    "name": "S+U Rathaus Spandau (Berlin)",
+    "location": {
+     "type": "location",
+     "id": "900029302",
+     "latitude": 52.535639,
+     "longitude": 13.199841
+    },
+    "products": {
+     "suburban": false,
+     "subway": true,
+     "tram": false,
+     "bus": true,
+     "ferry": false,
+     "express": false,
+     "regional": false
+    },
+    "ids": {
+     "ifopt": "de:11000:900029302"
+    }
+   },
+   "currentTripPosition": {
+    "type": "location",
+    "latitude": 52.487331,
+    "longitude": 13.319056
+   },
+   "occupancy": "low"
+  }
+ ],
+ "realtimeDataUpdatedAt": 1793781233
+}
