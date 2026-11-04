@@ -1,0 +1,32 @@
+{
+  "entity": {
+    "binary_sensor": {
+      "disruption": {
+        "default": "mdi:alert-circle-outline",
+        "state": {
+          "on": "mdi:alert-circle"
+        }
+      }
+    },
+    "sensor": {
+      "board_next_departure": {
+        "default": "mdi:bus-clock"
+      },
+      "delay": {
+        "default": "mdi:timer-alert-outline"
+      },
+      "duration": {
+        "default": "mdi:timer-outline"
+      },
+      "leave_at": {
+        "default": "mdi:walk"
+      },
+      "next_departure": {
+        "default": "mdi:train-bus"
+      },
+      "transfers": {
+        "default": "mdi:swap-horizontal"
+      }
+    }
+  }
+}
