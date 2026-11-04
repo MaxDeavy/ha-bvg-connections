@@ -253,22 +253,22 @@ var v = class extends HTMLElement {
 };
 v.elementStyles = [], v.shadowRootOptions = { mode: "open" }, v[g("elementProperties")] = /* @__PURE__ */ new Map(), v[g("finalized")] = /* @__PURE__ */ new Map(), ne?.({ ReactiveElement: v }), (m.reactiveElementVersions ??= []).push("2.1.2");
 // node_modules/lit-html/lit-html.js
-var y = globalThis, b = (e) => e, x = y.trustedTypes, S = x ? x.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, C = "$lit$", w = `lit$${Math.random().toFixed(9).slice(2)}$`, T = "?" + w, ae = `<${T}>`, E = document, D = () => E.createComment(""), O = (e) => e === null || typeof e != "object" && typeof e != "function", k = Array.isArray, oe = (e) => k(e) || typeof e?.[Symbol.iterator] == "function", A = "[ 	\n\f\r]", j = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, se = /-->/g, M = />/g, N = RegExp(`>|${A}(?:([^\\s"'>=/]+)(${A}*=${A}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`, "g"), ce = /'/g, le = /"/g, ue = /^(?:script|style|textarea|title)$/i, P = ((e) => (t, ...n) => ({
+var y = globalThis, ae = (e) => e, b = y.trustedTypes, x = b ? b.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, S = "$lit$", C = `lit$${Math.random().toFixed(9).slice(2)}$`, w = "?" + C, oe = `<${w}>`, T = document, E = () => T.createComment(""), D = (e) => e === null || typeof e != "object" && typeof e != "function", O = Array.isArray, se = (e) => O(e) || typeof e?.[Symbol.iterator] == "function", k = "[ 	\n\f\r]", A = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, ce = /-->/g, le = />/g, j = RegExp(`>|${k}(?:([^\\s"'>=/]+)(${k}*=${k}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`, "g"), M = /'/g, ue = /"/g, N = /^(?:script|style|textarea|title)$/i, P = ((e) => (t, ...n) => ({
 	_$litType$: e,
 	strings: t,
 	values: n
-}))(1), F = Symbol.for("lit-noChange"), I = Symbol.for("lit-nothing"), L = /* @__PURE__ */ new WeakMap(), R = E.createTreeWalker(E, 129);
+}))(1), F = Symbol.for("lit-noChange"), I = Symbol.for("lit-nothing"), L = /* @__PURE__ */ new WeakMap(), R = T.createTreeWalker(T, 129);
 function z(e, t) {
-	if (!k(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
-	return S === void 0 ? t : S.createHTML(t);
+	if (!O(e) || !e.hasOwnProperty("raw")) throw Error("invalid template strings array");
+	return x === void 0 ? t : x.createHTML(t);
 }
 var de = (e, t) => {
-	let n = e.length - 1, r = [], i, a = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", o = j;
+	let n = e.length - 1, r = [], i, a = t === 2 ? "<svg>" : t === 3 ? "<math>" : "", o = A;
 	for (let t = 0; t < n; t++) {
 		let n = e[t], s, c, l = -1, u = 0;
-		for (; u < n.length && (o.lastIndex = u, c = o.exec(n), c !== null);) u = o.lastIndex, o === j ? c[1] === "!--" ? o = se : c[1] === void 0 ? c[2] === void 0 ? c[3] !== void 0 && (o = N) : (ue.test(c[2]) && (i = RegExp("</" + c[2], "g")), o = N) : o = M : o === N ? c[0] === ">" ? (o = i ?? j, l = -1) : c[1] === void 0 ? l = -2 : (l = o.lastIndex - c[2].length, s = c[1], o = c[3] === void 0 ? N : c[3] === "\"" ? le : ce) : o === le || o === ce ? o = N : o === se || o === M ? o = j : (o = N, i = void 0);
-		let d = o === N && e[t + 1].startsWith("/>") ? " " : "";
-		a += o === j ? n + ae : l >= 0 ? (r.push(s), n.slice(0, l) + C + n.slice(l) + w + d) : n + w + (l === -2 ? t : d);
+		for (; u < n.length && (o.lastIndex = u, c = o.exec(n), c !== null);) u = o.lastIndex, o === A ? c[1] === "!--" ? o = ce : c[1] === void 0 ? c[2] === void 0 ? c[3] !== void 0 && (o = j) : (N.test(c[2]) && (i = RegExp("</" + c[2], "g")), o = j) : o = le : o === j ? c[0] === ">" ? (o = i ?? A, l = -1) : c[1] === void 0 ? l = -2 : (l = o.lastIndex - c[2].length, s = c[1], o = c[3] === void 0 ? j : c[3] === "\"" ? ue : M) : o === ue || o === M ? o = j : o === ce || o === le ? o = A : (o = j, i = void 0);
+		let d = o === j && e[t + 1].startsWith("/>") ? " " : "";
+		a += o === A ? n + oe : l >= 0 ? (r.push(s), n.slice(0, l) + S + n.slice(l) + C + d) : n + C + (l === -2 ? t : d);
 	}
 	return [z(e, a + (e[n] || "<?>") + (t === 2 ? "</svg>" : t === 3 ? "</math>" : "")), r];
 }, B = class e {
@@ -282,8 +282,8 @@ var de = (e, t) => {
 		}
 		for (; (i = R.nextNode()) !== null && c.length < s;) {
 			if (i.nodeType === 1) {
-				if (i.hasAttributes()) for (let e of i.getAttributeNames()) if (e.endsWith(C)) {
-					let t = u[o++], n = i.getAttribute(e).split(w), r = /([.?@])?(.*)/.exec(t);
+				if (i.hasAttributes()) for (let e of i.getAttributeNames()) if (e.endsWith(S)) {
+					let t = u[o++], n = i.getAttribute(e).split(C), r = /([.?@])?(.*)/.exec(t);
 					c.push({
 						type: 1,
 						index: a,
@@ -291,45 +291,45 @@ var de = (e, t) => {
 						strings: n,
 						ctor: r[1] === "." ? pe : r[1] === "?" ? me : r[1] === "@" ? he : U
 					}), i.removeAttribute(e);
-				} else e.startsWith(w) && (c.push({
+				} else e.startsWith(C) && (c.push({
 					type: 6,
 					index: a
 				}), i.removeAttribute(e));
-				if (ue.test(i.tagName)) {
-					let e = i.textContent.split(w), t = e.length - 1;
+				if (N.test(i.tagName)) {
+					let e = i.textContent.split(C), t = e.length - 1;
 					if (t > 0) {
-						i.textContent = x ? x.emptyScript : "";
-						for (let n = 0; n < t; n++) i.append(e[n], D()), R.nextNode(), c.push({
+						i.textContent = b ? b.emptyScript : "";
+						for (let n = 0; n < t; n++) i.append(e[n], E()), R.nextNode(), c.push({
 							type: 2,
 							index: ++a
 						});
-						i.append(e[t], D());
+						i.append(e[t], E());
 					}
 				}
 			} else if (i.nodeType === 8) {
-				if (i.data === T) c.push({
+				if (i.data === w) c.push({
 					type: 2,
 					index: a
 				});
 				else {
 					let e = -1;
-					for (; (e = i.data.indexOf(w, e + 1)) !== -1;) c.push({
+					for (; (e = i.data.indexOf(C, e + 1)) !== -1;) c.push({
 						type: 7,
 						index: a
-					}), e += w.length - 1;
+					}), e += C.length - 1;
 				}
 			}
 			a++;
 		}
 	}
 	static createElement(e, t) {
-		let n = E.createElement("template");
+		let n = T.createElement("template");
 		return n.innerHTML = e, n;
 	}
 };
 function V(e, t, n = e, r) {
 	if (t === F) return t;
-	let i = r === void 0 ? n._$Cl : n._$Co?.[r], a = O(t) ? void 0 : t._$litDirective$;
+	let i = r === void 0 ? n._$Cl : n._$Co?.[r], a = D(t) ? void 0 : t._$litDirective$;
 	return i?.constructor !== a && (i?._$AO?.(!1), a === void 0 ? i = void 0 : (i = new a(e), i._$AT(e, n, r)), r === void 0 ? n._$Cl = i : (n._$Co ??= [])[r] = i), i !== void 0 && (t = V(e, i._$AS(e, t.values), i, r)), t;
 }
 var fe = class {
@@ -343,7 +343,7 @@ var fe = class {
 		return this._$AM._$AU;
 	}
 	u(e) {
-		let { el: { content: t }, parts: n } = this._$AD, r = (e?.creationScope ?? E).importNode(t, !0);
+		let { el: { content: t }, parts: n } = this._$AD, r = (e?.creationScope ?? T).importNode(t, !0);
 		R.currentNode = r;
 		let i = R.nextNode(), a = 0, o = 0, s = n[0];
 		for (; s !== void 0;) {
@@ -353,7 +353,7 @@ var fe = class {
 			}
 			a !== s?.index && (i = R.nextNode(), a++);
 		}
-		return R.currentNode = E, r;
+		return R.currentNode = T, r;
 	}
 	p(e) {
 		let t = 0;
@@ -377,7 +377,7 @@ var fe = class {
 		return this._$AB;
 	}
 	_$AI(e, t = this) {
-		e = V(this, e, t), O(e) ? e === I || e == null || e === "" ? (this._$AH !== I && this._$AR(), this._$AH = I) : e !== this._$AH && e !== F && this._(e) : e._$litType$ === void 0 ? e.nodeType === void 0 ? oe(e) ? this.k(e) : this._(e) : this.T(e) : this.$(e);
+		e = V(this, e, t), D(e) ? e === I || e == null || e === "" ? (this._$AH !== I && this._$AR(), this._$AH = I) : e !== this._$AH && e !== F && this._(e) : e._$litType$ === void 0 ? e.nodeType === void 0 ? se(e) ? this.k(e) : this._(e) : this.T(e) : this.$(e);
 	}
 	O(e) {
 		return this._$AA.parentNode.insertBefore(e, this._$AB);
@@ -386,7 +386,7 @@ var fe = class {
 		this._$AH !== e && (this._$AR(), this._$AH = this.O(e));
 	}
 	_(e) {
-		this._$AH !== I && O(this._$AH) ? this._$AA.nextSibling.data = e : this.T(E.createTextNode(e)), this._$AH = e;
+		this._$AH !== I && D(this._$AH) ? this._$AA.nextSibling.data = e : this.T(T.createTextNode(e)), this._$AH = e;
 	}
 	$(e) {
 		let { values: t, _$litType$: n } = e, r = typeof n == "number" ? this._$AC(e) : (n.el === void 0 && (n.el = B.createElement(z(n.h, n.h[0]), this.options)), n);
@@ -401,15 +401,15 @@ var fe = class {
 		return t === void 0 && L.set(e.strings, t = new B(e)), t;
 	}
 	k(t) {
-		k(this._$AH) || (this._$AH = [], this._$AR());
+		O(this._$AH) || (this._$AH = [], this._$AR());
 		let n = this._$AH, r, i = 0;
-		for (let a of t) i === n.length ? n.push(r = new e(this.O(D()), this.O(D()), this, this.options)) : r = n[i], r._$AI(a), i++;
+		for (let a of t) i === n.length ? n.push(r = new e(this.O(E()), this.O(E()), this, this.options)) : r = n[i], r._$AI(a), i++;
 		i < n.length && (this._$AR(r && r._$AB.nextSibling, i), n.length = i);
 	}
 	_$AR(e = this._$AA.nextSibling, t) {
 		for (this._$AP?.(!1, !0, t); e !== this._$AB;) {
-			let t = b(e).nextSibling;
-			b(e).remove(), e = t;
+			let t = ae(e).nextSibling;
+			ae(e).remove(), e = t;
 		}
 	}
 	setConnected(e) {
@@ -427,10 +427,10 @@ var fe = class {
 	}
 	_$AI(e, t = this, n, r) {
 		let i = this.strings, a = !1;
-		if (i === void 0) e = V(this, e, t, 0), a = !O(e) || e !== this._$AH && e !== F, a && (this._$AH = e);
+		if (i === void 0) e = V(this, e, t, 0), a = !D(e) || e !== this._$AH && e !== F, a && (this._$AH = e);
 		else {
 			let r = e, o, s;
-			for (e = i[0], o = 0; o < i.length - 1; o++) s = V(this, r[n + o], t, o), s === F && (s = this._$AH[o]), a ||= !O(s) || s !== this._$AH[o], s === I ? e = I : e !== I && (e += (s ?? "") + i[o + 1]), this._$AH[o] = s;
+			for (e = i[0], o = 0; o < i.length - 1; o++) s = V(this, r[n + o], t, o), s === F && (s = this._$AH[o]), a ||= !D(s) || s !== this._$AH[o], s === I ? e = I : e !== I && (e += (s ?? "") + i[o + 1]), this._$AH[o] = s;
 		}
 		a && !r && this.j(e);
 	}
@@ -479,7 +479,7 @@ var ve = (e, t, n) => {
 	let r = n?.renderBefore ?? t, i = r._$litPart$;
 	if (i === void 0) {
 		let e = n?.renderBefore ?? null;
-		r._$litPart$ = i = new H(t.insertBefore(D(), e), e, void 0, n ?? {});
+		r._$litPart$ = i = new H(t.insertBefore(E(), e), e, void 0, n ?? {});
 	}
 	return i._$AI(e), i;
 }, W = globalThis, G = class extends v {
@@ -508,21 +508,21 @@ G._$litElement$ = !0, G.finalized = !0, W.litElementHydrateSupport?.({ LitElemen
 var ye = W.litElementPolyfillSupport;
 ye?.({ LitElement: G }), (W.litElementVersions ??= []).push("4.2.2");
 // src/format.ts
-var K = 6e4;
-function q(e) {
+var be = 6e4;
+function K(e) {
 	if (!e) return null;
 	let t = Date.parse(e);
 	return Number.isNaN(t) ? null : t;
 }
-function be(e, t) {
-	return Math.floor((e - t) / K);
+function xe(e, t) {
+	return Math.floor((e - t) / be);
 }
-function J(e, t, n) {
+function Se(e, t, n) {
 	if (e === null) return {
 		value: "–",
 		unit: !1
 	};
-	let r = be(e, t);
+	let r = xe(e, t);
 	if (r <= 0) return {
 		value: n,
 		unit: !1
@@ -537,7 +537,7 @@ function J(e, t, n) {
 		unit: !1
 	};
 }
-function xe(e, t, n) {
+function Ce(e, t, n) {
 	try {
 		return new Intl.DateTimeFormat(t, {
 			hour: "2-digit",
@@ -550,30 +550,44 @@ function xe(e, t, n) {
 		return `${String(t.getHours()).padStart(2, "0")}:${String(t.getMinutes()).padStart(2, "0")}`;
 	}
 }
-function Y(e) {
+function q(e) {
 	return e == null || e === 0 ? null : e > 0 ? `+${e}` : `${e}`;
 }
-function Se(e, t, n) {
+function we(e, t, n) {
 	if (n) return "cancelled";
 	if (e === null) return "relaxed";
-	let r = (e - t) / K;
+	let r = (e - t) / be;
 	return r < -.5 ? "missed" : r < 1 ? "now" : r < 4 ? "soon" : "relaxed";
 }
-function Ce(e, t) {
+function Te(e, t) {
 	return e !== null && e < t - 3e4;
 }
-function we(e, t, n) {
-	return e.filter((e) => !Ce(q(e.departure), t)).slice(0, n);
+function Ee(e, t, n) {
+	return e.filter((e) => !Te(K(e.departure), t)).slice(0, n);
 }
-function X(e) {
+function J(e) {
 	return (e ?? []).map((e) => typeof e == "string" ? { entity: e } : e).filter((e) => !!e?.entity);
 }
-function Te(e) {
+function Y(e) {
+	let t = J(e.entries);
+	return t.length ? t : [...J(e.connections), ...J(e.departures)];
+}
+function X(e) {
+	let t = e?.attributes?.bvg_type;
+	return t === "connection" || t === "departure_board" ? t : null;
+}
+function De(e) {
+	let t = Object.keys(e);
+	return [...t.filter((t) => X(e[t]) === "connection"), ...t.filter((t) => X(e[t]) === "departure_board")];
+}
+function Oe(e, t) {
+	return e.entries.length ? e.entries : De(t).map((e) => ({ entity: e }));
+}
+function ke(e) {
 	return {
 		type: e.type,
 		title: e.title,
-		connections: X(e.connections),
-		departures: X(e.departures),
+		entries: Y(e),
 		max_journeys: Math.max(1, Number(e.max_journeys ?? 3)),
 		max_departures: Math.max(1, Number(e.max_departures ?? 6)),
 		show_clock: e.show_clock ?? !0,
@@ -582,10 +596,10 @@ function Te(e) {
 		expand: e.expand ?? !1
 	};
 }
-function Ee(e) {
+function Ae(e) {
 	return e === "suburban" ? "pill" : e === "subway" ? "square" : "rect";
 }
-var De = {
+var je = {
 	suburban: "mdi:train-variant",
 	subway: "mdi:subway-variant",
 	tram: "mdi:tram",
@@ -594,16 +608,16 @@ var De = {
 	regional: "mdi:train",
 	express: "mdi:train"
 };
-function Oe(e) {
-	return e && Object.hasOwn(De, e) ? {
-		icon: De[e],
+function Me(e) {
+	return e && Object.hasOwn(je, e) ? {
+		icon: je[e],
 		tone: e
 	} : {
 		icon: "mdi:transit-connection-variant",
 		tone: "muted"
 	};
 }
-function ke(e) {
+function Ne(e) {
 	let t = /^#?([0-9a-f]{6})$/i.exec(e);
 	if (!t) return "#fff";
 	let n = parseInt(t[1], 16), [r, i, a] = [
@@ -614,7 +628,7 @@ function ke(e) {
 	return .299 * r + .587 * i + .114 * a > 160 ? "#000" : "#fff";
 }
 // src/i18n.ts
-var Ae = {
+var Pe = {
 	now: "jetzt",
 	min: "min",
 	in: "in",
@@ -650,16 +664,17 @@ var Ae = {
 	occupancy_medium: "mittel ausgelastet",
 	occupancy_high: "stark ausgelastet",
 	departures_title: "Abfahrten",
+	no_entries: "Noch keine Verbindungen oder Abfahrtstafeln angelegt",
 	editor_title: "Titel",
-	editor_connections: "Verbindungen",
-	editor_departures: "Abfahrtstafeln",
+	editor_entries: "Verbindungen und Abfahrtstafeln",
+	editor_entries_helper: "Leer lassen, um alle zu zeigen, auch später angelegte. Die Karte zeigt die Auswahl in dieser Reihenfolge.",
 	editor_max_journeys: "Max. Verbindungen je Gruppe",
 	editor_max_departures: "Max. Abfahrten je Tafel",
 	editor_show_clock: "Uhr anzeigen",
 	editor_show_header: "Kopfzeile anzeigen",
 	editor_show_footer: "Aktualisierungszeit anzeigen",
 	editor_expand: "Details immer aufgeklappt"
-}, je = {
+}, Fe = {
 	now: "now",
 	min: "min",
 	in: "in",
@@ -695,9 +710,10 @@ var Ae = {
 	occupancy_medium: "medium occupancy",
 	occupancy_high: "high occupancy",
 	departures_title: "Departures",
+	no_entries: "No connections or departure boards set up yet",
 	editor_title: "Title",
-	editor_connections: "Connections",
-	editor_departures: "Departure boards",
+	editor_entries: "Connections and departure boards",
+	editor_entries_helper: "Leave empty to show all of them, including ones added later. The card shows the selection in this order.",
 	editor_max_journeys: "Max. connections per group",
 	editor_max_departures: "Max. departures per board",
 	editor_show_clock: "Show clock",
@@ -705,18 +721,18 @@ var Ae = {
 	editor_show_footer: "Show update time",
 	editor_expand: "Always show details"
 };
-function Me(e, t, n = {}) {
-	return ((e ?? "en").toLowerCase().startsWith("de") ? Ae : je)[t].replace(/\{(\w+)\}/g, (e, t) => String(n[t] ?? ""));
+function Ie(e, t, n = {}) {
+	return (((e ?? "en").toLowerCase().startsWith("de") ? Pe : Fe)[t] ?? t).replace(/\{(\w+)\}/g, (e, t) => String(n[t] ?? ""));
 }
 // src/define.ts
-function Ne(e, t) {
+function Le(e, t) {
 	let n = () => {
 		customElements.get(e) || customElements.define(e, t);
 	};
 	customElements.get("home-assistant") || !document.querySelector("home-assistant") ? n() : customElements.whenDefined("home-assistant").then(n);
 }
 // src/remark-text.ts
-var Pe = {
+var Re = {
 	amp: "&",
 	lt: "<",
 	gt: ">",
@@ -741,22 +757,22 @@ var Pe = {
 	laquo: "«",
 	raquo: "»",
 	euro: "€"
-}, Fe = /* @__PURE__ */ new Set(["script", "style"]), Ie = /* @__PURE__ */ new Set([
+}, ze = /* @__PURE__ */ new Set(["script", "style"]), Be = /* @__PURE__ */ new Set([
 	"br",
 	"p",
 	"div",
 	"li"
-]), Le = /^\[?\s*(mehr|more)(\s*\/\s*(mehr|more))?\s*\]?$/i;
+]), Ve = /^\[?\s*(mehr|more)(\s*\/\s*(mehr|more))?\s*\]?$/i;
 function Z(e) {
 	return e.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (e, t) => {
 		if (t[0] === "#") {
 			let n = t[1] === "x" || t[1] === "X" ? parseInt(t.slice(2), 16) : parseInt(t.slice(1), 10);
 			return Number.isFinite(n) && n > 0 && n <= 1114111 ? String.fromCodePoint(n) : e;
 		}
-		return Object.hasOwn(Pe, t) ? Pe[t] : e;
+		return Object.hasOwn(Re, t) ? Re[t] : e;
 	});
 }
-function Re(e) {
+function He(e) {
 	if (e) try {
 		let t = new URL(Z(e).trim());
 		return t.protocol === "https:" || t.protocol === "http:" ? t.href : void 0;
@@ -764,11 +780,11 @@ function Re(e) {
 		return;
 	}
 }
-function ze(e) {
+function Ue(e) {
 	let t = /\bhref\s*=\s*(?:"([^"]*)"|'([^']*)'|([^\s"'>]+))/i.exec(e);
-	return Re(t ? t[1] ?? t[2] ?? t[3] : void 0);
+	return He(t ? t[1] ?? t[2] ?? t[3] : void 0);
 }
-function Be(e, t) {
+function We(e, t) {
 	let n = [], r = (e, t) => {
 		if (!e) return;
 		let r = n[n.length - 1];
@@ -786,18 +802,18 @@ function Be(e, t) {
 		let [, e, n, d] = l;
 		if (!n) continue;
 		let f = n.toLowerCase();
-		s ? e && f === s && (s = null) : Fe.has(f) && !e ? s = f : f === "a" ? !e && !o ? o = {
-			href: ze(d ?? ""),
+		s ? e && f === s && (s = null) : ze.has(f) && !e ? s = f : f === "a" ? !e && !o ? o = {
+			href: Ue(d ?? ""),
 			text: ""
-		} : e && o && (Ve(o, t, r), o = null) : Ie.has(f) && u(" ");
+		} : e && o && (Ge(o, t, r), o = null) : Be.has(f) && u(" ");
 	}
-	return u(i.slice(c)), o && Ve(o, t, r), He(n);
+	return u(i.slice(c)), o && Ge(o, t, r), Ke(n);
 }
-function Ve(e, t, n) {
+function Ge(e, t, n) {
 	let r = Z(e.text).replace(/\s+/g, " ").trim();
-	e.href ? n(!r || Le.test(r) ? t : r, e.href) : r && !Le.test(r) && n(r);
+	e.href ? n(!r || Ve.test(r) ? t : r, e.href) : r && !Ve.test(r) && n(r);
 }
-function He(e) {
+function Ke(e) {
 	let t = e.map((e) => ({
 		...e,
 		text: e.href ? e.text : Z(e.text).replace(/[ \t\r\n\f]+/g, " ")
@@ -805,10 +821,10 @@ function He(e) {
 	return t.length && (t[0].text = t[0].text.trimStart(), t[t.length - 1].text = t[t.length - 1].text.trimEnd()), t;
 }
 function Q(e, t) {
-	return Be(e, t).filter((e) => !e.href).map((e) => e.text).join("").trim();
+	return We(e, t).filter((e) => !e.href).map((e) => e.text).join("").trim();
 }
 // src/styles.ts
-var Ue = o`
+var qe = o`
   :host {
     --bvg-ok: var(--success-color, #43a047);
     --bvg-warn: var(--warning-color, #ffa600);
@@ -1375,72 +1391,78 @@ var Ue = o`
       display: none;
     }
   }
-`, We = {
+`, Je = {
 	integration: "bvg_connections",
 	domain: "sensor",
 	device_class: "timestamp"
-}, Ge = [
-	{
-		name: "title",
-		selector: { text: {} }
-	},
-	{
-		name: "connections",
-		selector: { entity: {
-			multiple: !0,
-			filter: We
+}, Ye = [{
+	type: "grid",
+	name: "",
+	schema: [{
+		name: "max_journeys",
+		selector: { number: {
+			min: 1,
+			max: 8,
+			mode: "box"
 		} }
-	},
-	{
-		name: "departures",
-		selector: { entity: {
-			multiple: !0,
-			filter: We
+	}, {
+		name: "max_departures",
+		selector: { number: {
+			min: 1,
+			max: 20,
+			mode: "box"
 		} }
-	},
-	{
-		type: "grid",
-		name: "",
-		schema: [{
-			name: "max_journeys",
-			selector: { number: {
-				min: 1,
-				max: 8,
-				mode: "box"
+	}]
+}, {
+	type: "grid",
+	name: "",
+	schema: [
+		{
+			name: "show_header",
+			selector: { boolean: {} }
+		},
+		{
+			name: "show_clock",
+			selector: { boolean: {} }
+		},
+		{
+			name: "show_footer",
+			selector: { boolean: {} }
+		},
+		{
+			name: "expand",
+			selector: { boolean: {} }
+		}
+	]
+}];
+function Xe(e) {
+	return [
+		{
+			name: "title",
+			selector: { text: {} }
+		},
+		{
+			name: "entries",
+			selector: { entity: {
+				multiple: !0,
+				filter: Je,
+				include_entities: De(e)
 			} }
-		}, {
-			name: "max_departures",
-			selector: { number: {
-				min: 1,
-				max: 20,
-				mode: "box"
-			} }
-		}]
-	},
-	{
-		type: "grid",
-		name: "",
-		schema: [
-			{
-				name: "show_header",
-				selector: { boolean: {} }
-			},
-			{
-				name: "show_clock",
-				selector: { boolean: {} }
-			},
-			{
-				name: "show_footer",
-				selector: { boolean: {} }
-			},
-			{
-				name: "expand",
-				selector: { boolean: {} }
-			}
-		]
+		},
+		...Ye
+	];
+}
+function Ze(e, t) {
+	let n = {
+		type: e.type,
+		...t
+	}, r = Y(e), i = (t.entries ?? []).map((e) => r.find((t) => t.entity === e && t.name) ?? e);
+	return delete n.connections, delete n.departures, i.length ? n.entries = i : delete n.entries, n.title || delete n.title, n;
+}
+Le("bvg-connections-card-editor", class extends G {
+	constructor(...e) {
+		super(...e), this._label = (e) => e.name ? this._t(`editor_${e.name}`) : "", this._helper = (e) => e.name === "entries" ? this._t("editor_entries_helper") : void 0;
 	}
-];
-Ne("bvg-connections-card-editor", class extends G {
 	static {
 		this.properties = {
 			hass: { attribute: !1 },
@@ -1450,38 +1472,34 @@ Ne("bvg-connections-card-editor", class extends G {
 	setConfig(e) {
 		this._config = e;
 	}
+	_t(e) {
+		return Ie(this.hass?.locale?.language ?? this.hass?.language, e);
+	}
 	render() {
 		if (!this.hass || !this._config) return I;
-		let e = {
+		let { connections: e, departures: t, ...n } = this._config, r = {
 			max_journeys: 3,
 			max_departures: 6,
 			show_header: !0,
 			show_clock: !0,
 			show_footer: !0,
 			expand: !1,
-			...this._config,
-			connections: X(this._config.connections).map((e) => e.entity),
-			departures: X(this._config.departures).map((e) => e.entity)
+			...n,
+			entries: Y(this._config).map((e) => e.entity)
 		};
 		return P`<ha-form
       .hass=${this.hass}
-      .data=${e}
-      .schema=${Ge}
-      .computeLabel=${(e) => Me(this.hass?.locale?.language ?? this.hass?.language, `editor_${e.name}`)}
+      .data=${r}
+      .schema=${Xe(this.hass.states)}
+      .computeLabel=${this._label}
+      .computeHelper=${this._helper}
       @value-changed=${this._changed}
     ></ha-form>`;
 	}
 	_changed(e) {
 		e.stopPropagation();
-		let t = { ...e.detail.value };
-		for (let e of ["connections", "departures"]) {
-			let n = X(this._config?.[e]);
-			t[e] = (t[e] ?? []).map((e) => {
-				let t = n.find((t) => t.entity === e);
-				return t?.name ? t : e;
-			});
-		}
-		t.title || delete t.title, this._config = t, this.dispatchEvent(new CustomEvent("config-changed", {
+		let t = Ze(this._config ?? { type: "custom:bvg-connections-card" }, e.detail.value);
+		this._config = t, this.dispatchEvent(new CustomEvent("config-changed", {
 			detail: { config: t },
 			bubbles: !0,
 			composed: !0
@@ -1489,18 +1507,18 @@ Ne("bvg-connections-card-editor", class extends G {
 	}
 });
 // src/card.ts
-var Ke = "0.1.1", qe = {
+var Qe = "0.1.1", $e = {
 	ok: ["mdi:check", "ok"],
 	delayed: ["mdi:clock-alert-outline", "warn"],
 	connection_at_risk: ["mdi:transit-transfer", "warn"],
 	cancelled: ["mdi:cancel", "error"],
 	no_realtime: ["mdi:clock-outline", "muted"]
-}, Je = 5e3, Ye = class extends G {
+}, et = 5e3, tt = class extends G {
 	constructor(...e) {
 		super(...e), this._now = Date.now(), this._expanded = /* @__PURE__ */ new Set(), this._openNotices = /* @__PURE__ */ new Set();
 	}
 	static {
-		this.styles = Ue;
+		this.styles = qe;
 	}
 	static {
 		this.properties = {
@@ -1514,27 +1532,21 @@ var Ke = "0.1.1", qe = {
 	static getConfigElement() {
 		return document.createElement("bvg-connections-card-editor");
 	}
-	static getStubConfig(e) {
-		let t = [], n = [];
-		for (let r of Object.values(e.states)) {
-			let e = r.attributes?.bvg_type;
-			e === "connection" && t.push(r.entity_id), e === "departure_board" && n.push(r.entity_id);
-		}
-		return {
-			type: "custom:bvg-connections-card",
-			connections: t,
-			departures: n
-		};
+	static getStubConfig() {
+		return { type: "custom:bvg-connections-card" };
 	}
 	setConfig(e) {
 		if (!e) throw Error("Invalid configuration");
-		let t = Te(e);
-		if (!t.connections.length && !t.departures.length) throw Error("Add at least one entity under `connections` or `departures`.");
-		this._config = t;
+		this._config = ke(e);
 	}
 	getCardSize() {
 		let e = this._config;
-		return e ? +!!e.show_header + e.connections.length * (1 + e.max_journeys) + Math.ceil(e.departures.length * (1 + e.max_departures) / 1.5) : 3;
+		if (!e) return 3;
+		let t = (this.hass ? this._refs(this.hass) : e.entries).map((t) => X(this.hass?.states[t.entity]) === "departure_board" ? (1 + e.max_departures) / 1.5 : 1 + e.max_journeys);
+		return +!!e.show_header + Math.ceil(t.reduce((e, t) => e + t, 0)) || 2;
+	}
+	_refs(e) {
+		return Oe(this._config, e.states);
 	}
 	getGridOptions() {
 		return {
@@ -1546,7 +1558,7 @@ var Ke = "0.1.1", qe = {
 	connectedCallback() {
 		super.connectedCallback(), this._now = Date.now(), this._timer = window.setInterval(() => {
 			this._now = Date.now();
-		}, Je);
+		}, et);
 	}
 	disconnectedCallback() {
 		super.disconnectedCallback(), this._timer && window.clearInterval(this._timer);
@@ -1554,43 +1566,42 @@ var Ke = "0.1.1", qe = {
 	shouldUpdate(e) {
 		if (!e.has("hass") || e.size > 1) return !0;
 		let t = e.get("hass");
-		return !t || !this._config || [...this._config.connections, ...this._config.departures].some((e) => t.states[e.entity] !== this.hass?.states[e.entity]);
+		return !t || !this.hass || !this._config || [...new Set([...this._refs(t), ...this._refs(this.hass)].map((e) => e.entity))].some((e) => t.states[e] !== this.hass?.states[e]);
 	}
 	get _lang() {
 		return this.hass?.locale?.language ?? this.hass?.language ?? "de";
 	}
 	_t(e, t) {
-		return Me(this._lang, e, t);
+		return Ie(this._lang, e, t);
 	}
 	_time(e) {
-		let t = typeof e == "number" ? e : q(e);
+		let t = typeof e == "number" ? e : K(e);
 		if (t === null) return "–";
 		let n = this.hass?.locale?.time_zone === "local" ? void 0 : this.hass?.config?.time_zone;
-		return xe(t, this._lang, n);
+		return Ce(t, this._lang, n);
 	}
 	render() {
 		if (!this._config || !this.hass) return I;
-		let e = this._config, t = [...e.connections, ...e.departures].map((e) => this.hass.states[e.entity]).filter(Boolean), n = e.connections.length ? this.hass.states[e.connections[0].entity] : void 0, r = e.title ?? (e.connections.length === 1 && n ? String(n.attributes.origin ?? "") : "");
+		let e = this._config, t = this._refs(this.hass), n = t.map((e) => this.hass.states[e.entity]).filter(Boolean), r = n.filter((e) => X(e) === "connection"), i = e.title ?? (r.length === 1 && n.length === 1 ? String(r[0].attributes.origin ?? "") : "");
 		return P`
       <ha-card class=${this.hass.themes?.darkMode ? "dark" : ""}>
-        ${e.show_header && (r || e.show_clock) ? P`<div class="header">
-              <div class="title">${r}</div>
+        ${e.show_header && (i || e.show_clock) ? P`<div class="header">
+              <div class="title">${i}</div>
               ${e.show_clock ? P`<div class="clock">${this._time(this._now)}</div>` : I}
             </div>` : I}
-        ${e.connections.map((e) => this._renderConnection(e))}
-        ${e.departures.map((e) => this._renderBoard(e))}
-        ${e.show_footer ? this._renderFooter(t) : I}
+        ${t.length ? t.map((e) => this._renderEntry(e)) : P`<div class="empty">${this._t("no_entries")}</div>`}
+        ${e.show_footer ? this._renderFooter(n) : I}
       </ha-card>
     `;
 	}
-	_entity(e, t) {
-		let n = this.hass.states[e.entity];
-		return n ? n.attributes.bvg_type === t ? n : P`<section><div class="warning">${e.entity}: ${this._t("wrong_entity")}</div></section>` : P`<section><div class="warning">${this._t("not_found")}: ${e.entity}</div></section>`;
+	_renderEntry(e) {
+		let t = this.hass.states[e.entity];
+		if (!t) return P`<section><div class="warning">${this._t("not_found")}: ${e.entity}</div></section>`;
+		let n = X(t);
+		return n === "connection" ? this._renderConnection(e, t) : n === "departure_board" ? this._renderBoard(e, t) : P`<section><div class="warning">${e.entity}: ${this._t("wrong_entity")}</div></section>`;
 	}
-	_renderConnection(e) {
-		let t = this._entity(e, "connection");
-		if (!("attributes" in t)) return t;
-		let n = t.attributes, r = Number(n.walk_minutes ?? 0), i = we(n.journeys ?? [], this._now, this._config.max_journeys);
+	_renderConnection(e, t) {
+		let n = t.attributes, r = Number(n.walk_minutes ?? 0), i = Ee(n.journeys ?? [], this._now, this._config.max_journeys);
 		return P`
       <section>
         <div class="group-head">
@@ -1608,7 +1619,7 @@ var Ke = "0.1.1", qe = {
     `;
 	}
 	_renderJourney(e, t, n, r) {
-		let i = `${e}:${t.departure}:${t.lines.join(">")}`, a = q(t.departure), o = q(t.leave_at), s = t.status === "cancelled", c = Se(r ? o : a, this._now, s), l = this._config.expand || this._expanded.has(i), u = J(a, this._now, this._t("now")), d = Y(t.delay), f = Y(t.arrival_delay), p = t.legs.find((e) => !e.walking);
+		let i = `${e}:${t.departure}:${t.lines.join(">")}`, a = K(t.departure), o = K(t.leave_at), s = t.status === "cancelled", c = we(r ? o : a, this._now, s), l = this._config.expand || this._expanded.has(i), u = Se(a, this._now, this._t("now")), d = q(t.delay), f = q(t.arrival_delay), p = t.legs.find((e) => !e.walking);
 		return P`
       <div
         class="journey u-${c}"
@@ -1668,18 +1679,18 @@ var Ke = "0.1.1", qe = {
 			cancelled: this._t("cancelled"),
 			connection_at_risk: this._t("at_risk"),
 			no_realtime: this._t("no_realtime")
-		}, n = e.status === "delayed" ? Y(e.delay) ?? Y(e.arrival_delay) ?? "+" : t[e.status];
+		}, n = e.status === "delayed" ? q(e.delay) ?? q(e.arrival_delay) ?? "+" : t[e.status];
 		return this._tag(e.status, n);
 	}
 	_tag(e, t) {
-		let [n, r] = qe[e] ?? qe.no_realtime;
+		let [n, r] = $e[e] ?? $e.no_realtime;
 		return P`<span class="status tone-${r}">${this._sym(n, r, "s")}${t}</span>`;
 	}
 	_sym(e, t, n = "m") {
 		return P`<span class="sym ${n} tone-${t}"><ha-icon icon=${e}></ha-icon></span>`;
 	}
 	_productSym(e, t = "m") {
-		let { icon: n, tone: r } = Oe(e);
+		let { icon: n, tone: r } = Me(e);
 		return this._sym(n, r, t);
 	}
 	_leaveHint(e, t) {
@@ -1688,9 +1699,9 @@ var Ke = "0.1.1", qe = {
 		return r = t === "missed" ? this._t("missed") : n <= 0 ? this._t("leave_now") : this._t("leave_in", { m: n }), P`<span class="leave">${this._sym("mdi:walk", t === "relaxed" ? "walk" : "current", "s")}${r}</span>`;
 	}
 	_badge(e, t, n, r, i = !1, a = !1) {
-		let o = n || "#5f6368", s = r || ke(o);
+		let o = n || "#5f6368", s = r || Ne(o);
 		return P`<span
-      class="badge ${Ee(t)} ${i ? "cancelled" : ""} ${a ? "large" : ""}"
+      class="badge ${Ae(t)} ${i ? "cancelled" : ""} ${a ? "large" : ""}"
       style="background:${o};color:${s}"
       >${e ?? "?"}</span
     >`;
@@ -1710,7 +1721,7 @@ var Ke = "0.1.1", qe = {
     </div>`;
 	}
 	_renderLeg(e) {
-		let t = Y(e.departure_delay), n = Y(e.arrival_delay);
+		let t = q(e.departure_delay), n = q(e.arrival_delay);
 		return P`<div class="leg">
       <span class="t">
         <span class=${e.cancelled ? "cancelled-text" : this._delayClass(e.departure_delay)}
@@ -1743,7 +1754,7 @@ var Ke = "0.1.1", qe = {
 		return P`<span class="occupancy ${e}" title=${this._t(`occupancy_${e}`)}><ha-icon icon=${t}></ha-icon></span>`;
 	}
 	_remark(e) {
-		let t = this._t("more"), n = Q(e.summary, t), r = Be(e.text, t), i = n && n !== Q(e.text, t);
+		let t = this._t("more"), n = Q(e.summary, t), r = We(e.text, t), i = n && n !== Q(e.text, t);
 		return P`<div class="remark is-${e.type}">
       ${e.type === "warning" ? this._sym("mdi:alert", "warn", "s") : this._sym("mdi:information-variant", "muted", "s")}
       <span
@@ -1757,10 +1768,8 @@ var Ke = "0.1.1", qe = {
       >
     </div>`;
 	}
-	_renderBoard(e) {
-		let t = this._entity(e, "departure_board");
-		if (!("attributes" in t)) return t;
-		let n = t.attributes, r = Number(n.walk_minutes ?? 0), i = (n.departures ?? []).filter((e) => !Ce(q(e.when), this._now)).slice(0, this._config.max_departures), a = this._boardNotices(i), o = this._openNotices.has(t.entity_id);
+	_renderBoard(e, t) {
+		let n = t.attributes, r = Number(n.walk_minutes ?? 0), i = (n.departures ?? []).filter((e) => !Te(K(e.when), this._now)).slice(0, this._config.max_departures), a = this._boardNotices(i), o = this._openNotices.has(t.entity_id);
 		return P`
       <section>
         <div class="group-head">
@@ -1790,7 +1799,7 @@ var Ke = "0.1.1", qe = {
 		return n;
 	}
 	_renderDeparture(e, t) {
-		let n = q(e.when), r = q(e.leave_at), i = !t || r === null || r >= this._now - 3e4, a = J(n, this._now, this._t("now")), o = Y(e.delay), s = o && e.planned_when && !e.cancelled ? this._time(e.planned_when) : null;
+		let n = K(e.when), r = K(e.leave_at), i = !t || r === null || r >= this._now - 3e4, a = Se(n, this._now, this._t("now")), o = q(e.delay), s = o && e.planned_when && !e.cancelled ? this._time(e.planned_when) : null;
 		return P`<div class="departure ${e.cancelled ? "is-cancelled" : ""} ${i ? "" : "unreachable"}">
       ${this._productSym(e.product)}
       ${this._badge(e.line, e.product, e.color, e.text_color, !1, !0)}
@@ -1811,7 +1820,7 @@ var Ke = "0.1.1", qe = {
     </div>`;
 	}
 	_renderFooter(e) {
-		let t = e.map((e) => q(e.attributes.fetched_at)).filter((e) => e !== null);
+		let t = e.map((e) => K(e.attributes.fetched_at)).filter((e) => e !== null);
 		return t.length ? P`<div class="footer">
       ${e.some((e) => e.attributes.stale) ? P`<span class="stale-text">${this._t("stale")} ·</span>` : I}
       <span>${this._t("updated")} ${this._time(Math.min(...t))}</span>
@@ -1826,7 +1835,7 @@ var Ke = "0.1.1", qe = {
 		t.has(e) ? t.delete(e) : t.add(e), this._openNotices = t;
 	}
 };
-Ne("bvg-connections-card", Ye);
+Le("bvg-connections-card", tt);
 var $ = window;
 $.customCards = $.customCards ?? [], $.customCards.some((e) => e.type === "bvg-connections-card") || ($.customCards.push({
 	type: "bvg-connections-card",
@@ -1834,5 +1843,5 @@ $.customCards = $.customCards ?? [], $.customCards.some((e) => e.type === "bvg-c
 	description: "Verbindungen mit Umstiegen, Abfahrtstafeln und Losgeh-Hinweisen",
 	preview: !0,
 	documentationURL: "https://github.com/MaxDeavy/ha-bvg-connections"
-}), console.info(`%c BVG-CONNECTIONS-CARD %c ${Ke} `, "color:#fff;background:#f0d722;color:#000;font-weight:700", ""));
-export { Ye as BvgConnectionsCard };
+}), console.info(`%c BVG-CONNECTIONS-CARD %c ${Qe} `, "color:#fff;background:#f0d722;color:#000;font-weight:700", ""));
+export { tt as BvgConnectionsCard };

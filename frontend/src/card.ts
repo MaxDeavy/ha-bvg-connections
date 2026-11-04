@@ -3,6 +3,7 @@ import {
   badgeShape,
   contrastText,
   countdown,
+  entryType,
   formatClock,
   formatDelay,
   isDeparted,
@@ -10,6 +11,7 @@ import {
   type NormalizedConfig,
   parseTime,
   productSymbol,
+  resolveEntries,
   urgency,
   visibleJourneys,
 } from "./format";
@@ -64,34 +66,29 @@ export class BvgConnectionsCard extends LitElement {
     return document.createElement("bvg-connections-card-editor");
   }
 
-  static getStubConfig(hass: HomeAssistant): CardConfig {
-    const connections: string[] = [];
-    const departures: string[] = [];
-    for (const entity of Object.values(hass.states)) {
-      const type = entity.attributes?.bvg_type;
-      if (type === "connection") connections.push(entity.entity_id);
-      if (type === "departure_board") departures.push(entity.entity_id);
-    }
-    return { type: "custom:bvg-connections-card", connections, departures };
+  static getStubConfig(): CardConfig {
+    return { type: "custom:bvg-connections-card" };
   }
 
   setConfig(config: CardConfig): void {
     if (!config) throw new Error("Invalid configuration");
-    const normalized = normalizeConfig(config);
-    if (!normalized.connections.length && !normalized.departures.length) {
-      throw new Error("Add at least one entity under `connections` or `departures`.");
-    }
-    this._config = normalized;
+    this._config = normalizeConfig(config);
   }
 
   getCardSize(): number {
     const c = this._config;
     if (!c) return 3;
-    return (
-      (c.show_header ? 1 : 0) +
-      c.connections.length * (1 + c.max_journeys) +
-      Math.ceil((c.departures.length * (1 + c.max_departures)) / 1.5)
+    const refs = this.hass ? this._refs(this.hass) : c.entries;
+    const rows = refs.map((ref) =>
+      entryType(this.hass?.states[ref.entity]) === "departure_board"
+        ? (1 + c.max_departures) / 1.5
+        : 1 + c.max_journeys,
     );
+    return (c.show_header ? 1 : 0) + Math.ceil(rows.reduce((sum, n) => sum + n, 0)) || 2;
+  }
+
+  private _refs(hass: HomeAssistant): EntityRef[] {
+    return resolveEntries(this._config!, hass.states);
   }
 
   getGridOptions() {
@@ -114,10 +111,9 @@ export class BvgConnectionsCard extends LitElement {
   protected shouldUpdate(changed: PropertyValues): boolean {
     if (!changed.has("hass") || changed.size > 1) return true;
     const old = changed.get("hass") as HomeAssistant | undefined;
-    if (!old || !this._config) return true;
-    return [...this._config.connections, ...this._config.departures].some(
-      (ref) => old.states[ref.entity] !== this.hass?.states[ref.entity],
-    );
+    if (!old || !this.hass || !this._config) return true;
+    const ids = new Set([...this._refs(old), ...this._refs(this.hass)].map((ref) => ref.entity));
+    return [...ids].some((id) => old.states[id] !== this.hass?.states[id]);
   }
 
   private get _lang(): string {
@@ -138,16 +134,13 @@ export class BvgConnectionsCard extends LitElement {
   protected render(): TemplateResult | typeof nothing {
     if (!this._config || !this.hass) return nothing;
     const c = this._config;
-    const entities = [...c.connections, ...c.departures]
-      .map((ref) => this.hass!.states[ref.entity])
-      .filter(Boolean);
-    const firstConnection = c.connections.length
-      ? this.hass.states[c.connections[0].entity]
-      : undefined;
+    const refs = this._refs(this.hass);
+    const entities = refs.map((ref) => this.hass!.states[ref.entity]).filter(Boolean);
+    const connections = entities.filter((e) => entryType(e) === "connection");
     const title =
       c.title ??
-      (c.connections.length === 1 && firstConnection
-        ? String(firstConnection.attributes.origin ?? "")
+      (connections.length === 1 && entities.length === 1
+        ? String(connections[0].attributes.origin ?? "")
         : "");
 
     return html`
@@ -158,27 +151,26 @@ export class BvgConnectionsCard extends LitElement {
               ${c.show_clock ? html`<div class="clock">${this._time(this._now)}</div>` : nothing}
             </div>`
           : nothing}
-        ${c.connections.map((ref) => this._renderConnection(ref))}
-        ${c.departures.map((ref) => this._renderBoard(ref))}
+        ${refs.length
+          ? refs.map((ref) => this._renderEntry(ref))
+          : html`<div class="empty">${this._t("no_entries")}</div>`}
         ${c.show_footer ? this._renderFooter(entities) : nothing}
       </ha-card>
     `;
   }
 
-  private _entity(ref: EntityRef, type: string): HassEntity | TemplateResult {
+  private _renderEntry(ref: EntityRef): TemplateResult {
     const entity = this.hass!.states[ref.entity];
     if (!entity) {
       return html`<section><div class="warning">${this._t("not_found")}: ${ref.entity}</div></section>`;
     }
-    if (entity.attributes.bvg_type !== type) {
-      return html`<section><div class="warning">${ref.entity}: ${this._t("wrong_entity")}</div></section>`;
-    }
-    return entity;
+    const type = entryType(entity);
+    if (type === "connection") return this._renderConnection(ref, entity);
+    if (type === "departure_board") return this._renderBoard(ref, entity);
+    return html`<section><div class="warning">${ref.entity}: ${this._t("wrong_entity")}</div></section>`;
   }
 
-  private _renderConnection(ref: EntityRef): TemplateResult {
-    const entity = this._entity(ref, "connection");
-    if (!("attributes" in entity)) return entity;
+  private _renderConnection(ref: EntityRef, entity: HassEntity): TemplateResult {
     const a = entity.attributes;
     const walk = Number(a.walk_minutes ?? 0);
     const journeys = visibleJourneys(
@@ -443,9 +435,7 @@ export class BvgConnectionsCard extends LitElement {
     </div>`;
   }
 
-  private _renderBoard(ref: EntityRef): TemplateResult {
-    const entity = this._entity(ref, "departure_board");
-    if (!("attributes" in entity)) return entity;
+  private _renderBoard(ref: EntityRef, entity: HassEntity): TemplateResult {
     const a = entity.attributes;
     const walk = Number(a.walk_minutes ?? 0);
     const departures = ((a.departures ?? []) as Departure[])

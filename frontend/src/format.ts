@@ -77,11 +77,13 @@ export function normalizeRefs(refs: (string | EntityRef)[] | undefined): EntityR
     .filter((ref) => Boolean(ref?.entity));
 }
 
+export type EntryType = "connection" | "departure_board";
+
 export interface NormalizedConfig {
   type: string;
   title?: string;
-  connections: EntityRef[];
-  departures: EntityRef[];
+  /** Selected connections and boards in display order; empty means all. */
+  entries: EntityRef[];
   max_journeys: number;
   max_departures: number;
   show_clock: boolean;
@@ -90,12 +92,39 @@ export interface NormalizedConfig {
   expand: boolean;
 }
 
+/** The configured entries; cards from 0.1.x list them under `connections` and `departures`. */
+export function configEntries(config: CardConfig): EntityRef[] {
+  const entries = normalizeRefs(config.entries);
+  if (entries.length) return entries;
+  return [...normalizeRefs(config.connections), ...normalizeRefs(config.departures)];
+}
+
+export function entryType(entity: { attributes?: Record<string, unknown> } | undefined): EntryType | null {
+  const type = entity?.attributes?.bvg_type;
+  return type === "connection" || type === "departure_board" ? type : null;
+}
+
+/** All connections, then all departure boards, in the order Home Assistant lists them. */
+export function allEntries(states: Record<string, { attributes?: Record<string, unknown> }>): string[] {
+  const ids = Object.keys(states);
+  return [
+    ...ids.filter((id) => entryType(states[id]) === "connection"),
+    ...ids.filter((id) => entryType(states[id]) === "departure_board"),
+  ];
+}
+
+export function resolveEntries(
+  config: Pick<NormalizedConfig, "entries">,
+  states: Record<string, { attributes?: Record<string, unknown> }>,
+): EntityRef[] {
+  return config.entries.length ? config.entries : allEntries(states).map((entity) => ({ entity }));
+}
+
 export function normalizeConfig(config: CardConfig): NormalizedConfig {
   return {
     type: config.type,
     title: config.title,
-    connections: normalizeRefs(config.connections),
-    departures: normalizeRefs(config.departures),
+    entries: configEntries(config),
     max_journeys: Math.max(1, Number(config.max_journeys ?? 3)),
     max_departures: Math.max(1, Number(config.max_departures ?? 6)),
     show_clock: config.show_clock ?? true,
