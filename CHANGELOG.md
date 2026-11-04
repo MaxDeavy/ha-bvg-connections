@@ -6,6 +6,12 @@ Format: [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung 
 
 <!-- next-release -->
 
+## [0.1.5](https://github.com/MaxDeavy/ha-bvg-connections/compare/v0.1.4...v0.1.5) - 2026-11-04
+
+### Neu / Added
+
+- Multi-value direction filter chips for departure boards (#17)
+
 ## [0.1.4](https://github.com/MaxDeavy/ha-bvg-connections/compare/v0.1.3...v0.1.4) – 2026-11-04
 
 ### Neu / Added
