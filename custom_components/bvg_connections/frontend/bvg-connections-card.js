@@ -519,6 +519,7 @@ var Se = {
 	on_time: "pünktlich",
 	cancelled: "Ausfall",
 	at_risk: "Anschluss?",
+	at_risk_detail: "knapper Umstieg",
 	no_realtime: "Plan",
 	duration_m: "{m} min",
 	duration_1h: "1 Stunde",
@@ -571,6 +572,7 @@ var Se = {
 	on_time: "on time",
 	cancelled: "Cancelled",
 	at_risk: "Connection?",
+	at_risk_detail: "tight transfer",
 	no_realtime: "Scheduled",
 	duration_m: "{m} min",
 	duration_1h: "1 hour",
@@ -1832,7 +1834,7 @@ var $e = "0.1.5", et = {
           ${e.platform ? M`<span class=${e.platform_changed ? "platform-changed" : ""}>${this._platform(e.platform)}</span>` : P}
           ${this._occupancy(e.occupancy)}
           ${e.cancelled ? this._tag("cancelled", this._t("cancelled")) : P}
-          ${!e.reachable && !e.cancelled ? this._tag("connection_at_risk", this._t("at_risk")) : P}
+          ${!e.reachable && !e.cancelled ? this._tag("connection_at_risk", this._t("at_risk_detail")) : P}
         </div>
         <div class="stop ${e.cancelled ? "cancelled-text" : ""}">${e.to}</div>
         ${e.remarks.map((e) => this._remark(e))}

@@ -164,5 +164,8 @@ describe("i18n", () => {
     expect(translate("fr", "cancelled")).toBe("Cancelled");
     expect(translate("de", "missed")).toBe("Nicht mehr\nzu schaffen");
     expect(translate("en", "missed")).toBe("Too late\nto catch");
+    expect(translate("de", "at_risk")).toBe("Anschluss?");
+    expect(translate("de", "at_risk_detail")).toBe("knapper Umstieg");
+    expect(translate("en", "at_risk_detail")).toBe("tight transfer");
   });
 });
