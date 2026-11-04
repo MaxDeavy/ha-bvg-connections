@@ -12,7 +12,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung 
 
 - Own icon and logo (“Abfahrtsuhr”) in the integration's `brand/` folder; Home Assistant shows them without an entry in the brands repository.
 - **card:** tile-style symbols (MDI icons in tinted circles), coloured by product and status (walk, transfer, delay, cancellation, on time).
-- **docs:** step-by-step setup guide in the README (where to add connections and boards, walking time, card, troubleshooting) this changelog with a release script, and a contributing guide (`CONTRIBUTING.md`) for development, commit format and releases.
+- **docs:** step-by-step setup guide in the README (where to add connections and boards, walking time, card, troubleshooting), this changelog with a release script, and a contributing guide (`CONTRIBUTING.md`) for development, commit format and releases.
 
 ### Geändert / Changed
 
