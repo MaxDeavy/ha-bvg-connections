@@ -19,8 +19,12 @@ Verbindungen mit Umstiegen und Abfahrtstafeln für den Berliner ÖPNV (BVG, S-Ba
 > **Wo lege ich Verbindungen an?** Nicht über „Integration hinzufügen“, sondern auf der Seite der Integration: *Einstellungen → Geräte & Dienste → BVG Verbindungen* → oben die Knöpfe **„Verbindung hinzufügen“** bzw. **„Abfahrtstafel hinzufügen“**. Details in [Schritt 3](#3-verbindungen-und-abfahrtstafeln-anlegen).
 
 <p>
-  <img src="docs/images/card-light.png" alt="Karte im hellen Theme" width="420">
-  <img src="docs/images/card-dark-details.png" alt="Karte im dunklen Theme mit aufgeklappten Details" width="420">
+  <img src="docs/images/card-light.png" alt="Verbindungskarte im hellen Theme" width="420">
+  <img src="docs/images/card-dark-details.png" alt="Verbindungskarte im dunklen Theme mit aufgeklappten Details" width="420">
+</p>
+<p>
+  <img src="docs/images/card-board-light.png" alt="Abfahrtstafel im hellen Theme" width="420">
+  <img src="docs/images/card-board-dark.png" alt="Abfahrtstafel im dunklen Theme" width="420">
 </p>
 
 ## Funktionen
