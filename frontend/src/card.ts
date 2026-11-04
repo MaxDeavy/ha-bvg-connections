@@ -14,6 +14,7 @@ import {
   visibleJourneys,
 } from "./format";
 import { translate, type StringKey } from "./i18n";
+import { defineElement } from "./define";
 import { cardStyles } from "./styles";
 import type {
   CardConfig,
@@ -541,10 +542,11 @@ export class BvgConnectionsCard extends LitElement {
   }
 }
 
-if (!customElements.get("bvg-connections-card")) {
-  customElements.define("bvg-connections-card", BvgConnectionsCard);
-  const w = window as unknown as { customCards?: unknown[] };
-  w.customCards = w.customCards ?? [];
+defineElement("bvg-connections-card", BvgConnectionsCard);
+
+const w = window as unknown as { customCards?: ({ type: string } & Record<string, unknown>)[] };
+w.customCards = w.customCards ?? [];
+if (!w.customCards.some((c) => c.type === "bvg-connections-card")) {
   w.customCards.push({
     type: "bvg-connections-card",
     name: "BVG Verbindungen",
