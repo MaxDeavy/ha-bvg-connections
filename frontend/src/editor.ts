@@ -1,4 +1,5 @@
 import { LitElement, html, nothing, type TemplateResult } from "lit";
+import { defineElement } from "./define";
 import { normalizeRefs } from "./format";
 import { translate, type StringKey } from "./i18n";
 import type { CardConfig, HomeAssistant } from "./types";
@@ -82,6 +83,4 @@ export class BvgConnectionsCardEditor extends LitElement {
   }
 }
 
-if (!customElements.get("bvg-connections-card-editor")) {
-  customElements.define("bvg-connections-card-editor", BvgConnectionsCardEditor);
-}
+defineElement("bvg-connections-card-editor", BvgConnectionsCardEditor);

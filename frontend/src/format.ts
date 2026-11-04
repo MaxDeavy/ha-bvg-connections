@@ -113,6 +113,24 @@ export function badgeShape(product: string | null | undefined): BadgeShape {
   return "rect";
 }
 
+const PRODUCT_ICONS: Record<string, string> = {
+  suburban: "mdi:train-variant",
+  subway: "mdi:subway-variant",
+  tram: "mdi:tram",
+  bus: "mdi:bus",
+  ferry: "mdi:ferry",
+  regional: "mdi:train",
+  express: "mdi:train",
+};
+
+/** MDI icon and colour tone for a product symbol; tones map to CSS classes. */
+export function productSymbol(product: string | null | undefined): { icon: string; tone: string } {
+  if (product && Object.hasOwn(PRODUCT_ICONS, product)) {
+    return { icon: PRODUCT_ICONS[product], tone: product };
+  }
+  return { icon: "mdi:transit-connection-variant", tone: "muted" };
+}
+
 /** Readable text colour if the integration did not provide one. */
 export function contrastText(hex: string): string {
   const match = /^#?([0-9a-f]{6})$/i.exec(hex);
