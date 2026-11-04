@@ -1015,9 +1015,10 @@ var qe = o`
 
   /* Journey rows: leave/status | lines+meta | big arrival */
   .journey {
+    --bvg-leave-col: 7.75rem;
     position: relative;
     display: grid;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: var(--bvg-leave-col) 1fr auto;
     align-items: center;
     column-gap: 12px;
     padding: 8px 16px 8px 20px;
@@ -1064,13 +1065,15 @@ var qe = o`
     flex-direction: column;
     align-items: flex-start;
     gap: 2px;
+    width: 100%;
     min-width: 0;
+    box-sizing: border-box;
   }
   .times {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    min-width: 52px;
+    min-width: 56px;
     font-variant-numeric: tabular-nums;
     text-align: right;
   }
@@ -1086,9 +1089,9 @@ var qe = o`
     display: none;
   }
   .arr-time {
-    font-size: 20px;
+    font-size: 26px;
     font-weight: 500;
-    line-height: 1.15;
+    line-height: 1.1;
     color: var(--primary-text-color);
   }
   .planned {
@@ -1160,9 +1163,12 @@ var qe = o`
     display: inline-flex;
     align-items: center;
     gap: 4px;
+    max-width: 100%;
     font-size: 12px;
     font-weight: 500;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: var(--urgency-color);
   }
   .u-relaxed .leave {
