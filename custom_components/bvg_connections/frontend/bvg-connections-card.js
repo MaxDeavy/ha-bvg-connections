@@ -512,7 +512,7 @@ var Se = {
 	now: "jetzt",
 	min: "min",
 	in: "in",
-	leave_in: "Los in {m} min",
+	leave_in_prefix: "Los in",
 	leave_now: "Jetzt los!",
 	missed: "Nicht mehr zu schaffen",
 	hurry: "Beeilen",
@@ -564,7 +564,7 @@ var Se = {
 	now: "now",
 	min: "min",
 	in: "in",
-	leave_in: "Leave in {m} min",
+	leave_in_prefix: "Go in",
 	leave_now: "Leave now!",
 	missed: "Too late",
 	hurry: "Hurry",
@@ -1027,13 +1027,13 @@ var Je = o`
 
   /* Journey rows: leave/status | lines+meta | big arrival */
   .journey {
-    --bvg-leave-col: 7.75rem;
+    --bvg-leave-col: 5.75rem;
     position: relative;
     display: grid;
     grid-template-columns: var(--bvg-leave-col) 1fr auto;
     align-items: center;
-    column-gap: 12px;
-    padding: 8px 16px 8px 20px;
+    column-gap: 8px;
+    padding: 8px 14px 8px 18px;
     cursor: pointer;
     outline: none;
     transition: background-color 120ms ease;
@@ -1085,12 +1085,12 @@ var Je = o`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    min-width: 56px;
+    min-width: 52px;
     font-variant-numeric: tabular-nums;
     text-align: right;
   }
   .time-label {
-    font-size: 10px;
+    font-size: 10.5px;
     font-weight: 500;
     letter-spacing: 0.02em;
     line-height: 1.2;
@@ -1101,7 +1101,7 @@ var Je = o`
     display: none;
   }
   .arr-time {
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 500;
     line-height: 1.1;
     color: var(--primary-text-color);
@@ -1148,7 +1148,7 @@ var Je = o`
     flex-wrap: wrap;
     gap: 2px 8px;
     margin-top: 3px;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--bvg-muted);
     font-variant-numeric: tabular-nums;
   }
@@ -1159,7 +1159,7 @@ var Je = o`
     display: flex;
     align-items: baseline;
     gap: 2px;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 500;
     line-height: 1.1;
     font-variant-numeric: tabular-nums;
@@ -1167,21 +1167,33 @@ var Je = o`
     white-space: nowrap;
   }
   .countdown .unit {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 400;
     color: var(--bvg-muted);
   }
   .leave {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 3px;
     max-width: 100%;
-    font-size: 12px;
+    font-size: 12.5px;
     font-weight: 500;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--urgency-color);
+  }
+  .leave.leave-stack {
+    align-items: flex-start;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+  .leave-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
   }
   .u-relaxed .leave {
     color: var(--bvg-muted);
@@ -1770,8 +1782,12 @@ var $e = "0.1.3", et = {
 	}
 	_leaveHint(e, t) {
 		if (e === null) return P;
-		let n = Math.floor((e - this._now) / 6e4), r;
-		return r = t === "missed" ? this._t("missed") : n <= 0 ? this._t("leave_now") : this._t("leave_in", { m: n }), M`<span class="leave">${this._sym("mdi:walk", t === "relaxed" ? "walk" : "current", "s")}${r}</span>`;
+		let n = Math.floor((e - this._now) / 6e4), r = this._sym("mdi:walk", t === "relaxed" ? "walk" : "current", "s");
+		return t === "missed" ? M`<span class="leave">${r}${this._t("missed")}</span>` : n <= 0 ? M`<span class="leave">${r}${this._t("leave_now")}</span>` : M`<span class="leave leave-stack"
+      >${r}<span class="leave-text"
+        ><span>${this._t("leave_in_prefix")}</span><span>${n} ${this._t("min")}</span></span
+      ></span
+    >`;
 	}
 	_badge(e, t, n, r, i = !1, a = !1) {
 		let o = n || "#5f6368", s = r || Le(o);

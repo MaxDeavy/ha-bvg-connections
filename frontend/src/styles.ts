@@ -185,13 +185,13 @@ export const cardStyles = css`
 
   /* Journey rows: leave/status | lines+meta | big arrival */
   .journey {
-    --bvg-leave-col: 7.75rem;
+    --bvg-leave-col: 5.75rem;
     position: relative;
     display: grid;
     grid-template-columns: var(--bvg-leave-col) 1fr auto;
     align-items: center;
-    column-gap: 12px;
-    padding: 8px 16px 8px 20px;
+    column-gap: 8px;
+    padding: 8px 14px 8px 18px;
     cursor: pointer;
     outline: none;
     transition: background-color 120ms ease;
@@ -243,12 +243,12 @@ export const cardStyles = css`
     display: flex;
     flex-direction: column;
     align-items: flex-end;
-    min-width: 56px;
+    min-width: 52px;
     font-variant-numeric: tabular-nums;
     text-align: right;
   }
   .time-label {
-    font-size: 10px;
+    font-size: 10.5px;
     font-weight: 500;
     letter-spacing: 0.02em;
     line-height: 1.2;
@@ -259,7 +259,7 @@ export const cardStyles = css`
     display: none;
   }
   .arr-time {
-    font-size: 26px;
+    font-size: 28px;
     font-weight: 500;
     line-height: 1.1;
     color: var(--primary-text-color);
@@ -306,7 +306,7 @@ export const cardStyles = css`
     flex-wrap: wrap;
     gap: 2px 8px;
     margin-top: 3px;
-    font-size: 12px;
+    font-size: 13px;
     color: var(--bvg-muted);
     font-variant-numeric: tabular-nums;
   }
@@ -317,7 +317,7 @@ export const cardStyles = css`
     display: flex;
     align-items: baseline;
     gap: 2px;
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 500;
     line-height: 1.1;
     font-variant-numeric: tabular-nums;
@@ -325,21 +325,33 @@ export const cardStyles = css`
     white-space: nowrap;
   }
   .countdown .unit {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 400;
     color: var(--bvg-muted);
   }
   .leave {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 3px;
     max-width: 100%;
-    font-size: 12px;
+    font-size: 12.5px;
     font-weight: 500;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--urgency-color);
+  }
+  .leave.leave-stack {
+    align-items: flex-start;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+  }
+  .leave-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+    min-width: 0;
   }
   .u-relaxed .leave {
     color: var(--bvg-muted);
