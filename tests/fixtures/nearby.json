@@ -1,0 +1,122 @@
+[
+ {
+  "type": "stop",
+  "id": "900100026",
+  "name": "S+U Alexanderplatz Bhf/Gontardstr. (Berlin)",
+  "location": {
+   "type": "location",
+   "id": "900100026",
+   "latitude": 52.52105,
+   "longitude": 13.411285
+  },
+  "products": {
+   "suburban": false,
+   "subway": false,
+   "tram": true,
+   "bus": false,
+   "ferry": false,
+   "express": false,
+   "regional": false
+  },
+  "ids": {
+   "ifopt": "de:11000:900100026"
+  },
+  "distance": 130
+ },
+ {
+  "type": "stop",
+  "id": "900100003",
+  "name": "S+U Alexanderplatz Bhf (Berlin)",
+  "location": {
+   "type": "location",
+   "id": "900100003",
+   "latitude": 52.521508,
+   "longitude": 13.411267
+  },
+  "products": {
+   "suburban": true,
+   "subway": true,
+   "tram": false,
+   "bus": false,
+   "ferry": false,
+   "express": false,
+   "regional": true
+  },
+  "ids": {
+   "ifopt": "de:11000:900100003"
+  },
+  "distance": 149
+ },
+ {
+  "type": "stop",
+  "id": "900100024",
+  "name": "S+U Alexanderplatz Bhf/Dircksenstr. (Berlin)",
+  "location": {
+   "type": "location",
+   "id": "900100024",
+   "latitude": 52.521481,
+   "longitude": 13.411924
+  },
+  "products": {
+   "suburban": false,
+   "subway": false,
+   "tram": true,
+   "bus": false,
+   "ferry": false,
+   "express": false,
+   "regional": false
+  },
+  "ids": {
+   "ifopt": "de:11000:900100024"
+  },
+  "distance": 187
+ },
+ {
+  "type": "stop",
+  "id": "900100031",
+  "name": "S+U Alexanderplatz Bhf/Memhardstr. (Berlin)",
+  "location": {
+   "type": "location",
+   "id": "900100031",
+   "latitude": 52.522937,
+   "longitude": 13.410755
+  },
+  "products": {
+   "suburban": false,
+   "subway": false,
+   "tram": false,
+   "bus": true,
+   "ferry": false,
+   "express": false,
+   "regional": false
+  },
+  "ids": {
+   "ifopt": "de:11000:900100031"
+  },
+  "distance": 255
+ },
+ {
+  "type": "stop",
+  "id": "900100559",
+  "name": "Jüdenstr. (Berlin)",
+  "location": {
+   "type": "location",
+   "id": "900100559",
+   "latitude": 52.518317,
+   "longitude": 13.410396
+  },
+  "products": {
+   "suburban": false,
+   "subway": false,
+   "tram": false,
+   "bus": true,
+   "ferry": false,
+   "express": false,
+   "regional": false
+  },
+  "ids": {
+   "ifopt": "de:11000:900100559"
+  },
+  "distance": 284
+ }
+]

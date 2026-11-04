@@ -1,0 +1,189 @@
+{
+  "config": {
+    "abort": {
+      "already_configured": "This API endpoint is already configured."
+    },
+    "error": {
+      "cannot_connect": "The API could not be reached. Check the URL or try again later."
+    },
+    "step": {
+      "user": {
+        "title": "BVG connections",
+        "description": "Connect to a transport.rest API (bvg-rest/vbb-rest). Connections and departure boards are added afterwards on the integration page.",
+        "data": {
+          "base_url": "API URL",
+          "request_budget": "Request budget per minute"
+        },
+        "data_description": {
+          "base_url": "Default: https://v6.bvg.transport.rest (public, no SLA). A self-hosted bvg-rest instance also works.",
+          "request_budget": "Hard limit for requests to the API. The public instance allows 100 per minute."
+        }
+      }
+    }
+  },
+  "options": {
+    "error": {
+      "budget_exceeded": "With these intervals up to {estimate} requests per minute would be sent. Increase the intervals or the budget."
+    },
+    "step": {
+      "init": {
+        "title": "Polling",
+        "data": {
+          "journey_interval": "Update interval for connections",
+          "departure_interval": "Update interval for departure boards",
+          "request_budget": "Request budget per minute"
+        },
+        "data_description": {
+          "journey_interval": "Seconds between journey searches per connection.",
+          "departure_interval": "Seconds between updates per departure board. The API caches boards for 30 s."
+        }
+      }
+    }
+  },
+  "config_subentries": {
+    "connection": {
+      "entry_type": "Connection",
+      "initiate_flow": {
+        "user": "Add connection",
+        "reconfigure": "Edit connection"
+      },
+      "abort": {
+        "entry_not_loaded": "The integration is not loaded. Enable it first."
+      },
+      "error": {
+        "cannot_connect": "The API could not be reached.",
+        "no_results": "Nothing found. Try a different spelling.",
+        "same_location": "Origin and destination must differ."
+      },
+      "step": {
+        "user": {
+          "title": "Search origin and destination",
+          "description": "Enter stops, addresses or places. Leave the origin empty to list stops near your home.",
+          "data": {
+            "origin_query": "Origin",
+            "destination_query": "Destination"
+          }
+        },
+        "select": {
+          "title": "Choose origin and destination",
+          "data": {
+            "origin": "Origin",
+            "destination": "Destination"
+          }
+        },
+        "settings": {
+          "title": "Connection settings",
+          "data": {
+            "name": "Name",
+            "walk_minutes": "Walking time to the origin",
+            "results": "Number of connections",
+            "hide_missed": "Hide connections I can no longer catch",
+            "products": "Means of transport",
+            "excluded_lines": "Exclude lines",
+            "max_transfers": "Maximum transfers",
+            "transfer_time": "Minimum transfer time"
+          },
+          "data_description": {
+            "walk_minutes": "Minutes from your door to the origin. Used for “leave in X min” and to hide connections you can't reach.",
+            "products": "Only use these products. Select all for no filter.",
+            "excluded_lines": "Type a line (e.g. M10) and press Enter.",
+            "max_transfers": "Leave empty for no limit."
+          }
+        }
+      }
+    },
+    "departure_board": {
+      "entry_type": "Departure board",
+      "initiate_flow": {
+        "user": "Add departure board",
+        "reconfigure": "Edit departure board"
+      },
+      "abort": {
+        "entry_not_loaded": "The integration is not loaded. Enable it first."
+      },
+      "error": {
+        "cannot_connect": "The API could not be reached.",
+        "no_results": "No stop found. Try a different spelling."
+      },
+      "step": {
+        "user": {
+          "title": "Search stop",
+          "description": "Leave empty to list stops near your home.",
+          "data": {
+            "stop_query": "Stop"
+          }
+        },
+        "select": {
+          "title": "Choose stop",
+          "data": {
+            "stop": "Stop"
+          }
+        },
+        "settings": {
+          "title": "Departure board settings",
+          "data": {
+            "name": "Name",
+            "walk_minutes": "Walking time to the stop",
+            "results": "Number of departures",
+            "duration": "Time window",
+            "hide_missed": "Hide departures I can no longer catch",
+            "products": "Means of transport",
+            "lines": "Only these lines",
+            "direction": "Direction contains"
+          },
+          "data_description": {
+            "walk_minutes": "Minutes from your door to the stop.",
+            "lines": "Type a line (e.g. U9) and press Enter. Empty = all lines.",
+            "direction": "Optional text filter for the destination, e.g. “Osloer”."
+          }
+        }
+      }
+    }
+  },
+  "entity": {
+    "binary_sensor": {
+      "disruption": {
+        "name": "Disruption"
+      }
+    },
+    "sensor": {
+      "board_next_departure": {
+        "name": "Next departure"
+      },
+      "delay": {
+        "name": "Delay"
+      },
+      "duration": {
+        "name": "Travel time"
+      },
+      "leave_at": {
+        "name": "Leave at"
+      },
+      "next_departure": {
+        "name": "Next departure"
+      },
+      "transfers": {
+        "name": "Transfers"
+      }
+    }
+  },
+  "issues": {
+    "api_unreachable": {
+      "title": "Transit API unreachable",
+      "description": "The API at {url} has not answered for several attempts. The last known connections are still shown and polling continues with a growing interval. If this persists, check the URL in the integration or use a self-hosted bvg-rest instance."
+    }
+  },
+  "selector": {
+    "product": {
+      "options": {
+        "suburban": "S-Bahn",
+        "subway": "U-Bahn",
+        "tram": "Tram",
+        "bus": "Bus",
+        "ferry": "Ferry",
+        "regional": "Regional (RE/RB)",
+        "express": "Long distance (IC/ICE)"
+      }
+    }
+  }
+}

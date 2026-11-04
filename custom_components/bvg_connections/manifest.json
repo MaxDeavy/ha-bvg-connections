@@ -1,0 +1,14 @@
+{
+  "domain": "bvg_connections",
+  "name": "BVG Verbindungen",
+  "after_dependencies": ["frontend"],
+  "codeowners": ["@MaxDeavy"],
+  "config_flow": true,
+  "dependencies": ["http"],
+  "documentation": "https://github.com/MaxDeavy/ha-bvg-connections",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/MaxDeavy/ha-bvg-connections/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}
