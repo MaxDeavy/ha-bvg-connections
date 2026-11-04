@@ -352,7 +352,12 @@ export class BvgConnectionsCard extends LitElement {
     const minutes = Math.floor((leaveAt - this._now) / 60_000);
     const icon = this._sym("mdi:walk", level === "relaxed" ? "walk" : "current", "s");
     if (level === "missed") {
-      return html`<span class="leave">${icon}${this._t("missed")}</span>`;
+      const lines = this._t("missed").split("\n");
+      return html`<span class="leave leave-wrap"
+        >${icon}<span class="leave-text"
+          >${lines.map((line) => html`<span class="leave-line">${line}</span>`)}</span
+        ></span
+      >`;
     }
     if (minutes <= 0) {
       return html`<span class="leave">${icon}${this._t("leave_now")}</span>`;
@@ -427,7 +432,9 @@ export class BvgConnectionsCard extends LitElement {
             : nothing}
           ${this._occupancy(leg.occupancy)}
           ${leg.cancelled ? this._tag("cancelled", this._t("cancelled")) : nothing}
-          ${!leg.reachable && !leg.cancelled ? this._tag("connection_at_risk", this._t("at_risk")) : nothing}
+          ${!leg.reachable && !leg.cancelled
+            ? this._tag("connection_at_risk", this._t("at_risk_detail"))
+            : nothing}
         </div>
         <div class="stop ${leg.cancelled ? "cancelled-text" : ""}">${leg.to}</div>
         ${leg.remarks.map((r) => this._remark(r))}

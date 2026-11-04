@@ -514,11 +514,12 @@ var Se = {
 	in: "in",
 	leave_in_prefix: "in",
 	leave_now: "Jetzt!",
-	missed: "Nicht mehr zu schaffen",
+	missed: "Nicht zu\nschaffen",
 	hurry: "Beeilen",
 	on_time: "pünktlich",
 	cancelled: "Ausfall",
 	at_risk: "Anschluss?",
+	at_risk_detail: "knapper Umstieg",
 	no_realtime: "Plan",
 	duration_m: "{m} min",
 	duration_1h: "1 Stunde",
@@ -566,11 +567,12 @@ var Se = {
 	in: "in",
 	leave_in_prefix: "in",
 	leave_now: "Now!",
-	missed: "Too late",
+	missed: "Can't\ncatch",
 	hurry: "Hurry",
 	on_time: "on time",
 	cancelled: "Cancelled",
 	at_risk: "Connection?",
+	at_risk_detail: "tight transfer",
 	no_realtime: "Scheduled",
 	duration_m: "{m} min",
 	duration_1h: "1 hour",
@@ -1183,6 +1185,21 @@ var Je = o`
     text-overflow: ellipsis;
     color: var(--urgency-color);
   }
+  .leave.leave-wrap {
+    align-items: flex-start;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    line-height: 1.2;
+  }
+  .leave.leave-wrap .leave-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .leave.leave-wrap .leave-line {
+    white-space: nowrap;
+  }
   .u-relaxed .leave {
     color: var(--bvg-muted);
   }
@@ -1771,7 +1788,11 @@ var $e = "0.1.5", et = {
 	_leaveHint(e, t) {
 		if (e === null) return P;
 		let n = Math.floor((e - this._now) / 6e4), r = this._sym("mdi:walk", t === "relaxed" ? "walk" : "current", "s");
-		return t === "missed" ? M`<span class="leave">${r}${this._t("missed")}</span>` : n <= 0 ? M`<span class="leave">${r}${this._t("leave_now")}</span>` : M`<span class="leave"
+		return t === "missed" ? M`<span class="leave leave-wrap"
+        >${r}<span class="leave-text"
+          >${this._t("missed").split("\n").map((e) => M`<span class="leave-line">${e}</span>`)}</span
+        ></span
+      >` : n <= 0 ? M`<span class="leave">${r}${this._t("leave_now")}</span>` : M`<span class="leave"
       >${r}${this._t("leave_in_prefix")} ${n} ${this._t("min")}</span
     >`;
 	}
@@ -1818,7 +1839,7 @@ var $e = "0.1.5", et = {
           ${e.platform ? M`<span class=${e.platform_changed ? "platform-changed" : ""}>${this._platform(e.platform)}</span>` : P}
           ${this._occupancy(e.occupancy)}
           ${e.cancelled ? this._tag("cancelled", this._t("cancelled")) : P}
-          ${!e.reachable && !e.cancelled ? this._tag("connection_at_risk", this._t("at_risk")) : P}
+          ${!e.reachable && !e.cancelled ? this._tag("connection_at_risk", this._t("at_risk_detail")) : P}
         </div>
         <div class="stop ${e.cancelled ? "cancelled-text" : ""}">${e.to}</div>
         ${e.remarks.map((e) => this._remark(e))}
