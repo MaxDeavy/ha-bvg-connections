@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping with BVG Verbindungen. This file covers the development setup, the commit message format and how releases and the changelog are made. User documentation lives in the [README](README.md).
+Thanks for helping with BVG Verbindungen. This file covers the development setup, the commit message format and how releases and the changelog are made. User documentation lives in the [README](README.md); custom-repository and zip installs are in [docs/MANUAL_INSTALL.md](docs/MANUAL_INSTALL.md).
 
 ## Development setup
 

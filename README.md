@@ -9,7 +9,7 @@
 
 [![Validate](https://github.com/MaxDeavy/ha-bvg-connections/actions/workflows/validate.yml/badge.svg)](https://github.com/MaxDeavy/ha-bvg-connections/actions/workflows/validate.yml)
 [![CI](https://github.com/MaxDeavy/ha-bvg-connections/actions/workflows/ci.yml/badge.svg)](https://github.com/MaxDeavy/ha-bvg-connections/actions/workflows/ci.yml)
-[![HACS Custom](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://hacs.xyz/docs/faq/custom_repositories)
+[![HACS Default](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/default)
 
 Verbindungen mit Umstiegen und Abfahrtstafeln für den Berliner ÖPNV (BVG, S-Bahn, Regionalverkehr) – als Home-Assistant-Integration mit eigener Lovelace-Karte.
 
@@ -42,30 +42,10 @@ Voraussetzung: Home Assistant **2026.10** oder neuer.
 
 ### 1. Integration installieren
 
-**Variante A – über HACS (empfohlen)**
+1. HACS öffnen → nach **BVG Verbindungen** suchen → **Herunterladen**.
+2. Home Assistant **neu starten** (*Einstellungen → System → Neu starten*).
 
-1. HACS öffnen → Drei-Punkte-Menü oben rechts → **Benutzerdefinierte Repositories**.
-2. Repository `https://github.com/MaxDeavy/ha-bvg-connections` eintragen, Typ **Integration**, *Hinzufügen*.
-3. In HACS nach **BVG Verbindungen** suchen → **Herunterladen**.
-4. Home Assistant **neu starten** (*Einstellungen → System → Neu starten*).
-
-**Variante B – manuell**
-
-1. Die [aktuelle Version](https://github.com/MaxDeavy/ha-bvg-connections/releases/latest) herunterladen (*Source code (zip)*) und entpacken.
-2. Den Ordner `custom_components/bvg_connections` nach `<config>/custom_components/` kopieren (z. B. per Samba, SSH oder File-Editor-Add-on). Der Zielordner muss **genau** `bvg_connections` heißen:
-
-   ```text
-   config/
-   └── custom_components/
-       └── bvg_connections/
-           ├── __init__.py
-           ├── manifest.json
-           ├── brand/
-           ├── frontend/
-           └── …
-   ```
-
-3. Home Assistant **neu starten**.
+Custom Repository, Zip-Kopie ohne HACS oder lokale Entwickler-Installation: [Manuelle Installation / Custom Repository](docs/MANUAL_INSTALL.md).
 
 ### 2. Integration hinzufügen
 
@@ -103,7 +83,7 @@ Die Karte wird von der Integration mitgeliefert und automatisch geladen. Eine Lo
   1. Browser hart neu laden (Strg+Umschalt+R bzw. Cmd+Umschalt+R). In der Companion-App den Frontend-Cache zurücksetzen (*Einstellungen → Companion-App → Fehlerbehebung* bzw. *Debugging*).
   2. Prüfen, ob Home Assistant nach der Installation neu gestartet wurde.
   3. Falls die Karte weiterhin fehlt, die Ressource von Hand eintragen: *Einstellungen → Dashboards → Drei-Punkte-Menü → Ressourcen → Ressource hinzufügen*, URL `/bvg_connections/bvg-connections-card.js`, Typ **JavaScript-Modul**. Der Menüpunkt *Ressourcen* erscheint nur, wenn im Benutzerprofil der *Erweiterte Modus* aktiv ist. Doppelt geladen schadet die Karte nicht.
-- **Integration erscheint nicht in der Suche:** Liegt der Ordner unter `<config>/custom_components/bvg_connections/` (nicht `ha-bvg-connections`, nicht doppelt verschachtelt)? Danach neu starten.
+- **Integration erscheint nicht in der Suche:** Nach der Installation neu gestartet? Bei manueller Installation den Ordnerpfad prüfen – siehe [Manuelle Installation](docs/MANUAL_INSTALL.md).
 - **Seltsames Verhalten nach einem Update oder nach Tests mit anderen Versionen:**
   1. Alte oder andere BVG-/VBB-Integrationen und alte Einträge dieser Integration unter *Geräte & Dienste* entfernen.
   2. Übrig gebliebene Ordner unter `custom_components/` löschen (z. B. alte Kopien unter anderem Namen). Dabei den ganzen Ordner löschen, auch den Unterordner `__pycache__`, den manche Dateibrowser ausblenden.
@@ -167,10 +147,7 @@ Journeys with transfers and departure boards for Berlin public transport (BVG, S
 
 **Setup, step by step** (requires Home Assistant 2026.10 or newer):
 
-1. **Install.**
-   - *HACS:* HACS → three-dot menu → **Custom repositories** → `https://github.com/MaxDeavy/ha-bvg-connections`, type **Integration** → search **BVG Verbindungen** → **Download**.
-   - *Manual:* download the [latest release](https://github.com/MaxDeavy/ha-bvg-connections/releases/latest) and copy `custom_components/bvg_connections` to `<config>/custom_components/`. The folder name must be exactly `bvg_connections`.
-   - Restart Home Assistant.
+1. **Install:** HACS → search **BVG Verbindungen** → **Download** → restart Home Assistant. Custom repository, zip copy without HACS, or local developer install: [Manual install / Custom repository](docs/MANUAL_INSTALL.md).
 2. **Add the integration:** *Settings → Devices & services → **Add integration** → BVG Verbindungen*. The defaults are fine. This creates the integration only, no connections yet.
 3. **Add connections and boards:** open *Settings → Devices & services → **BVG Verbindungen*** and use the **“Verbindung hinzufügen”** / **“Abfahrtstafel hinzufügen”** buttons at the top (not “Dienst hinzufügen” / “Add service”, which creates a second integration entry). Search origin and destination (stop, address or place), pick the match, then set name, **walking time to the stop** (prefilled with 5 min), number of results, products, excluded lines, max. transfers and min. transfer time. Change an entry later with its **pencil icon** (“Reconfigure”). Polling intervals (default 30 s each) and the request budget are in the integration **options** (gear icon).
 4. **Add the card:** dashboard → **Edit** → **Add card** → search **BVG Verbindungen**. Without a selection the card shows all connections and departure boards; pick individual ones under **“Verbindungen und Abfahrtstafeln”** for a card per route or stop (shown in the order you pick them, with a title per card). The integration serves and loads the card itself, so no Lovelace resource is needed.
@@ -178,7 +155,7 @@ Journeys with transfers and departure boards for Berlin public transport (BVG, S
 **Troubleshooting:**
 
 - *Card missing from the picker, or “Configuration error” / “Custom element doesn't exist”:* hard-reload the browser (Ctrl+Shift+R; Companion app: reset the frontend cache) and make sure you restarted after installing. If it is still missing, add the resource manually: *Settings → Dashboards → three-dot menu → Resources → Add resource*, URL `/bvg_connections/bvg-connections-card.js`, type **JavaScript module** (the *Resources* entry needs *Advanced mode* in your user profile).
-- *Integration not found:* check that the files are in `<config>/custom_components/bvg_connections/` (not `ha-bvg-connections`, not nested twice), then restart.
+- *Integration not found:* restarted after installing? For a manual install, check the folder path — see [Manual install](docs/MANUAL_INSTALL.md).
 - *Odd behaviour after updates or tests with other versions:* remove old or other BVG/VBB integrations and old entries of this one, delete leftover folders under `custom_components/` completely (including the `__pycache__` subfolder that some file browsers hide), reinstall, restart and hard-reload.
 
 **Card:** see the YAML example above; all options are also available in the visual editor. `entries` lists the “next departure” sensors of connections and boards in display order; leave it out to show all of them, including ones added later. Cards from 0.1 with `connections:` / `departures:` keep working and are switched to `entries` when saved in the editor.
