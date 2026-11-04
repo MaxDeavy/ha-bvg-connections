@@ -212,6 +212,7 @@ class BvgConfigFlow(ConfigFlow, domain=DOMAIN):
             step_id="user",
             data_schema=self.add_suggested_values_to_schema(schema, user_input),
             errors=errors,
+            description_placeholders={"default_url": DEFAULT_BASE_URL},
         )
 
     @staticmethod

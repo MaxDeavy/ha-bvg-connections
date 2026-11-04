@@ -15,7 +15,7 @@
           "request_budget": "Request budget per minute"
         },
         "data_description": {
-          "base_url": "Default: https://v6.bvg.transport.rest (public, no SLA). A self-hosted bvg-rest instance also works.",
+          "base_url": "Default: {default_url} (public, no SLA). A self-hosted bvg-rest instance also works.",
           "request_budget": "Hard limit for requests to the API. The public instance allows 100 per minute."
         }
       }

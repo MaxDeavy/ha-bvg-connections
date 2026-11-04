@@ -15,7 +15,7 @@
           "request_budget": "Request-Budget pro Minute"
         },
         "data_description": {
-          "base_url": "Standard: https://v6.bvg.transport.rest (öffentlich, ohne SLA). Eine selbst gehostete bvg-rest-Instanz geht auch.",
+          "base_url": "Standard: {default_url} (öffentlich, ohne SLA). Eine selbst gehostete bvg-rest-Instanz geht auch.",
           "request_budget": "Obergrenze für Anfragen an die API. Die öffentliche Instanz erlaubt 100 pro Minute."
         }
       }
