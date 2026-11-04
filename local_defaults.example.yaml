@@ -1,0 +1,52 @@
+# Template for local test data used by scripts/dev_seed.py.
+#
+# Copy this file to `local_defaults.yaml` (gitignored) and put your own stops
+# and addresses there. Never commit personal locations to the repository.
+#
+# Locations can be given as:
+#   stop: "<VBB stop id>"           e.g. "900100003"
+#   query: "<free text>"            first matching stop/address/POI is used
+#   query + stop                    search with the text, pick the given stop id
+#   query + match                   pick the first result whose label contains `match`
+
+ha_url: http://localhost:8123
+
+# Optional: global options of the config entry
+options:
+  journey_interval: 30
+  departure_interval: 30
+  request_budget: 40
+
+connections:
+  - name: Alexanderplatz → Reichstag
+    origin:
+      query: S+U Alexanderplatz
+      stop: "900100003"
+    destination:
+      query: Platz der Republik 1, Berlin
+    walk_minutes: 4
+    products: []          # empty = all products
+    excluded_lines: []
+    results: 4
+
+  - name: Zoo → Hauptbahnhof
+    origin:
+      query: S+U Zoologischer Garten
+      stop: "900023201"
+    destination:
+      query: S+U Hauptbahnhof
+      stop: "900003201"
+    walk_minutes: 6
+    products: [suburban, subway, regional]
+
+departure_boards:
+  - name: Alexanderplatz
+    stop:
+      query: S+U Alexanderplatz
+      stop: "900100003"
+    walk_minutes: 4
+    results: 8
+
+# Optional Lovelace dashboard created by `dev_seed.py --dashboard`
+dashboard:
+  title: Unterwegs
