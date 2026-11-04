@@ -1,4 +1,4 @@
-// node_modules/@lit/reactive-element/css-tag.js
+// ../../../workspace/frontend/node_modules/@lit/reactive-element/css-tag.js
 var e = globalThis, t = e.ShadowRoot && (e.ShadyCSS === void 0 || e.ShadyCSS.nativeShadow) && "adoptedStyleSheets" in Document.prototype && "replace" in CSSStyleSheet.prototype, n = Symbol(), r = /* @__PURE__ */ new WeakMap(), i = class {
 	constructor(e, t, r) {
 		if (this._$cssResult$ = !0, r !== n) throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");
@@ -252,7 +252,7 @@ var v = class extends HTMLElement {
 	firstUpdated(e) {}
 };
 v.elementStyles = [], v.shadowRootOptions = { mode: "open" }, v[g("elementProperties")] = /* @__PURE__ */ new Map(), v[g("finalized")] = /* @__PURE__ */ new Map(), ne?.({ ReactiveElement: v }), (m.reactiveElementVersions ??= []).push("2.1.2");
-// node_modules/lit-html/lit-html.js
+// ../../../workspace/frontend/node_modules/lit-html/lit-html.js
 var y = globalThis, b = (e) => e, x = y.trustedTypes, S = x ? x.createPolicy("lit-html", { createHTML: (e) => e }) : void 0, C = "$lit$", w = `lit$${Math.random().toFixed(9).slice(2)}$`, T = "?" + w, ae = `<${T}>`, E = document, D = () => E.createComment(""), O = (e) => e === null || typeof e != "object" && typeof e != "function", k = Array.isArray, oe = (e) => k(e) || typeof e?.[Symbol.iterator] == "function", A = "[ 	\n\f\r]", j = /<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g, se = /-->/g, M = />/g, N = RegExp(`>|${A}(?:([^\\s"'>=/]+)(${A}*=${A}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`, "g"), ce = /'/g, le = /"/g, ue = /^(?:script|style|textarea|title)$/i, P = ((e) => (t, ...n) => ({
 	_$litType$: e,
 	strings: t,
@@ -706,7 +706,7 @@ var Ae = {
 	editor_expand: "Always show details"
 };
 function Me(e, t, n = {}) {
-	return ((e ?? "en").toLowerCase().startsWith("de") ? Ae : je)[t].replace(/\{(\w+)\}/g, (e, t) => String(n[t] ?? ""));
+	return (((e ?? "en").toLowerCase().startsWith("de") ? Ae : je)[t] ?? t).replace(/\{(\w+)\}/g, (e, t) => String(n[t] ?? ""));
 }
 // src/define.ts
 function Ne(e, t) {
@@ -1467,7 +1467,7 @@ Ne("bvg-connections-card-editor", class extends G {
       .hass=${this.hass}
       .data=${e}
       .schema=${Ge}
-      .computeLabel=${(e) => Me(this.hass?.locale?.language ?? this.hass?.language, `editor_${e.name}`)}
+      .computeLabel=${(e) => e.name ? Me(this.hass?.locale?.language ?? this.hass?.language, `editor_${e.name}`) : ""}
       @value-changed=${this._changed}
     ></ha-form>`;
 	}

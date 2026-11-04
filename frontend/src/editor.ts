@@ -60,8 +60,8 @@ export class BvgConnectionsCardEditor extends LitElement {
       .hass=${this.hass}
       .data=${data}
       .schema=${SCHEMA}
-      .computeLabel=${(s: { name: string }) =>
-        translate(this.hass?.locale?.language ?? this.hass?.language, `editor_${s.name}` as StringKey)}
+      .computeLabel=${(s: { name?: string }) =>
+        s.name ? translate(this.hass?.locale?.language ?? this.hass?.language, `editor_${s.name}` as StringKey) : ""}
       @value-changed=${this._changed}
     ></ha-form>`;
   }

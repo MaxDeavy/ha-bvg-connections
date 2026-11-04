@@ -102,5 +102,5 @@ export function translate(
   vars: Record<string, string | number> = {},
 ): string {
   const table = (language ?? "en").toLowerCase().startsWith("de") ? de : en;
-  return table[key].replace(/\{(\w+)\}/g, (_, name) => String(vars[name] ?? ""));
+  return (table[key] ?? key).replace(/\{(\w+)\}/g, (_, name) => String(vars[name] ?? ""));
 }
