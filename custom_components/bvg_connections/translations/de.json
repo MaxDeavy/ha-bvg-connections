@@ -84,7 +84,7 @@
             "transfer_time": "Mindest-Umstiegszeit"
           },
           "data_description": {
-            "walk_minutes": "Minuten von der Haustür bis zum Start. Wird für „Losgehen in X min“ genutzt und um nicht mehr erreichbare Verbindungen auszublenden.",
+            "walk_minutes": "Minuten von der Haustür bis zum Start (Standard 5). Wird für „Losgehen in X min“ genutzt und um nicht mehr erreichbare Verbindungen auszublenden.",
             "products": "Nur diese Verkehrsmittel verwenden. Alle ausgewählt = kein Filter.",
             "excluded_lines": "Linie eintippen (z. B. M10) und Enter drücken.",
             "max_transfers": "Leer lassen für keine Begrenzung."
@@ -132,7 +132,7 @@
             "direction": "Richtung enthält"
           },
           "data_description": {
-            "walk_minutes": "Minuten von der Haustür bis zur Haltestelle.",
+            "walk_minutes": "Minuten von der Haustür bis zur Haltestelle (Standard 5).",
             "lines": "Linie eintippen (z. B. U9) und Enter drücken. Leer = alle Linien.",
             "direction": "Optionaler Textfilter für das Fahrtziel, z. B. „Osloer“."
           }

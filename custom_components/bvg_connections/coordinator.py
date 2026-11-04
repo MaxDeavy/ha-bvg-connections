@@ -32,6 +32,7 @@ from .const import (
     DEFAULT_BOARD_DURATION,
     DEFAULT_BOARD_RESULTS,
     DEFAULT_CONNECTION_RESULTS,
+    DEFAULT_WALK_MINUTES,
     DOMAIN,
     FAILURES_BEFORE_ISSUE,
     MAX_BACKOFF_SECONDS,
@@ -111,7 +112,7 @@ class BvgCoordinator[DataT](DataUpdateCoordinator[DataT]):
     @property
     def walk_minutes(self) -> int:
         """Walking time from home to the stop."""
-        return int(self.options.get(CONF_WALK_MINUTES, 0) or 0)
+        return int(self.options.get(CONF_WALK_MINUTES, DEFAULT_WALK_MINUTES))
 
     @property
     def stale(self) -> bool:
