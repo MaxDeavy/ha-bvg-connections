@@ -1549,7 +1549,7 @@ Le("bvg-connections-card-editor", class extends G {
 	}
 });
 // src/card.ts
-var Qe = "0.1.2", $e = {
+var Qe = "0.1.3", $e = {
 	ok: ["mdi:check", "ok"],
 	delayed: ["mdi:clock-alert-outline", "warn"],
 	connection_at_risk: ["mdi:transit-transfer", "warn"],

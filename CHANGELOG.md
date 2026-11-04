@@ -6,6 +6,20 @@ Format: [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung 
 
 <!-- next-release -->
 
+## [0.1.3](https://github.com/MaxDeavy/ha-bvg-connections/compare/v0.1.2...v0.1.3) – 2026-11-04
+
+### Neu / Added
+
+- **card:** Leave hints left, big arrival right, small departure in meta
+
+### Behoben / Fixed
+
+- **card:** Fixed leave column width and larger arrival time
+
+### Dokumentation / Docs
+
+- Lead install with HACS search (#11)
+
 ## [0.1.2](https://github.com/MaxDeavy/ha-bvg-connections/compare/v0.1.1...v0.1.2) – 2026-11-04
 
 ### Neu / Added
