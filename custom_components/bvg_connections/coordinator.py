@@ -18,6 +18,7 @@ from .api import BvgApiClient, BvgApiError, BvgRateLimitError
 from .const import (
     CONF_DESTINATION,
     CONF_DIRECTION,
+    CONF_DIRECTIONS,
     CONF_DURATION,
     CONF_EXCLUDED_LINES,
     CONF_HIDE_MISSED,
@@ -42,6 +43,7 @@ from .models import (
     Journey,
     filter_departures,
     filter_journeys,
+    normalize_directions,
     parse_departures,
     parse_journeys,
 )
@@ -220,7 +222,10 @@ class DepartureBoardCoordinator(BvgCoordinator[DepartureBoardData]):
     async def _fetch(self) -> DepartureBoardData:
         opts = self.options
         limit = int(opts.get(CONF_RESULTS, DEFAULT_BOARD_RESULTS))
-        filtered = bool(opts.get(CONF_LINES) or opts.get(CONF_DIRECTION))
+        directions = normalize_directions(
+            opts.get(CONF_DIRECTIONS, opts.get(CONF_DIRECTION))
+        )
+        filtered = bool(opts.get(CONF_LINES) or directions)
         hide_missed = bool(opts.get(CONF_HIDE_MISSED, True))
         now = dt_util.now()
         payload = await self.client.departures(
@@ -238,7 +243,7 @@ class DepartureBoardCoordinator(BvgCoordinator[DepartureBoardData]):
             walk_minutes=self.walk_minutes,
             hide_missed=hide_missed,
             lines=opts.get(CONF_LINES),
-            direction=opts.get(CONF_DIRECTION),
+            directions=directions,
             limit=limit,
         )
         return DepartureBoardData(

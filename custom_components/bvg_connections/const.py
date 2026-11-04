@@ -35,6 +35,8 @@ CONF_WALK_MINUTES: Final = "walk_minutes"
 CONF_PRODUCTS: Final = "products"
 CONF_EXCLUDED_LINES: Final = "excluded_lines"
 CONF_LINES: Final = "lines"
+CONF_DIRECTIONS: Final = "directions"
+# Legacy single-string key; still read for migration of existing subentries.
 CONF_DIRECTION: Final = "direction"
 CONF_MAX_TRANSFERS: Final = "max_transfers"
 CONF_TRANSFER_TIME: Final = "transfer_time"

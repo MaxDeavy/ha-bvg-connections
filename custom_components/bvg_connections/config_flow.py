@@ -38,6 +38,7 @@ from .const import (
     CONF_DESTINATION,
     CONF_DESTINATION_QUERY,
     CONF_DIRECTION,
+    CONF_DIRECTIONS,
     CONF_DURATION,
     CONF_EXCLUDED_LINES,
     CONF_HIDE_MISSED,
@@ -71,7 +72,7 @@ from .const import (
     SUBENTRY_CONNECTION,
     SUBENTRY_DEPARTURE_BOARD,
 )
-from .models import clean_name
+from .models import clean_name, normalize_directions
 
 PRODUCT_LABELS = {
     "suburban": "S",
@@ -379,6 +380,11 @@ def _locations(data: Mapping[str, Any]) -> dict[str, Any]:
     }
 
 
+def _directions_default(data: Mapping[str, Any]) -> list[str]:
+    """Chip defaults from ``directions`` or a legacy ``direction`` string."""
+    return normalize_directions(data.get(CONF_DIRECTIONS, data.get(CONF_DIRECTION)))
+
+
 def _clean_settings(user_input: dict[str, Any]) -> dict[str, Any]:
     """Convert number fields to int and drop empty optional values."""
     result: dict[str, Any] = {}
@@ -386,12 +392,10 @@ def _clean_settings(user_input: dict[str, Any]) -> dict[str, Any]:
         if key == CONF_NAME:
             continue
         value = int(raw) if isinstance(raw, float) else raw
-        if key in (CONF_EXCLUDED_LINES, CONF_LINES):
+        if key in (CONF_EXCLUDED_LINES, CONF_LINES, CONF_DIRECTIONS):
             value = sorted({str(v).strip() for v in raw if str(v).strip()})
         elif key == CONF_PRODUCTS and set(raw) == set(PRODUCTS):
             value = []
-        elif key == CONF_DIRECTION:
-            value = str(raw).strip()
         result[key] = value
     return result
 
@@ -597,9 +601,8 @@ class DepartureBoardSubentryFlow(_BvgSubentryFlow):
                     LINES_SELECTOR
                 ),
                 vol.Optional(
-                    CONF_DIRECTION,
-                    description={"suggested_value": data.get(CONF_DIRECTION)},
-                ): TextSelector(),
+                    CONF_DIRECTIONS, default=_directions_default(data)
+                ): LINES_SELECTOR,
             }
         )
         return self.async_show_form(step_id="settings", data_schema=schema)

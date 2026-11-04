@@ -21,6 +21,7 @@ from custom_components.bvg_connections.const import (
     CONF_DESTINATION,
     CONF_DESTINATION_QUERY,
     CONF_DIRECTION,
+    CONF_DIRECTIONS,
     CONF_DURATION,
     CONF_EXCLUDED_LINES,
     CONF_HIDE_MISSED,
@@ -275,13 +276,56 @@ async def test_board_subentry_flow(
             CONF_HIDE_MISSED: True,
             CONF_PRODUCTS: ["subway"],
             CONF_LINES: ["U2", "U8"],
-            CONF_DIRECTION: " Pankow ",
+            CONF_DIRECTIONS: [" Pankow ", "", "Osloer"],
         },
     )
     assert result["type"] is FlowResultType.CREATE_ENTRY
     assert result["data"][CONF_STOP]["id"] == "900100003"
     assert result["data"][CONF_LINES] == ["U2", "U8"]
-    assert result["data"][CONF_DIRECTION] == "Pankow"
+    assert result["data"][CONF_DIRECTIONS] == ["Osloer", "Pankow"]
+    assert CONF_DIRECTION not in result["data"]
+
+
+async def test_board_reconfigure_migrates_direction_string(
+    hass: HomeAssistant, loaded_entry: MockConfigEntry
+) -> None:
+    """Legacy ``direction`` string is shown as a chip and saved as ``directions``."""
+    subentry = next(
+        s
+        for s in loaded_entry.subentries.values()
+        if s.subentry_type == "departure_board"
+    )
+    hass.config_entries.async_update_subentry(
+        loaded_entry,
+        subentry,
+        data={**subentry.data, CONF_DIRECTION: "  Osloer  "},
+    )
+    await hass.async_block_till_done()
+    result = await hass.config_entries.subentries.async_init(
+        (loaded_entry.entry_id, "departure_board"),
+        context={"source": SOURCE_RECONFIGURE, "subentry_id": subentry.subentry_id},
+    )
+    assert result["step_id"] == "settings"
+    assert _default(result, CONF_DIRECTIONS) == ["Osloer"]
+    result = await hass.config_entries.subentries.async_configure(
+        result["flow_id"],
+        {
+            "name": subentry.title,
+            CONF_WALK_MINUTES: subentry.data.get(CONF_WALK_MINUTES, 5),
+            CONF_RESULTS: subentry.data.get(CONF_RESULTS, 8),
+            CONF_DURATION: subentry.data.get(CONF_DURATION, 30),
+            CONF_HIDE_MISSED: subentry.data.get(CONF_HIDE_MISSED, True),
+            CONF_PRODUCTS: subentry.data.get(CONF_PRODUCTS) or list(PRODUCTS),
+            CONF_LINES: subentry.data.get(CONF_LINES, []),
+            CONF_DIRECTIONS: ["Osloer", "Pankow"],
+        },
+    )
+    assert result["type"] is FlowResultType.ABORT
+    assert result["reason"] == "reconfigure_successful"
+    await hass.async_block_till_done()
+    updated = loaded_entry.subentries[subentry.subentry_id]
+    assert updated.data[CONF_DIRECTIONS] == ["Osloer", "Pankow"]
+    assert CONF_DIRECTION not in updated.data
 
 
 async def test_subentry_cannot_connect(

@@ -23,6 +23,7 @@ from custom_components.bvg_connections.models import (
     filter_journeys,
     next_departure,
     next_journey,
+    normalize_directions,
     parse_departures,
     parse_journeys,
     parse_remarks,
@@ -135,6 +136,17 @@ def test_parse_departures_real_data() -> None:
     assert not any("Fahrradmitnahme" in t for t in texts)
 
 
+def test_normalize_directions() -> None:
+    """Legacy string and list inputs become a cleaned fragment list."""
+    assert normalize_directions(None) == []
+    assert normalize_directions("") == []
+    assert normalize_directions("  Osloer  ") == ["Osloer"]
+    assert normalize_directions([" Pankow ", "", "osloer", "Pankow"]) == [
+        "Pankow",
+        "osloer",
+    ]
+
+
 def test_filter_departures() -> None:
     """Line, direction and walking time filters."""
     departures = parse_departures(load_fixture("departures.json"))
@@ -142,9 +154,23 @@ def test_filter_departures() -> None:
     assert only_s
     assert {d.line for d in only_s} <= {"S7", "S3"}
 
-    direction = filter_departures(departures, now=NOW, direction="zoolog")
+    direction = filter_departures(departures, now=NOW, directions="zoolog")
     assert direction
     assert all("zoolog" in d.direction.lower() for d in direction)
+
+    # Legacy single-string kwarg still works.
+    legacy = filter_departures(departures, now=NOW, direction="zoolog")
+    assert {d.trip_id for d in legacy} == {d.trip_id for d in direction}
+
+    # OR match across multiple fragments.
+    multi = filter_departures(departures, now=NOW, directions=["zoolog", "Hottengrund"])
+    assert multi
+    assert all(
+        "zoolog" in d.direction.casefold() or "hottengrund" in d.direction.casefold()
+        for d in multi
+    )
+    assert any("zoolog" in d.direction.casefold() for d in multi)
+    assert any("hottengrund" in d.direction.casefold() for d in multi)
 
     late = NOW + timedelta(minutes=10)
     reachable = filter_departures(departures, now=late, walk_minutes=5)
