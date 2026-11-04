@@ -1,0 +1,93 @@
+import { describe, expect, it } from "vitest";
+import {
+  badgeShape,
+  contrastText,
+  countdown,
+  formatClock,
+  formatDelay,
+  normalizeConfig,
+  urgency,
+  visibleJourneys,
+} from "../src/format";
+import { translate } from "../src/i18n";
+import type { Journey } from "../src/types";
+
+const NOW = Date.parse("2026-11-04T09:30:00+01:00");
+const at = (minutes: number) => NOW + minutes * 60_000;
+
+describe("countdown", () => {
+  it("shows minutes, now and hours", () => {
+    expect(countdown(at(9.5), NOW, "jetzt")).toEqual({ value: "9", unit: true });
+    expect(countdown(at(0.5), NOW, "jetzt")).toEqual({ value: "jetzt", unit: false });
+    expect(countdown(at(-2), NOW, "jetzt")).toEqual({ value: "jetzt", unit: false });
+    expect(countdown(at(82), NOW, "jetzt")).toEqual({ value: "1h 22", unit: false });
+    expect(countdown(at(125), NOW, "now")).toEqual({ value: "2h 05", unit: false });
+    expect(countdown(null, NOW, "now").value).toBe("–");
+  });
+});
+
+describe("urgency", () => {
+  it("grades the time left before leaving", () => {
+    expect(urgency(at(10), NOW, false)).toBe("relaxed");
+    expect(urgency(at(3), NOW, false)).toBe("soon");
+    expect(urgency(at(0.2), NOW, false)).toBe("now");
+    expect(urgency(at(-1), NOW, false)).toBe("missed");
+    expect(urgency(at(10), NOW, true)).toBe("cancelled");
+    expect(urgency(null, NOW, false)).toBe("relaxed");
+  });
+});
+
+describe("formatting", () => {
+  it("formats delays without +0", () => {
+    expect(formatDelay(3)).toBe("+3");
+    expect(formatDelay(0)).toBeNull();
+    expect(formatDelay(null)).toBeNull();
+    expect(formatDelay(-1)).toBe("-1");
+  });
+
+  it("formats clock times in the configured time zone", () => {
+    expect(formatClock(NOW, "de", "Europe/Berlin")).toBe("09:30");
+    expect(formatClock(NOW, "en", "UTC")).toBe("08:30");
+  });
+
+  it("uses product specific badge shapes", () => {
+    expect(badgeShape("suburban")).toBe("pill");
+    expect(badgeShape("subway")).toBe("square");
+    expect(badgeShape("bus")).toBe("rect");
+  });
+
+  it("picks a readable text colour", () => {
+    expect(contrastText("#F0D722")).toBe("#000");
+    expect(contrastText("#224F86")).toBe("#fff");
+    expect(contrastText("nope")).toBe("#fff");
+  });
+});
+
+describe("config", () => {
+  it("normalizes entity references and defaults", () => {
+    const c = normalizeConfig({
+      type: "custom:bvg-connections-card",
+      connections: ["sensor.a", { entity: "sensor.b", name: "B" }],
+    });
+    expect(c.connections).toEqual([{ entity: "sensor.a" }, { entity: "sensor.b", name: "B" }]);
+    expect(c.departures).toEqual([]);
+    expect(c.max_journeys).toBe(3);
+    expect(c.show_clock).toBe(true);
+  });
+});
+
+describe("visibleJourneys", () => {
+  it("drops departed journeys and limits the list", () => {
+    const j = (minutes: number) => ({ departure: new Date(at(minutes)).toISOString() }) as Journey;
+    const list = [j(-5), j(-0.2), j(4), j(9), j(15)];
+    expect(visibleJourneys(list, NOW, 2)).toEqual([list[1], list[2]]);
+  });
+});
+
+describe("i18n", () => {
+  it("translates with placeholders and falls back to English", () => {
+    expect(translate("de", "leave_in", { m: 4 })).toBe("Los in 4 min");
+    expect(translate("en-GB", "leave_in", { m: 4 })).toBe("Leave in 4 min");
+    expect(translate("fr", "cancelled")).toBe("Cancelled");
+  });
+});
