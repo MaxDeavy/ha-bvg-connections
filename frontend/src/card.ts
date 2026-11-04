@@ -9,10 +9,12 @@ import {
   normalizeConfig,
   type NormalizedConfig,
   parseTime,
+  productSymbol,
   urgency,
   visibleJourneys,
 } from "./format";
 import { translate, type StringKey } from "./i18n";
+import { defineElement } from "./define";
 import { cardStyles } from "./styles";
 import type {
   CardConfig,
@@ -27,6 +29,14 @@ import type {
 import "./editor";
 
 const VERSION = "0.1.0";
+
+const STATUS_SYMBOLS: Record<string, [icon: string, tone: string]> = {
+  ok: ["mdi:check", "ok"],
+  delayed: ["mdi:clock-alert-outline", "warn"],
+  connection_at_risk: ["mdi:transit-transfer", "warn"],
+  cancelled: ["mdi:cancel", "error"],
+  no_realtime: ["mdi:clock-outline", "muted"],
+};
 const TICK_MS = 5_000;
 
 type Normalized = NormalizedConfig;
@@ -140,7 +150,7 @@ export class BvgConnectionsCard extends LitElement {
         : "");
 
     return html`
-      <ha-card>
+      <ha-card class=${this.hass.themes?.darkMode ? "dark" : ""}>
         ${c.show_header && (title || c.show_clock)
           ? html`<div class="header">
               <div class="title">${title}</div>
@@ -178,18 +188,18 @@ export class BvgConnectionsCard extends LitElement {
     return html`
       <section>
         <div class="group-head">
-          <ha-icon icon="mdi:map-marker-outline"></ha-icon>
+          ${this._sym("mdi:map-marker", "place", "l")}
           <span class="place">${ref.name ?? a.origin}</span>
           ${ref.name
             ? nothing
             : html`<ha-icon icon="mdi:arrow-right"></ha-icon><span class="place">${a.destination}</span>`}
           <span class="spacer"></span>
           ${a.stale
-            ? html`<span class="chip stale"><ha-icon icon="mdi:cloud-alert"></ha-icon>${this._t("stale")}</span>`
+            ? html`<span class="chip stale">${this._sym("mdi:cloud-alert", "warn", "s")}${this._t("stale")}</span>`
             : nothing}
           ${walk
             ? html`<span class="chip" title=${this._t("walk_to_stop")}
-                ><ha-icon icon="mdi:walk"></ha-icon>${walk} ${this._t("min")}</span
+                >${this._sym("mdi:walk", "walk", "s")}${walk} ${this._t("min")}</span
               >`
             : nothing}
         </div>
@@ -237,7 +247,7 @@ export class BvgConnectionsCard extends LitElement {
         </div>
         <div class="main">
           <div class="chain">
-            ${j.starts_with_walk ? html`<ha-icon class="walk-icon" icon="mdi:walk"></ha-icon>` : nothing}
+            ${j.starts_with_walk ? this._sym("mdi:walk", "walk") : nothing}
             ${j.legs
               .filter((l) => !l.walking)
               .map(
@@ -264,7 +274,7 @@ export class BvgConnectionsCard extends LitElement {
                 >`
               : nothing}
             ${j.remarks.some((r) => r.type === "warning")
-              ? html`<ha-icon style="--mdc-icon-size:14px;color:var(--bvg-warn)" icon="mdi:alert"></ha-icon>`
+              ? this._sym("mdi:alert", "warn", "xs")
               : nothing}
           </div>
         </div>
@@ -301,7 +311,21 @@ export class BvgConnectionsCard extends LitElement {
       no_realtime: this._t("no_realtime"),
     };
     const text = j.status === "delayed" ? (formatDelay(j.delay) ?? formatDelay(j.arrival_delay) ?? "+") : labels[j.status];
-    return html`<span class="status ${j.status}">${text}</span>`;
+    return this._tag(j.status, text);
+  }
+
+  private _tag(status: string, text: string): TemplateResult {
+    const [icon, tone] = STATUS_SYMBOLS[status] ?? STATUS_SYMBOLS.no_realtime;
+    return html`<span class="status tone-${tone}">${this._sym(icon, tone, "s")}${text}</span>`;
+  }
+
+  private _sym(icon: string, tone: string, size: "xs" | "s" | "m" | "l" = "m"): TemplateResult {
+    return html`<span class="sym ${size} tone-${tone}"><ha-icon icon=${icon}></ha-icon></span>`;
+  }
+
+  private _productSym(product: string | null, size: "s" | "m" = "m"): TemplateResult {
+    const { icon, tone } = productSymbol(product);
+    return this._sym(icon, tone, size);
   }
 
   private _leaveHint(leaveAt: number | null, level: string): TemplateResult | typeof nothing {
@@ -311,7 +335,7 @@ export class BvgConnectionsCard extends LitElement {
     if (level === "missed") text = this._t("missed");
     else if (minutes <= 0) text = this._t("leave_now");
     else text = this._t("leave_in", { m: minutes });
-    return html`<span class="leave"><ha-icon icon="mdi:walk"></ha-icon>${text}</span>`;
+    return html`<span class="leave">${this._sym("mdi:walk", level === "relaxed" ? "walk" : "current", "s")}${text}</span>`;
   }
 
   private _badge(
@@ -350,7 +374,7 @@ export class BvgConnectionsCard extends LitElement {
       : this._t("transfer");
     return html`<div class="leg walk">
       <span class="t">${this._time(leg.departure)}</span>
-      <ha-icon icon=${leg.distance ? "mdi:walk" : "mdi:swap-horizontal"}></ha-icon>
+      ${leg.distance ? this._sym("mdi:walk", "walk") : this._sym("mdi:transit-transfer", "muted")}
       <span>${text}${minutes ? ` · ${minutes} ${this._t("min")}` : ""}${leg.to ? ` → ${leg.to}` : ""}</span>
     </div>`;
   }
@@ -367,7 +391,9 @@ export class BvgConnectionsCard extends LitElement {
           >${this._time(leg.arrival)}${arrDelay ? html` <small>${arrDelay}</small>` : nothing}</span
         >
       </span>
-      ${this._badge(leg.line, leg.product, leg.color, leg.text_color, leg.cancelled)}
+      <span class="line">
+        ${this._productSym(leg.product)}${this._badge(leg.line, leg.product, leg.color, leg.text_color, leg.cancelled)}
+      </span>
       <div class="route">
         <div class="stop ${leg.cancelled ? "cancelled-text" : ""}">${leg.from}</div>
         <div class="sub">
@@ -376,10 +402,8 @@ export class BvgConnectionsCard extends LitElement {
             ? html`<span class=${leg.platform_changed ? "platform-changed" : ""}>${this._platform(leg.platform)}</span>`
             : nothing}
           ${this._occupancy(leg.occupancy)}
-          ${leg.cancelled ? html`<span class="status cancelled">${this._t("cancelled")}</span>` : nothing}
-          ${!leg.reachable && !leg.cancelled
-            ? html`<span class="status connection_at_risk">${this._t("at_risk")}</span>`
-            : nothing}
+          ${leg.cancelled ? this._tag("cancelled", this._t("cancelled")) : nothing}
+          ${!leg.reachable && !leg.cancelled ? this._tag("connection_at_risk", this._t("at_risk")) : nothing}
         </div>
         <div class="stop ${leg.cancelled ? "cancelled-text" : ""}">${leg.to}</div>
         ${leg.remarks.map((r) => this._remark(r))}
@@ -396,8 +420,8 @@ export class BvgConnectionsCard extends LitElement {
   }
 
   private _remark(r: Remark): TemplateResult {
-    return html`<div class="remark ${r.type}">
-      <ha-icon icon=${r.type === "warning" ? "mdi:alert" : "mdi:information-outline"}></ha-icon>
+    return html`<div class="remark is-${r.type}">
+      ${r.type === "warning" ? this._sym("mdi:alert", "warn", "s") : this._sym("mdi:information-variant", "muted", "s")}
       <span>${r.summary && r.summary !== r.text ? html`<b>${r.summary}:</b> ` : nothing}${r.text}</span>
     </div>`;
   }
@@ -415,14 +439,14 @@ export class BvgConnectionsCard extends LitElement {
     return html`
       <section>
         <div class="group-head">
-          <ha-icon icon="mdi:bus-stop"></ha-icon>
+          ${this._sym("mdi:bus-stop", "place", "l")}
           <span class="place">${ref.name ?? a.stop}</span>
           <span class="spacer"></span>
           ${a.stale
-            ? html`<span class="chip stale"><ha-icon icon="mdi:cloud-alert"></ha-icon>${this._t("stale")}</span>`
+            ? html`<span class="chip stale">${this._sym("mdi:cloud-alert", "warn", "s")}${this._t("stale")}</span>`
             : nothing}
           ${walk
-            ? html`<span class="chip"><ha-icon icon="mdi:walk"></ha-icon>${walk} ${this._t("min")}</span>`
+            ? html`<span class="chip">${this._sym("mdi:walk", "walk", "s")}${walk} ${this._t("min")}</span>`
             : nothing}
         </div>
         ${departures.length
@@ -431,7 +455,7 @@ export class BvgConnectionsCard extends LitElement {
         ${notices.length
           ? html`<div class="notices" @click=${() => this._toggleNotices(entity.entity_id)}>
               <div class="summary">
-                <ha-icon icon="mdi:alert"></ha-icon>
+                ${this._sym("mdi:alert", "warn", "s")}
                 <span>${notices.length === 1 ? this._t("remark") : this._t("remarks", { n: notices.length })}</span>
                 ${open ? nothing : html`<span class="preview">${notices[0].text}</span>`}
                 <span class="spacer"></span>
@@ -466,12 +490,13 @@ export class BvgConnectionsCard extends LitElement {
     const delay = formatDelay(d.delay);
     const planned = delay && d.planned_when && !d.cancelled ? this._time(d.planned_when) : null;
     return html`<div class="departure ${d.cancelled ? "is-cancelled" : ""} ${reachable ? "" : "unreachable"}">
+      ${this._productSym(d.product)}
       ${this._badge(d.line, d.product, d.color, d.text_color, false, true)}
       <div class="dir">
         <span>${d.direction}</span>
         ${d.platform || planned || d.cancelled
           ? html`<small>
-              ${d.cancelled ? html`<span class="status cancelled">${this._t("cancelled")}</span>` : nothing}
+              ${d.cancelled ? this._tag("cancelled", this._t("cancelled")) : nothing}
               ${planned ? html`<span class="planned-inline">${planned}</span>` : nothing}
               ${d.platform
                 ? html`<span class=${d.platform_changed ? "platform-changed" : ""}>${this._platform(d.platform)}</span>`
@@ -479,7 +504,11 @@ export class BvgConnectionsCard extends LitElement {
             </small>`
           : nothing}
       </div>
-      <span class="delay ${this._delayClass(d.delay)}">${d.cancelled ? "" : (delay ?? "")}</span>
+      <span class="delay ${this._delayClass(d.delay)}"
+        >${d.cancelled
+          ? ""
+          : html`${(d.delay ?? 0) > 0 ? this._sym("mdi:clock-alert-outline", "current", "xs") : nothing}${delay ?? ""}`}</span
+      >
       <span class="countdown ${d.cancelled ? "cancelled-text" : ""}"
         >${cd.value}${cd.unit ? html`<span class="unit">${this._t("min")}</span>` : nothing}</span
       >
@@ -513,10 +542,11 @@ export class BvgConnectionsCard extends LitElement {
   }
 }
 
-if (!customElements.get("bvg-connections-card")) {
-  customElements.define("bvg-connections-card", BvgConnectionsCard);
-  const w = window as unknown as { customCards?: unknown[] };
-  w.customCards = w.customCards ?? [];
+defineElement("bvg-connections-card", BvgConnectionsCard);
+
+const w = window as unknown as { customCards?: ({ type: string } & Record<string, unknown>)[] };
+w.customCards = w.customCards ?? [];
+if (!w.customCards.some((c) => c.type === "bvg-connections-card")) {
   w.customCards.push({
     type: "bvg-connections-card",
     name: "BVG Verbindungen",

@@ -1,3 +1,10 @@
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="custom_components/bvg_connections/brand/dark_logo.png">
+    <img src="custom_components/bvg_connections/brand/logo.png" alt="BVG Verbindungen" width="420">
+  </picture>
+</p>
+
 # BVG Verbindungen für Home Assistant
 
 [![Validate](https://github.com/MaxDeavy/ha-bvg-connections/actions/workflows/validate.yml/badge.svg)](https://github.com/MaxDeavy/ha-bvg-connections/actions/workflows/validate.yml)
@@ -19,7 +26,8 @@ Verbindungen mit Umstiegen und Abfahrtstafeln für den Berliner ÖPNV (BVG, S-Ba
 - **Abfahrtstafeln** für beliebige Haltestellen, optional gefiltert nach Verkehrsmittel, Linie und Richtung.
 - **Fußweg zur Haltestelle** pro Verbindung bzw. Tafel: Die Integration blendet Fahrten aus, die du nicht mehr erreichst, und die Karte zeigt „Los in X min“ bzw. „Jetzt los!“.
 - **Echtzeit:** Verspätungen, Ausfälle, gefährdete Anschlüsse, Gleiswechsel, Auslastung und Störungsmeldungen.
-- **Lovelace-Karte** im nativen Home-Assistant-Look (helles und dunkles Theme): Linien-Badges in BVG-Farben, Umstiegsketten, Countdown, Dringlichkeitsbalken, aufklappbare Fahrtdetails, Uhr und grafischer Editor.
+- **Lovelace-Karte** im nativen Home-Assistant-Look (helles und dunkles Theme): Linien-Badges in BVG-Farben, Symbole in farbigen Kreisen wie bei den HA-Kachelkarten (nach Verkehrsmittel und Status eingefärbt), Umstiegsketten, Countdown, Dringlichkeitsbalken, aufklappbare Fahrtdetails, Uhr und grafischer Editor.
+- **Eigenes Symbol und Logo:** Home Assistant zeigt sie direkt aus dem Ordner `brand/` der Integration an, ein Eintrag im Brands-Repository ist nicht nötig.
 - **Alles über die Oberfläche:** Verbindungen und Tafeln sind Unterelemente (Config Subentries) der Integration und lassen sich jederzeit hinzufügen, bearbeiten oder löschen.
 - **Schonend zur API:** Request-Budget mit Token-Bucket (Standard 40/min, die öffentliche API erlaubt 100/min), Backoff bei Fehlern, die letzten Daten bleiben bei Ausfällen sichtbar, Reparaturhinweis bei längerem Ausfall.
 
@@ -112,7 +120,7 @@ Die Linienfarben (`line_colors.py`) erzeugt `scripts/gen_line_colors.py` aus dem
 
 Journeys with transfers and departure boards for Berlin public transport (BVG, S-Bahn, regional trains), as a Home Assistant integration with a bundled Lovelace card.
 
-**Features:** journeys from stop/address/place to stop/address/place with all transfers; departure boards with product, line and direction filters; per-entry walking time that hides connections you can no longer catch and drives “leave in X min” hints; realtime delays, cancellations, at-risk connections, platform changes, occupancy and disruption notices; a native-looking card (light and dark theme) with BVG-coloured line badges, transfer chains, countdowns, urgency bars, expandable trip details and a visual editor; everything configured in the UI via config subentries; a request budget (default 40/min, the public API allows 100/min), backoff, stale-data display and a repair issue on longer outages.
+**Features:** journeys from stop/address/place to stop/address/place with all transfers; departure boards with product, line and direction filters; per-entry walking time that hides connections you can no longer catch and drives “leave in X min” hints; realtime delays, cancellations, at-risk connections, platform changes, occupancy and disruption notices; a native-looking card (light and dark theme) with BVG-coloured line badges, tile-style symbols (MDI icons in tinted circles, coloured by product and status), transfer chains, countdowns, urgency bars, expandable trip details and a visual editor; its own icon and logo, served by Home Assistant from the integration's `brand/` folder; everything configured in the UI via config subentries; a request budget (default 40/min, the public API allows 100/min), backoff, stale-data display and a repair issue on longer outages.
 
 **Install:** HACS → custom repository `https://github.com/MaxDeavy/ha-bvg-connections` (category *Integration*), install, restart, then add “BVG Verbindungen” under *Settings → Devices & services*. Requires Home Assistant 2025.3 or newer. The card is served and loaded by the integration automatically.
 

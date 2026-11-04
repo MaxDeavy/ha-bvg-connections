@@ -84,6 +84,7 @@ export interface HomeAssistant {
   locale?: { language: string; time_zone?: string };
   config: { time_zone: string };
   entities?: Record<string, { platform?: string }>;
+  themes?: { darkMode?: boolean };
 }
 
 export interface EntityRef {
