@@ -341,18 +341,6 @@ export const cardStyles = css`
     text-overflow: ellipsis;
     color: var(--urgency-color);
   }
-  .leave.leave-stack {
-    align-items: flex-start;
-    white-space: normal;
-    overflow: visible;
-    text-overflow: unset;
-  }
-  .leave-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.15;
-    min-width: 0;
-  }
   .u-relaxed .leave {
     color: var(--bvg-muted);
   }

@@ -1183,18 +1183,6 @@ var Je = o`
     text-overflow: ellipsis;
     color: var(--urgency-color);
   }
-  .leave.leave-stack {
-    align-items: flex-start;
-    white-space: normal;
-    overflow: visible;
-    text-overflow: unset;
-  }
-  .leave-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.15;
-    min-width: 0;
-  }
   .u-relaxed .leave {
     color: var(--bvg-muted);
   }
@@ -1783,10 +1771,8 @@ var $e = "0.1.3", et = {
 	_leaveHint(e, t) {
 		if (e === null) return P;
 		let n = Math.floor((e - this._now) / 6e4), r = this._sym("mdi:walk", t === "relaxed" ? "walk" : "current", "s");
-		return t === "missed" ? M`<span class="leave">${r}${this._t("missed")}</span>` : n <= 0 ? M`<span class="leave">${r}${this._t("leave_now")}</span>` : M`<span class="leave leave-stack"
-      >${r}<span class="leave-text"
-        ><span>${this._t("leave_in_prefix")}</span><span>${n} ${this._t("min")}</span></span
-      ></span
+		return t === "missed" ? M`<span class="leave">${r}${this._t("missed")}</span>` : n <= 0 ? M`<span class="leave">${r}${this._t("leave_now")}</span>` : M`<span class="leave"
+      >${r}${this._t("leave_in_prefix")} ${n} ${this._t("min")}</span
     >`;
 	}
 	_badge(e, t, n, r, i = !1, a = !1) {

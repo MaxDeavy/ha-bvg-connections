@@ -357,10 +357,8 @@ export class BvgConnectionsCard extends LitElement {
     if (minutes <= 0) {
       return html`<span class="leave">${icon}${this._t("leave_now")}</span>`;
     }
-    return html`<span class="leave leave-stack"
-      >${icon}<span class="leave-text"
-        ><span>${this._t("leave_in_prefix")}</span><span>${minutes} ${this._t("min")}</span></span
-      ></span
+    return html`<span class="leave"
+      >${icon}${this._t("leave_in_prefix")} ${minutes} ${this._t("min")}</span
     >`;
   }
 
