@@ -7,6 +7,7 @@ import {
   entryType,
   formatClock,
   formatDelay,
+  formatJourneyDuration,
   normalizeConfig,
   productSymbol,
   resolveEntries,
@@ -27,6 +28,26 @@ describe("countdown", () => {
     expect(countdown(at(82), NOW, "jetzt")).toEqual({ value: "1h 22", unit: false });
     expect(countdown(at(125), NOW, "now")).toEqual({ value: "2h 05", unit: false });
     expect(countdown(null, NOW, "now").value).toBe("–");
+  });
+});
+
+describe("formatJourneyDuration", () => {
+  it("keeps minutes under an hour", () => {
+    expect(formatJourneyDuration(0, "de")).toBe("0 min");
+    expect(formatJourneyDuration(49, "de")).toBe("49 min");
+    expect(formatJourneyDuration(59, "en")).toBe("59 min");
+  });
+
+  it("uses a full hour word for exactly 60 minutes", () => {
+    expect(formatJourneyDuration(60, "de")).toBe("1 Stunde");
+    expect(formatJourneyDuration(60, "en")).toBe("1 hour");
+  });
+
+  it("splits hours and minutes above 60", () => {
+    expect(formatJourneyDuration(61, "de")).toBe("1 Std. 1 min");
+    expect(formatJourneyDuration(61, "en")).toBe("1 h 1 min");
+    expect(formatJourneyDuration(135, "de")).toBe("2 Std. 15 min");
+    expect(formatJourneyDuration(135, "en-GB")).toBe("2 h 15 min");
   });
 });
 

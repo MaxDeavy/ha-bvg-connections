@@ -6,6 +6,7 @@ import {
   entryType,
   formatClock,
   formatDelay,
+  formatJourneyDuration,
   isDeparted,
   normalizeConfig,
   type NormalizedConfig,
@@ -274,7 +275,9 @@ export class BvgConnectionsCard extends LitElement {
             <span class="dep-meta ${cancelled ? "cancelled-text" : ""}"
               >${this._t("departure")} ${this._time(j.departure)}</span
             >
-            ${j.duration !== null ? html`<span>${j.duration} ${this._t("min")}</span>` : nothing}
+            ${j.duration !== null
+              ? html`<span>${formatJourneyDuration(j.duration, this._lang)}</span>`
+              : nothing}
             <span>${this._transfers(j.transfers)}</span>
             ${firstRide?.platform
               ? html`<span class=${firstRide.platform_changed ? "platform-changed" : ""}
