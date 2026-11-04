@@ -355,9 +355,7 @@ export class BvgConnectionsCard extends LitElement {
       const lines = this._t("missed").split("\n");
       return html`<span class="leave leave-wrap"
         >${icon}<span class="leave-text"
-          >${lines.map(
-            (line, i) => html`${i > 0 ? html`<br />` : nothing}${line}`,
-          )}</span
+          >${lines.map((line) => html`<span class="leave-line">${line}</span>`)}</span
         ></span
       >`;
     }

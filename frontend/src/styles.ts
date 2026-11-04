@@ -349,7 +349,12 @@ export const cardStyles = css`
     line-height: 1.2;
   }
   .leave.leave-wrap .leave-text {
+    display: flex;
+    flex-direction: column;
     min-width: 0;
+  }
+  .leave.leave-wrap .leave-line {
+    white-space: nowrap;
   }
   .u-relaxed .leave {
     color: var(--bvg-muted);

@@ -162,8 +162,8 @@ describe("i18n", () => {
     expect(translate("de", "leave_now")).toBe("Jetzt!");
     expect(translate("en", "leave_now")).toBe("Now!");
     expect(translate("fr", "cancelled")).toBe("Cancelled");
-    expect(translate("de", "missed")).toBe("Nicht mehr\nzu schaffen");
-    expect(translate("en", "missed")).toBe("Too late\nto catch");
+    expect(translate("de", "missed")).toBe("Nicht zu\nschaffen");
+    expect(translate("en", "missed")).toBe("Can't\ncatch");
     expect(translate("de", "at_risk")).toBe("Anschluss?");
     expect(translate("de", "at_risk_detail")).toBe("knapper Umstieg");
     expect(translate("en", "at_risk_detail")).toBe("tight transfer");
