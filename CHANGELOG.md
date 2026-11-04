@@ -6,6 +6,16 @@ Format: [Keep a Changelog](https://keepachangelog.com/de/1.1.0/), Versionierung 
 
 <!-- next-release -->
 
+## [0.1.6](https://github.com/MaxDeavy/ha-bvg-connections/compare/v0.1.5...v0.1.6) - 2026-11-04
+
+### Behoben / Fixed
+
+- **card:** Missed leave hint on two lines („Nicht zu“ / „schaffen“); expanded detail tag „knapper Umstieg“ (header stays „Anschluss?“) (#20)
+
+### Dokumentation / Docs
+
+- Use absolute README image URLs for HACS (#19)
+
 ## [0.1.5](https://github.com/MaxDeavy/ha-bvg-connections/compare/v0.1.4...v0.1.5) - 2026-11-04
 
 ### Neu / Added
