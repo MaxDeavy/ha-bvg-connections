@@ -31,7 +31,7 @@ import type {
 } from "./types";
 import "./editor";
 
-const VERSION = "0.1.1";
+const VERSION = "0.1.2";
 
 const STATUS_SYMBOLS: Record<string, [icon: string, tone: string]> = {
   ok: ["mdi:check", "ok"],
