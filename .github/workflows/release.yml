@@ -1,0 +1,45 @@
+name: Release notes
+
+# Checks a pushed release tag and prepares its notes. It deliberately does not
+# create the GitHub release: Max publishes it under his own account so no bot
+# shows up as release author.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+jobs:
+  notes:
+    name: Check tag and prepare notes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Tag matches manifest version
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          manifest=$(python3 -c "import json; print(json.load(open('custom_components/bvg_connections/manifest.json'))['version'])")
+          if [ "$tag" != "$manifest" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match manifest version $manifest"
+            exit 1
+          fi
+      - name: Extract notes from CHANGELOG.md
+        run: |
+          python3 scripts/release.py notes "$GITHUB_REF_NAME" > release-notes.md
+          {
+            echo "## Release notes for $GITHUB_REF_NAME"
+            echo
+            echo "Copy these into the GitHub release, or run:"
+            echo
+            echo '```bash'
+            echo "python scripts/release.py notes $GITHUB_REF_NAME > /tmp/notes.md"
+            echo "gh release create $GITHUB_REF_NAME --title $GITHUB_REF_NAME --notes-file /tmp/notes.md"
+            echo '```'
+            echo
+            cat release-notes.md
+          } >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v7
+        with:
+          name: release-notes
+          path: release-notes.md

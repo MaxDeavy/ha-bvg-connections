@@ -1,0 +1,36 @@
+name: Commits
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  conventional:
+    name: Conventional Commits
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: Check commit messages
+        env:
+          EVENT: ${{ github.event_name }}
+          PR_BASE: ${{ github.event.pull_request.base.sha }}
+          PR_HEAD: ${{ github.event.pull_request.head.sha }}
+          PUSH_BEFORE: ${{ github.event.before }}
+          PUSH_AFTER: ${{ github.event.after }}
+        run: |
+          if [ "$EVENT" = "pull_request" ]; then
+            range="$PR_BASE..$PR_HEAD"
+          elif [ -z "$PUSH_BEFORE" ] || [ "$PUSH_BEFORE" = "0000000000000000000000000000000000000000" ] \
+              || ! git merge-base --is-ancestor "$PUSH_BEFORE" "$PUSH_AFTER" 2>/dev/null; then
+            echo "New branch or rewritten history, checking the pushed commit only."
+            range="$PUSH_AFTER^!"
+          else
+            range="$PUSH_BEFORE..$PUSH_AFTER"
+          fi
+          python3 scripts/check_commits.py "$range"
