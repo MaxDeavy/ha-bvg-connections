@@ -1,12 +1,15 @@
 import { describe, expect, it } from "vitest";
 import {
+  allEntries,
   badgeShape,
   contrastText,
   countdown,
+  entryType,
   formatClock,
   formatDelay,
   normalizeConfig,
   productSymbol,
+  resolveEntries,
   urgency,
   visibleJourneys,
 } from "../src/format";
@@ -72,15 +75,54 @@ describe("formatting", () => {
 });
 
 describe("config", () => {
+  const type = "custom:bvg-connections-card";
+
   it("normalizes entity references and defaults", () => {
-    const c = normalizeConfig({
-      type: "custom:bvg-connections-card",
-      connections: ["sensor.a", { entity: "sensor.b", name: "B" }],
-    });
-    expect(c.connections).toEqual([{ entity: "sensor.a" }, { entity: "sensor.b", name: "B" }]);
-    expect(c.departures).toEqual([]);
+    const c = normalizeConfig({ type, entries: ["sensor.a", { entity: "sensor.b", name: "B" }] });
+    expect(c.entries).toEqual([{ entity: "sensor.a" }, { entity: "sensor.b", name: "B" }]);
     expect(c.max_journeys).toBe(3);
     expect(c.show_clock).toBe(true);
+  });
+
+  it("reads 0.1.x connections and departures as entries", () => {
+    const c = normalizeConfig({ type, connections: ["sensor.a"], departures: [{ entity: "sensor.d", name: "D" }] });
+    expect(c.entries).toEqual([{ entity: "sensor.a" }, { entity: "sensor.d", name: "D" }]);
+  });
+
+  it("prefers entries over the old keys", () => {
+    expect(normalizeConfig({ type, entries: ["sensor.x"], connections: ["sensor.a"] }).entries).toEqual([
+      { entity: "sensor.x" },
+    ]);
+  });
+
+  it("treats an empty or missing list as all", () => {
+    expect(normalizeConfig({ type }).entries).toEqual([]);
+    expect(normalizeConfig({ type, entries: [] }).entries).toEqual([]);
+  });
+});
+
+describe("entries", () => {
+  const states = {
+    "sensor.board": { attributes: { bvg_type: "departure_board" } },
+    "sensor.trip_1": { attributes: { bvg_type: "connection" } },
+    "sensor.leave_at": { attributes: { device_class: "timestamp" } },
+    "sensor.trip_2": { attributes: { bvg_type: "connection" } },
+  };
+
+  it("lists connections first, then boards, and skips other sensors", () => {
+    expect(allEntries(states)).toEqual(["sensor.trip_1", "sensor.trip_2", "sensor.board"]);
+    expect(entryType(states["sensor.leave_at"])).toBeNull();
+    expect(entryType(undefined)).toBeNull();
+  });
+
+  it("resolves an empty selection to all entries and keeps a selection as is", () => {
+    expect(resolveEntries({ entries: [] }, states).map((r) => r.entity)).toEqual([
+      "sensor.trip_1",
+      "sensor.trip_2",
+      "sensor.board",
+    ]);
+    const picked = [{ entity: "sensor.board" }, { entity: "sensor.trip_2", name: "Home" }];
+    expect(resolveEntries({ entries: picked }, states)).toBe(picked);
   });
 });
 

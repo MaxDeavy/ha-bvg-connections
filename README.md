@@ -91,8 +91,9 @@ Damit ist nur die Integration selbst angelegt; Verbindungen gibt es noch keine.
 ### 4. Karte zum Dashboard hinzufügen
 
 1. Dashboard öffnen → Stift oben rechts (**Bearbeiten**) → **Karte hinzufügen**.
-2. Nach **BVG Verbindungen** suchen und auswählen. Der Editor schlägt die Sensoren deiner Verbindungen und Tafeln bereits vor.
-3. Speichern.
+2. Nach **BVG Verbindungen** suchen und auswählen. Ohne Auswahl zeigt die Karte alle Verbindungen und Abfahrtstafeln.
+3. Optional: Unter **Verbindungen und Abfahrtstafeln** nur einzelne auswählen, zum Beispiel eine Karte nur für eine Verbindung und eine zweite nur für eine Abfahrtstafel. Die Karte zeigt die Auswahl in der gewählten Reihenfolge, der **Titel** gilt pro Karte.
+4. Speichern.
 
 Die Karte wird von der Integration mitgeliefert und automatisch geladen. Eine Lovelace-Ressource musst du normalerweise **nicht** anlegen. Alle Optionen gibt es auch als YAML (siehe [Karte](#karte)).
 
@@ -130,13 +131,12 @@ Die großen Listen-Attribute werden nicht in der Recorder-Datenbank gespeichert.
 
 ```yaml
 type: custom:bvg-connections-card
-title: Unterwegs             # optional
-connections:                 # Sensoren „Nächste Abfahrt“ von Verbindungen
+title: Unterwegs             # optional, pro Karte
+entries:                     # optional; weglassen oder leer = alle Verbindungen und Tafeln
   - sensor.alexanderplatz_reichstag_nachste_abfahrt
   - entity: sensor.zoo_hauptbahnhof_nachste_abfahrt
     name: Über Zoo           # optional eigener Gruppenname
-departures:                  # Sensoren „Nächste Abfahrt“ von Abfahrtstafeln
-  - sensor.alexanderplatz_nachste_abfahrt
+  - sensor.alexanderplatz_nachste_abfahrt   # Tafeln und Verbindungen beliebig gemischt
 max_journeys: 3              # je Verbindung, Standard 3
 max_departures: 6            # je Tafel, Standard 6
 show_header: true
@@ -144,6 +144,13 @@ show_clock: true
 show_footer: true            # „Stand 10:05“
 expand: false                # Fahrtdetails immer aufgeklappt
 ```
+
+In `entries` gehören die Sensoren „Nächste Abfahrt“ deiner Verbindungen und Tafeln. Die Karte zeigt sie in der angegebenen Reihenfolge. Ohne `entries` zeigt sie alle, erst die Verbindungen, dann die Tafeln, und nimmt neu angelegte automatisch auf. So kannst du eine Karte mit allem und zusätzlich Karten für einzelne Wege oder Haltestellen anlegen. Karten aus Version 0.1 mit `connections:` und `departures:` funktionieren weiter; der Editor stellt sie beim nächsten Speichern auf `entries` um.
+
+<p align="center">
+  <img src="docs/images/card-select-entries.png" alt="Zwei Karten: eine zeigt nur eine Verbindung, die andere nur eine Abfahrtstafel" width="840">
+  <img src="docs/images/card-editor-entries.png" alt="Karteneditor mit Auswahl einer Verbindung und einer Abfahrtstafel" width="840">
+</p>
 
 Ein Tipp auf eine Verbindung klappt die Details auf (Teilstrecken, Fußwege, Richtung, Gleis, Auslastung, Hinweise). Der farbige Balken links zeigt, wie dringend du los musst: grün = entspannt, orange = bald/jetzt, rot = nicht mehr zu schaffen oder Ausfall.
 
@@ -166,7 +173,7 @@ Journeys with transfers and departure boards for Berlin public transport (BVG, S
    - Restart Home Assistant.
 2. **Add the integration:** *Settings → Devices & services → **Add integration** → BVG Verbindungen*. The defaults are fine. This creates the integration only, no connections yet.
 3. **Add connections and boards:** open *Settings → Devices & services → **BVG Verbindungen*** and use the **“Verbindung hinzufügen”** / **“Abfahrtstafel hinzufügen”** buttons at the top (not “Dienst hinzufügen” / “Add service”, which creates a second integration entry). Search origin and destination (stop, address or place), pick the match, then set name, **walking time to the stop** (prefilled with 5 min), number of results, products, excluded lines, max. transfers and min. transfer time. Change an entry later with its **pencil icon** (“Reconfigure”). Polling intervals (default 30 s each) and the request budget are in the integration **options** (gear icon).
-4. **Add the card:** dashboard → **Edit** → **Add card** → search **BVG Verbindungen**. The editor suggests your sensors. The integration serves and loads the card itself, so no Lovelace resource is needed.
+4. **Add the card:** dashboard → **Edit** → **Add card** → search **BVG Verbindungen**. Without a selection the card shows all connections and departure boards; pick individual ones under **“Verbindungen und Abfahrtstafeln”** for a card per route or stop (shown in the order you pick them, with a title per card). The integration serves and loads the card itself, so no Lovelace resource is needed.
 
 **Troubleshooting:**
 
@@ -174,7 +181,7 @@ Journeys with transfers and departure boards for Berlin public transport (BVG, S
 - *Integration not found:* check that the files are in `<config>/custom_components/bvg_connections/` (not `ha-bvg-connections`, not nested twice), then restart.
 - *Odd behaviour after updates or tests with other versions:* remove old or other BVG/VBB integrations and old entries of this one, delete leftover folders under `custom_components/` completely (including the `__pycache__` subfolder that some file browsers hide), reinstall, restart and hard-reload.
 
-**Card:** see the YAML example above; all options are also available in the visual editor.
+**Card:** see the YAML example above; all options are also available in the visual editor. `entries` lists the “next departure” sensors of connections and boards in display order; leave it out to show all of them, including ones added later. Cards from 0.1 with `connections:` / `departures:` keep working and are switched to `entries` when saved in the editor.
 
 ## Changelog
 

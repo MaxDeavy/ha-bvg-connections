@@ -95,7 +95,10 @@ export interface EntityRef {
 export interface CardConfig {
   type: string;
   title?: string;
+  entries?: (string | EntityRef)[];
+  /** @deprecated 0.1.x, read as `entries` */
   connections?: (string | EntityRef)[];
+  /** @deprecated 0.1.x, read as `entries` */
   departures?: (string | EntityRef)[];
   max_journeys?: number;
   max_departures?: number;
