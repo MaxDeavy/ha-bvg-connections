@@ -147,28 +147,6 @@ expand: false                # Fahrtdetails immer aufgeklappt
 
 Ein Tipp auf eine Verbindung klappt die Details auf (Teilstrecken, Fußwege, Richtung, Gleis, Auslastung, Hinweise). Der farbige Balken links zeigt, wie dringend du los musst: grün = entspannt, orange = bald/jetzt, rot = nicht mehr zu schaffen oder Ausfall.
 
-## Entwicklung
-
-```bash
-# Python (HA 2026.10 benötigt Python 3.14)
-pip install -r requirements_test.txt
-ruff check . && pytest
-
-# Karte
-cd frontend && npm ci && npm test && npm run build   # schreibt custom_components/bvg_connections/frontend/
-```
-
-**Lokale Testdaten:** Eigene Haltestellen gehören **nie** ins Repository. Kopiere `local_defaults.example.yaml` nach `local_defaults.yaml` (steht in `.gitignore`) und trage dort deine Verbindungen ein. Dann:
-
-```bash
-./scripts/dev_ha.sh                    # startet HA in .dev/config mit dieser Integration
-python scripts/dev_seed.py --dashboard # legt Einträge über die echten Config Flows an
-```
-
-Das Seed-Skript richtet eine frische Instanz mit dem Benutzer `dev` / `dev-password` ein (über `HA_USERNAME`/`HA_PASSWORD` änderbar) und erstellt das Dashboard `/bvg-connections`.
-
-Die Linienfarben (`line_colors.py`) erzeugt `scripts/gen_line_colors.py` aus dem VBB-GTFS-Feed. Der Feed enthält Farben nur für S- und U-Bahn; Tram, Bus, Fähre und Regionalverkehr nutzen Produktfarben.
-
 ---
 
 ## English
@@ -198,11 +176,9 @@ Journeys with transfers and departure boards for Berlin public transport (BVG, S
 
 **Card:** see the YAML example above; all options are also available in the visual editor.
 
-**Development:** see the commands above. Keep personal stops in the gitignored `local_defaults.yaml`; `scripts/dev_seed.py` creates the entries in a local dev instance through the real config flows.
-
 ## Changelog
 
-Siehe / see [CHANGELOG.md](CHANGELOG.md).
+Siehe / see [CHANGELOG.md](CHANGELOG.md). Mitwirken / contributing: [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Lizenz / License
 
