@@ -341,6 +341,16 @@ export const cardStyles = css`
     text-overflow: ellipsis;
     color: var(--urgency-color);
   }
+  .leave.leave-wrap {
+    align-items: flex-start;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    line-height: 1.2;
+  }
+  .leave.leave-wrap .leave-text {
+    min-width: 0;
+  }
   .u-relaxed .leave {
     color: var(--bvg-muted);
   }

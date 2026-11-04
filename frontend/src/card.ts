@@ -352,7 +352,14 @@ export class BvgConnectionsCard extends LitElement {
     const minutes = Math.floor((leaveAt - this._now) / 60_000);
     const icon = this._sym("mdi:walk", level === "relaxed" ? "walk" : "current", "s");
     if (level === "missed") {
-      return html`<span class="leave">${icon}${this._t("missed")}</span>`;
+      const lines = this._t("missed").split("\n");
+      return html`<span class="leave leave-wrap"
+        >${icon}<span class="leave-text"
+          >${lines.map(
+            (line, i) => html`${i > 0 ? html`<br />` : nothing}${line}`,
+          )}</span
+        ></span
+      >`;
     }
     if (minutes <= 0) {
       return html`<span class="leave">${icon}${this._t("leave_now")}</span>`;

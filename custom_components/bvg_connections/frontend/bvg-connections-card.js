@@ -514,7 +514,7 @@ var Se = {
 	in: "in",
 	leave_in_prefix: "in",
 	leave_now: "Jetzt!",
-	missed: "Nicht mehr zu schaffen",
+	missed: "Nicht mehr\nzu schaffen",
 	hurry: "Beeilen",
 	on_time: "pünktlich",
 	cancelled: "Ausfall",
@@ -566,7 +566,7 @@ var Se = {
 	in: "in",
 	leave_in_prefix: "in",
 	leave_now: "Now!",
-	missed: "Too late",
+	missed: "Too late\nto catch",
 	hurry: "Hurry",
 	on_time: "on time",
 	cancelled: "Cancelled",
@@ -1183,6 +1183,16 @@ var Je = o`
     text-overflow: ellipsis;
     color: var(--urgency-color);
   }
+  .leave.leave-wrap {
+    align-items: flex-start;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: unset;
+    line-height: 1.2;
+  }
+  .leave.leave-wrap .leave-text {
+    min-width: 0;
+  }
   .u-relaxed .leave {
     color: var(--bvg-muted);
   }
@@ -1771,7 +1781,11 @@ var $e = "0.1.5", et = {
 	_leaveHint(e, t) {
 		if (e === null) return P;
 		let n = Math.floor((e - this._now) / 6e4), r = this._sym("mdi:walk", t === "relaxed" ? "walk" : "current", "s");
-		return t === "missed" ? M`<span class="leave">${r}${this._t("missed")}</span>` : n <= 0 ? M`<span class="leave">${r}${this._t("leave_now")}</span>` : M`<span class="leave"
+		return t === "missed" ? M`<span class="leave leave-wrap"
+        >${r}<span class="leave-text"
+          >${this._t("missed").split("\n").map((e, t) => M`${t > 0 ? M`<br />` : P}${e}`)}</span
+        ></span
+      >` : n <= 0 ? M`<span class="leave">${r}${this._t("leave_now")}</span>` : M`<span class="leave"
       >${r}${this._t("leave_in_prefix")} ${n} ${this._t("min")}</span
     >`;
 	}

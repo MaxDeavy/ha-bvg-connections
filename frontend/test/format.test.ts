@@ -162,5 +162,7 @@ describe("i18n", () => {
     expect(translate("de", "leave_now")).toBe("Jetzt!");
     expect(translate("en", "leave_now")).toBe("Now!");
     expect(translate("fr", "cancelled")).toBe("Cancelled");
+    expect(translate("de", "missed")).toBe("Nicht mehr\nzu schaffen");
+    expect(translate("en", "missed")).toBe("Too late\nto catch");
   });
 });
