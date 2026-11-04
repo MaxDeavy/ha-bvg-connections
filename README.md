@@ -15,6 +15,9 @@ Verbindungen mit Umstiegen und Abfahrtstafeln für den Berliner ÖPNV (BVG, S-Ba
 
 *English version below.*
 
+> [!TIP]
+> **Wo lege ich Verbindungen an?** Nicht über „Integration hinzufügen“, sondern auf der Seite der Integration: *Einstellungen → Geräte & Dienste → BVG Verbindungen* → oben die Knöpfe **„Verbindung hinzufügen“** bzw. **„Abfahrtstafel hinzufügen“**. Details in [Schritt 3](#3-verbindungen-und-abfahrtstafeln-anlegen).
+
 <p>
   <img src="docs/images/card-light.png" alt="Karte im hellen Theme" width="420">
   <img src="docs/images/card-dark-details.png" alt="Karte im dunklen Theme mit aufgeklappten Details" width="420">
@@ -33,26 +36,78 @@ Verbindungen mit Umstiegen und Abfahrtstafeln für den Berliner ÖPNV (BVG, S-Ba
 
 Datenquelle ist [`v6.bvg.transport.rest`](https://v6.bvg.transport.rest) (Community-Dienst ohne SLA, keine Anmeldung nötig). Eine selbst gehostete [`bvg-rest`](https://github.com/derhuerst/bvg-rest)-Instanz funktioniert ebenfalls.
 
-## Installation
+## Installation und Einrichtung
 
 Voraussetzung: Home Assistant **2026.10** oder neuer.
 
-1. HACS → Integrationen → Menü → *Benutzerdefinierte Repositories* → `https://github.com/MaxDeavy/ha-bvg-connections`, Kategorie *Integration*.
-2. „BVG Verbindungen“ installieren und Home Assistant neu starten.
-3. *Einstellungen → Geräte & Dienste → Integration hinzufügen → BVG Verbindungen.*
+### 1. Integration installieren
 
-Ohne HACS: den Ordner `custom_components/bvg_connections` nach `<config>/custom_components/` kopieren.
+**Variante A – über HACS (empfohlen)**
 
-Die Karte wird von der Integration mitgeliefert und automatisch geladen; eine Lovelace-Ressource musst du nicht anlegen.
+1. HACS öffnen → Drei-Punkte-Menü oben rechts → **Benutzerdefinierte Repositories**.
+2. Repository `https://github.com/MaxDeavy/ha-bvg-connections` eintragen, Typ **Integration**, *Hinzufügen*.
+3. In HACS nach **BVG Verbindungen** suchen → **Herunterladen**.
+4. Home Assistant **neu starten** (*Einstellungen → System → Neu starten*).
 
-## Einrichtung
+**Variante B – manuell**
 
-1. **Integration:** API-URL (Standard passt) und Request-Budget.
-2. **Verbindung hinzufügen** (auf der Integrationsseite): Start und Ziel suchen, Treffer auswählen, dann Name, Fußweg, Anzahl, Verkehrsmittel, ausgeschlossene Linien, maximale Umstiege und Mindest-Umstiegszeit festlegen. Bleibt der Start leer, werden Haltestellen in der Nähe deines Zuhauses angeboten.
-3. **Abfahrtstafel hinzufügen:** Haltestelle suchen, dann Fußweg, Zeitfenster, Anzahl, Verkehrsmittel, Linien und Richtung.
-4. **Optionen** der Integration: Aktualisierungsintervalle für Verbindungen und Tafeln (Standard je 30 s) und das Request-Budget. Die Optionen prüfen, ob die Intervalle ins Budget passen.
+1. Die [aktuelle Version](https://github.com/MaxDeavy/ha-bvg-connections/releases/latest) herunterladen (*Source code (zip)*) und entpacken.
+2. Den Ordner `custom_components/bvg_connections` nach `<config>/custom_components/` kopieren (z. B. per Samba, SSH oder File-Editor-Add-on). Der Zielordner muss **genau** `bvg_connections` heißen:
 
-Einstellungen einer Verbindung oder Tafel änderst du über das Drei-Punkte-Menü des Eintrags („Neu konfigurieren“).
+   ```text
+   config/
+   └── custom_components/
+       └── bvg_connections/
+           ├── __init__.py
+           ├── manifest.json
+           ├── brand/
+           ├── frontend/
+           └── …
+   ```
+
+3. Home Assistant **neu starten**.
+
+### 2. Integration hinzufügen
+
+1. *Einstellungen → Geräte & Dienste → **Integration hinzufügen*** → nach **BVG Verbindungen** suchen.
+2. API-URL und Request-Budget bestätigen. Die Standardwerte passen.
+
+Damit ist nur die Integration selbst angelegt; Verbindungen gibt es noch keine.
+
+### 3. Verbindungen und Abfahrtstafeln anlegen
+
+1. *Einstellungen → Geräte & Dienste* → auf **BVG Verbindungen** klicken (nicht erneut „Integration hinzufügen“).
+2. Oben auf der Integrationsseite stehen die Knöpfe **„Verbindung hinzufügen“** und **„Abfahrtstafel hinzufügen“** (nicht „Dienst hinzufügen“, das legt eine zweite Integration an):
+
+   <img src="docs/images/integration-page.png" alt="Integrationsseite mit den Knöpfen „Verbindung hinzufügen“ und „Abfahrtstafel hinzufügen“" width="600">
+3. **Verbindung hinzufügen:** Start und Ziel eingeben (Haltestelle, Adresse oder Ort), passenden Treffer auswählen. Im letzten Schritt Name, **Gehzeit zur Haltestelle** (vorbelegt mit 5 min), Anzahl der Verbindungen, Verkehrsmittel, ausgeschlossene Linien, maximale Umstiege und Mindest-Umstiegszeit festlegen. Bleibt der Start leer, werden Haltestellen in der Nähe deines Zuhauses angeboten.
+4. **Abfahrtstafel hinzufügen:** Haltestelle suchen, dann Gehzeit, Zeitfenster, Anzahl, Verkehrsmittel, Linien und Richtung festlegen.
+5. Für jede Verbindung und Tafel entsteht ein eigenes Gerät mit Sensoren (siehe [Entitäten](#entitäten)).
+
+**Gehzeit:** die Minuten von deiner Tür bis zur Haltestelle, pro Verbindung bzw. Tafel einzeln. Fahrten, die du zu Fuß nicht mehr erreichst, blendet die Integration aus, und die Karte zeigt „Los in X min“ bzw. „Jetzt los!“.
+
+**Später ändern:** In der Liste auf der Integrationsseite beim Eintrag auf das **Stift-Symbol** („Neu konfigurieren“) klicken. Löschen geht über das Drei-Punkte-Menü des Eintrags. Aktualisierungsintervalle (Standard je 30 s) und Request-Budget stehen in den **Optionen** der Integration (Zahnrad).
+
+### 4. Karte zum Dashboard hinzufügen
+
+1. Dashboard öffnen → Stift oben rechts (**Bearbeiten**) → **Karte hinzufügen**.
+2. Nach **BVG Verbindungen** suchen und auswählen. Der Editor schlägt die Sensoren deiner Verbindungen und Tafeln bereits vor.
+3. Speichern.
+
+Die Karte wird von der Integration mitgeliefert und automatisch geladen. Eine Lovelace-Ressource musst du normalerweise **nicht** anlegen. Alle Optionen gibt es auch als YAML (siehe [Karte](#karte)).
+
+### Fehlerbehebung
+
+- **„BVG Verbindungen“ fehlt in der Kartenauswahl oder die Karte zeigt „Konfigurationsfehler“ / „Custom element doesn't exist“:**
+  1. Browser hart neu laden (Strg+Umschalt+R bzw. Cmd+Umschalt+R). In der Companion-App den Frontend-Cache zurücksetzen (*Einstellungen → Companion-App → Fehlerbehebung* bzw. *Debugging*).
+  2. Prüfen, ob Home Assistant nach der Installation neu gestartet wurde.
+  3. Falls die Karte weiterhin fehlt, die Ressource von Hand eintragen: *Einstellungen → Dashboards → Drei-Punkte-Menü → Ressourcen → Ressource hinzufügen*, URL `/bvg_connections/bvg-connections-card.js`, Typ **JavaScript-Modul**. Der Menüpunkt *Ressourcen* erscheint nur, wenn im Benutzerprofil der *Erweiterte Modus* aktiv ist. Doppelt geladen schadet die Karte nicht.
+- **Integration erscheint nicht in der Suche:** Liegt der Ordner unter `<config>/custom_components/bvg_connections/` (nicht `ha-bvg-connections`, nicht doppelt verschachtelt)? Danach neu starten.
+- **Seltsames Verhalten nach einem Update oder nach Tests mit anderen Versionen:**
+  1. Alte oder andere BVG-/VBB-Integrationen und alte Einträge dieser Integration unter *Geräte & Dienste* entfernen.
+  2. Übrig gebliebene Ordner unter `custom_components/` löschen (z. B. alte Kopien unter anderem Namen). Dabei den ganzen Ordner löschen, auch den Unterordner `__pycache__`, den manche Dateibrowser ausblenden.
+  3. Neu installieren, neu starten, Browser hart neu laden.
+- **„Keine Verbindungen“ oder veraltete Daten:** `v6.bvg.transport.rest` ist ein Community-Dienst ohne SLA. Bei Ausfällen zeigt die Karte die letzten Daten mit dem Hinweis „Daten veraltet“, nach längerer Störung erscheint ein Reparaturhinweis.
 
 ## Entitäten
 
@@ -122,13 +177,32 @@ Journeys with transfers and departure boards for Berlin public transport (BVG, S
 
 **Features:** journeys from stop/address/place to stop/address/place with all transfers; departure boards with product, line and direction filters; per-entry walking time that hides connections you can no longer catch and drives “leave in X min” hints; realtime delays, cancellations, at-risk connections, platform changes, occupancy and disruption notices; a native-looking card (light and dark theme) with BVG-coloured line badges, tile-style symbols (MDI icons in tinted circles, coloured by product and status), transfer chains, countdowns, urgency bars, expandable trip details and a visual editor; its own icon and logo, served by Home Assistant from the integration's `brand/` folder; everything configured in the UI via config subentries; a request budget (default 40/min, the public API allows 100/min), backoff, stale-data display and a repair issue on longer outages.
 
-**Install:** HACS → custom repository `https://github.com/MaxDeavy/ha-bvg-connections` (category *Integration*), install, restart, then add “BVG Verbindungen” under *Settings → Devices & services*. Requires Home Assistant 2026.10 or newer. The card is served and loaded by the integration automatically.
+> [!TIP]
+> **Where do I add connections?** Not via “Add integration”, but on the integration's own page: *Settings → Devices & services → BVG Verbindungen* → the **“Verbindung hinzufügen”** (add connection) and **“Abfahrtstafel hinzufügen”** (add departure board) buttons at the top.
 
-**Setup:** add *connections* and *departure boards* from the integration page. Polling intervals (default 30 s each) and the request budget are in the integration options. Use “Reconfigure” on a connection or board to change filters and walking time.
+**Setup, step by step** (requires Home Assistant 2026.10 or newer):
+
+1. **Install.**
+   - *HACS:* HACS → three-dot menu → **Custom repositories** → `https://github.com/MaxDeavy/ha-bvg-connections`, type **Integration** → search **BVG Verbindungen** → **Download**.
+   - *Manual:* download the [latest release](https://github.com/MaxDeavy/ha-bvg-connections/releases/latest) and copy `custom_components/bvg_connections` to `<config>/custom_components/`. The folder name must be exactly `bvg_connections`.
+   - Restart Home Assistant.
+2. **Add the integration:** *Settings → Devices & services → **Add integration** → BVG Verbindungen*. The defaults are fine. This creates the integration only, no connections yet.
+3. **Add connections and boards:** open *Settings → Devices & services → **BVG Verbindungen*** and use the **“Verbindung hinzufügen”** / **“Abfahrtstafel hinzufügen”** buttons at the top (not “Dienst hinzufügen” / “Add service”, which creates a second integration entry). Search origin and destination (stop, address or place), pick the match, then set name, **walking time to the stop** (prefilled with 5 min), number of results, products, excluded lines, max. transfers and min. transfer time. Change an entry later with its **pencil icon** (“Reconfigure”). Polling intervals (default 30 s each) and the request budget are in the integration **options** (gear icon).
+4. **Add the card:** dashboard → **Edit** → **Add card** → search **BVG Verbindungen**. The editor suggests your sensors. The integration serves and loads the card itself, so no Lovelace resource is needed.
+
+**Troubleshooting:**
+
+- *Card missing from the picker, or “Configuration error” / “Custom element doesn't exist”:* hard-reload the browser (Ctrl+Shift+R; Companion app: reset the frontend cache) and make sure you restarted after installing. If it is still missing, add the resource manually: *Settings → Dashboards → three-dot menu → Resources → Add resource*, URL `/bvg_connections/bvg-connections-card.js`, type **JavaScript module** (the *Resources* entry needs *Advanced mode* in your user profile).
+- *Integration not found:* check that the files are in `<config>/custom_components/bvg_connections/` (not `ha-bvg-connections`, not nested twice), then restart.
+- *Odd behaviour after updates or tests with other versions:* remove old or other BVG/VBB integrations and old entries of this one, delete leftover folders under `custom_components/` completely (including the `__pycache__` subfolder that some file browsers hide), reinstall, restart and hard-reload.
 
 **Card:** see the YAML example above; all options are also available in the visual editor.
 
 **Development:** see the commands above. Keep personal stops in the gitignored `local_defaults.yaml`; `scripts/dev_seed.py` creates the entries in a local dev instance through the real config flows.
+
+## Changelog
+
+Siehe / see [CHANGELOG.md](CHANGELOG.md).
 
 ## Lizenz / License
 

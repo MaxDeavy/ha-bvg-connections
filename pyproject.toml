@@ -1,6 +1,6 @@
 [project]
 name = "ha-bvg-connections"
-version = "0.1.0"
+version = "0.1.1"
 description = "Home Assistant integration for BVG/VBB journeys and departure boards"
 license = "MIT"
 requires-python = ">=3.13"
