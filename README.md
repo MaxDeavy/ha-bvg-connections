@@ -7,6 +7,7 @@
 [![Validate](https://github.com/MaxDeavy/ha-bvg-connections/actions/workflows/validate.yml/badge.svg)](https://github.com/MaxDeavy/ha-bvg-connections/actions/workflows/validate.yml)
 [![CI](https://github.com/MaxDeavy/ha-bvg-connections/actions/workflows/ci.yml/badge.svg)](https://github.com/MaxDeavy/ha-bvg-connections/actions/workflows/ci.yml)
 [![HACS Default](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/default)
+[![Marketplace](https://img.shields.io/badge/HA-Marketplace-41BDF5.svg)](https://www.home-assistant.io/integrations/marketplace/)
 
 Verbindungen mit Umstiegen und Abfahrtstafeln für den Berliner ÖPNV (BVG, S-Bahn, Regionalverkehr) – als Home-Assistant-Integration mit eigener Lovelace-Karte.
 
@@ -29,7 +30,7 @@ Verbindungen mit Umstiegen und Abfahrtstafeln für den Berliner ÖPNV (BVG, S-Ba
 - **Fußweg zur Haltestelle** pro Verbindung bzw. Tafel: Die Integration blendet Fahrten aus, die du nicht mehr erreichst, und die Karte zeigt „Los in X min“ bzw. „Jetzt los!“.
 - **Echtzeit:** Verspätungen, Ausfälle, gefährdete Anschlüsse, Gleiswechsel, Auslastung und Störungsmeldungen.
 - **Lovelace-Karte** im nativen Home-Assistant-Look (helles und dunkles Theme): Linien-Badges in BVG-Farben, Symbole in farbigen Kreisen wie bei den HA-Kachelkarten (nach Verkehrsmittel und Status eingefärbt), Umstiegsketten, Countdown, Dringlichkeitsbalken, aufklappbare Fahrtdetails, Uhr und grafischer Editor.
-- **Eigenes Symbol und Logo:** Nach der Installation zeigt Home Assistant sie unter Geräte & Dienste aus dem Ordner `brand/` (kein Brands-Repository nötig). Im HACS-Katalog kann bis zum Home Assistant Marketplace (HA 2026.11) noch ein Platzhalter erscheinen.
+- **Eigenes Symbol und Logo:** Nach der Installation zeigt Home Assistant sie unter Geräte & Dienste und im Marketplace aus dem Ordner `brand/` (kein Brands-Repository nötig).
 - **Alles über die Oberfläche:** Verbindungen und Tafeln sind Unterelemente (Config Subentries) der Integration und lassen sich jederzeit hinzufügen, bearbeiten oder löschen.
 - **Schonend zur API:** Request-Budget mit Token-Bucket (Standard 40/min, die öffentliche API erlaubt 100/min), Backoff bei Fehlern, die letzten Daten bleiben bei Ausfällen sichtbar, Reparaturhinweis bei längerem Ausfall.
 
@@ -37,21 +38,26 @@ Datenquelle ist [`v6.bvg.transport.rest`](https://v6.bvg.transport.rest) (Commun
 
 ## Installation und Einrichtung
 
-Voraussetzung: Home Assistant **2026.10** oder neuer.
+Voraussetzung: Home Assistant **2026.10** oder neuer. Ab **2026.11** installierst du über den eingebauten **Marketplace** (*Einstellungen → Marketplace*). Auf **2026.10** kannst du noch den separaten HACS nutzen (siehe Hinweis unten).
 
 ### 1. Integration installieren
 
-1. HACS öffnen → nach **BVG Verbindungen** suchen → **Herunterladen**.
-2. Home Assistant **neu starten** (*Einstellungen → System → Neu starten*).
+**Home Assistant 2026.11 oder neuer (empfohlen):**
 
-Custom Repository, Zip-Kopie ohne HACS oder lokale Entwickler-Installation: [Manuelle Installation / Custom Repository](docs/MANUAL_INSTALL.md).
+1. *Einstellungen → Marketplace* öffnen (beim ersten Mal den Hinweis bestätigen).
+2. Nach **BVG Verbindungen** suchen → Repository öffnen → **Installieren**.
+3. Home Assistant **neu starten**, falls Home Assistant danach fragt (*Einstellungen → System → Reparaturen* bzw. *Neu starten*).
+
+**Home Assistant 2026.10:** HACS öffnen → nach **BVG Verbindungen** suchen → **Herunterladen** → Home Assistant **neu starten**. Ab 2026.11 ersetzt der Marketplace die eigenständige HACS-Integration; bestehende Downloads bleiben erhalten.
+
+Custom Repository / „Add from link“, Zip-Kopie ohne Marketplace/HACS oder lokale Entwickler-Installation: [Manuelle Installation / Custom Repository](docs/MANUAL_INSTALL.md).
 
 ### 2. Integration hinzufügen
 
 1. *Einstellungen → Geräte & Dienste → **Integration hinzufügen*** → nach **BVG Verbindungen** suchen.
 2. API-URL und Request-Budget bestätigen. Die Standardwerte passen.
 
-Damit ist nur die Integration selbst angelegt; Verbindungen gibt es noch keine.
+Damit ist nur die Integration selbst angelegt; Verbindungen gibt es noch keine. (Öffnet der Marketplace die Einrichtung direkt nach der Installation, kannst du Schritt 2 überspringen.)
 
 ### 3. Verbindungen und Abfahrtstafeln anlegen
 
@@ -139,15 +145,15 @@ Ein Tipp auf eine Verbindung klappt die Details auf (Teilstrecken, Fußwege, Ric
 
 Journeys with transfers and departure boards for Berlin public transport (BVG, S-Bahn, regional trains), as a Home Assistant integration with a bundled Lovelace card.
 
-**Features:** journeys from stop/address/place to stop/address/place with all transfers; departure boards with product, line and direction filters; per-entry walking time that hides connections you can no longer catch and drives “leave in X min” hints; realtime delays, cancellations, at-risk connections, platform changes, occupancy and disruption notices; a native-looking card (light and dark theme) with BVG-coloured line badges, tile-style symbols (MDI icons in tinted circles, coloured by product and status), transfer chains, countdowns, urgency bars, expandable trip details and a visual editor; its own icon and logo from the integration's `brand/` folder (shown in Devices & services after install; the HACS catalog may show a placeholder until the Home Assistant Marketplace in HA 2026.11); everything configured in the UI via config subentries; a request budget (default 40/min, the public API allows 100/min), backoff, stale-data display and a repair issue on longer outages.
+**Features:** journeys from stop/address/place to stop/address/place with all transfers; departure boards with product, line and direction filters; per-entry walking time that hides connections you can no longer catch and drives “leave in X min” hints; realtime delays, cancellations, at-risk connections, platform changes, occupancy and disruption notices; a native-looking card (light and dark theme) with BVG-coloured line badges, tile-style symbols (MDI icons in tinted circles, coloured by product and status), transfer chains, countdowns, urgency bars, expandable trip details and a visual editor; its own icon and logo from the integration's `brand/` folder (shown in Devices & services and in the Marketplace after install; no Brands repository needed); everything configured in the UI via config subentries; a request budget (default 40/min, the public API allows 100/min), backoff, stale-data display and a repair issue on longer outages.
 
 > [!TIP]
 > **Where do I add connections?** Not via “Add integration”, but on the integration's own page: *Settings → Devices & services → BVG Verbindungen* → the **“Verbindung hinzufügen”** (add connection) and **“Abfahrtstafel hinzufügen”** (add departure board) buttons at the top.
 
-**Setup, step by step** (requires Home Assistant 2026.10 or newer):
+**Setup, step by step** (requires Home Assistant 2026.10 or newer; on **2026.11+** use the built-in **Marketplace**):
 
-1. **Install:** HACS → search **BVG Verbindungen** → **Download** → restart Home Assistant. Custom repository, zip copy without HACS, or local developer install: [Manual install / Custom repository](docs/MANUAL_INSTALL.md).
-2. **Add the integration:** *Settings → Devices & services → **Add integration** → BVG Verbindungen*. The defaults are fine. This creates the integration only, no connections yet.
+1. **Install (HA 2026.11+):** *Settings → Marketplace* → search **BVG Verbindungen** → **Install** → restart Home Assistant if prompted. **On HA 2026.10:** HACS → search **BVG Verbindungen** → **Download** → restart. From 2026.11 the Marketplace replaces the standalone HACS integration; existing downloads keep working. Custom repository / “Add from link”, zip copy, or local developer install: [Manual install / Custom repository](docs/MANUAL_INSTALL.md).
+2. **Add the integration:** *Settings → Devices & services → **Add integration** → BVG Verbindungen*. The defaults are fine. This creates the integration only, no connections yet. (Skip this step if the Marketplace already opened the setup dialog.)
 3. **Add connections and boards:** open *Settings → Devices & services → **BVG Verbindungen*** and use the **“Verbindung hinzufügen”** / **“Abfahrtstafel hinzufügen”** buttons at the top (not “Dienst hinzufügen” / “Add service”, which creates a second integration entry). Search origin and destination (stop, address or place), pick the match, then set name, **walking time to the stop** (prefilled with 5 min), number of results, products, excluded lines, max. transfers and min. transfer time. Change an entry later with its **pencil icon** (“Reconfigure”). Polling intervals (default 30 s each) and the request budget are in the integration **options** (gear icon).
 4. **Add the card:** dashboard → **Edit** → **Add card** → search **BVG Verbindungen**. Without a selection the card shows all connections and departure boards; pick individual ones under **“Verbindungen und Abfahrtstafeln”** for a card per route or stop (shown in the order you pick them, with a title per card). The integration serves and loads the card itself, so no Lovelace resource is needed.
 
